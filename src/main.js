@@ -29,6 +29,10 @@ const preload = function(){
   // Dotf.game.load.atlasJSONHash('assets', 'Assets/assets.png', 'Assets/assets.json');
   Dotf.game.load.image('background', 'Assets/maps/map1.png');
   Dotf.game.load.image('character1', 'Assets/characters/1.png');
+
+  //TODO create a spritesheet including all animations of an object.
+
+  Dotf.game.load.spritesheet('character1_down', 'Assets/characters/animation_down.png', 16, 21);
 }
 
 // initialize the game
@@ -43,13 +47,16 @@ const create = function(){
   Dotf.playerGroup = Dotf.game.add.physicsGroup();
 
   Dotf.player = new PlayerController('character1', {
-    up: Phaser.Keyboard.W,
-    down: Phaser.Keyboard.S,
-    left: Phaser.Keyboard.A,
-    right: Phaser.Keyboard.D,
-    fire: Phaser.Keyboard.SPACEBAR,
-    speed: 200
-  });
+      down: 'character1_down'
+    },
+    {
+      up: Phaser.Keyboard.W,
+      down: Phaser.Keyboard.S,
+      left: Phaser.Keyboard.A,
+      right: Phaser.Keyboard.D,
+      speed: 150
+    }
+  );
 
 }
 
