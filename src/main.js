@@ -14,8 +14,12 @@ Dotf.configs = {
   }
 };
 
+const GAME_WIDTH = window.innerWidth;
+const GAME_HEIGHT = window.innerHeight;
+
 window.onload = function(){
-  Dotf.game = new Phaser.Game(Dotf.configs.GAME_WIDTH_MAX,Dotf.configs.GAME_HEIGHT_MAX,Phaser.CANVAS,'',
+  // Dotf.game = new Phaser.Game(Dotf.configs.GAME_WIDTH_MAX,Dotf.configs.GAME_HEIGHT_MAX,Phaser.CANVAS,'',
+  Dotf.game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.CANVAS, '',
     {
       preload: preload,
       create: create,
@@ -27,12 +31,16 @@ window.onload = function(){
 
 // preparations before game starts
 const preload = () => {
-  Dotf.game.scale.minWidth = 320;
-  Dotf.game.scale.minHeight = 480;
+  console.log(Dotf.configs.gameSize)
+  Dotf.game.scale.minWidth = 0;
+  Dotf.game.scale.minHeight = 0;
   Dotf.game.scale.maxWidth = Dotf.configs.GAME_WIDTH_MAX;
   Dotf.game.scale.maxHeight = Dotf.configs.GAME_HEIGHT_MAX;
   Dotf.game.scale.pageAlignHorizontally = true;
   Dotf.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  Dotf.game.scale.pageAlignHorizontally = true;
+  Dotf.game.scale.pageAlignVertically = true;
+  Dotf.game.scale.setScreenSize = true;
 
   Dotf.game.time.advancedTiming = true;
 
@@ -53,14 +61,15 @@ const create = () => {
   Dotf.game.physics.startSystem(Phaser.Physics.ARCADE);
   Dotf.game.physics.startSystem(Phaser.Physics.P2JS);
   Dotf.keyboard = Dotf.game.input.keyboard;
+  Dotf.game.input.mouse.capture = true;
 
   Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, 'background');
   Dotf.background1.scale.setTo(2);
-  Dotf.game.world.setBounds(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, 1080 *2);
+  Dotf.game.world.setBounds(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT);
 
   Dotf.playerGroup = Dotf.game.add.physicsGroup();
 
-  Dotf.player = new PlayerController('character1', 'cursor', 'gun', {
+  Dotf.player = new PlayerController('character1', 'gun', {
       down: 'character1_down'
     },
     {
@@ -72,12 +81,14 @@ const create = () => {
     }
   );
 
+  Dotf.cursor = new CursorController('cursor');
+
 }
 
 // update game state each frame
 const update = () => {
   Dotf.player.update();
-
+  Dotf.cursor.update();
 }
 
 // before camera render (mostly for debug)

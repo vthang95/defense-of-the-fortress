@@ -1,6 +1,6 @@
 class PlayerController {
-  constructor(spriteName, cursor, gunName, animation, configs) {
-    this.sprite = Dotf.game.add.sprite(Dotf.configs.GAME_WIDTH_MAX/2, Dotf.configs.GAME_HEIGHT_MAX/2, animation.down, 1);
+  constructor(spriteName, gunName, spritesheet, configs) {
+    this.sprite = Dotf.game.add.sprite(Dotf.configs.GAME_WIDTH_MAX/2, Dotf.configs.GAME_HEIGHT_MAX/2, spritesheet.down, 1);
     Dotf.game.physics.p2.enable(this.sprite);
     this.sprite.body.fixedRotation = true;
     this.sprite.anchor.setTo(0.5, 0.5);
@@ -10,23 +10,12 @@ class PlayerController {
     Dotf.left = this.sprite.animations.add('left', [0,1,2,3], 10, true);
 
     this.configs = configs;
-    this.animation = animation;
+    this.spritesheet = spritesheet;
 
     Dotf.game.camera.follow(this.sprite);
     Dotf.game.camera.follow(this.sprite, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+    Dotf.gun = new GunController(gunName, this.sprite);
 
-    Dotf.game.input.mouse.capture = true;
-    this.cursor = Dotf.game.add.sprite(Dotf.game.world.centerX, Dotf.game.world.centerY, cursor);
-    Dotf.game.physics.p2.enable(this.cursor);
-    this.cursor.body.fixedRotation = true;
-    this.cursor.scale.setTo(3);
-    this.cursor.anchor.setTo(0.5, 0.5);
-
-    this.gun = Dotf.game.add.sprite(this.sprite.body.x, this.sprite.body.y, gunName);
-    Dotf.game.physics.p2.enable(this.gun);
-    this.gun.body.fixedRotation = true;
-    this.gun.anchor.setTo(0.5, 0.5);
-    this.gun.scale.setTo(3.5);
   }
 
   tryFire() {
@@ -34,12 +23,7 @@ class PlayerController {
   }
 
   update() {
-
-    this.gun.body.x = this.sprite.body.x;
-    this.gun.body.y = this.sprite.body.y + 40;
-
-    this.cursor.body.x = Dotf.game.input.mousePointer.x + Dotf.game.camera.x;
-    this.cursor.body.y = Dotf.game.input.mousePointer.y + Dotf.game.camera.y;
+    Dotf.gun.update();
 
     this.sprite.body.setZeroVelocity();
     //TODO add animation for all navigations command
