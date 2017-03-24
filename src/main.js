@@ -3,14 +3,19 @@
 var Dotf = Dotf || {};
 
 Dotf.configs = {
-  GAME_WIDTH_MAX: 800,
-  GAME_HEIGHT_MAX: 640,
+  GAME_WIDTH_MAX: 1920,
+  GAME_HEIGHT_MAX: 1080,
   GAME_WIDTH_MIN: 320,
-  GAME_HEIGHT_MIN: 480
+  GAME_HEIGHT_MIN: 480,
+  GAME_WORLD_WIDTH: 2960,
+  GAME_WORLD_HEIGHT: 2160,
+  player: {
+    speed: 200
+  }
 };
 
 window.onload = function(){
-  Dotf.game = new Phaser.Game(800,640,Phaser.CANVAS,'',
+  Dotf.game = new Phaser.Game(Dotf.configs.GAME_WIDTH_MAX,Dotf.configs.GAME_HEIGHT_MAX,Phaser.CANVAS,'',
     {
       preload: preload,
       create: create,
@@ -49,8 +54,9 @@ const create = () => {
   Dotf.game.physics.startSystem(Phaser.Physics.P2JS);
   Dotf.keyboard = Dotf.game.input.keyboard;
 
-  Dotf.background1 = Dotf.game.add.tileSprite(0, 0, 1920, 1080, 'background');
-  Dotf.game.world.setBounds(0, 0, 1920, 1080);
+  Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, 'background');
+  Dotf.background1.scale.setTo(2);
+  Dotf.game.world.setBounds(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, 1080 *2);
 
   Dotf.playerGroup = Dotf.game.add.physicsGroup();
 
@@ -62,7 +68,7 @@ const create = () => {
       down: Phaser.Keyboard.S,
       left: Phaser.Keyboard.A,
       right: Phaser.Keyboard.D,
-      speed: 150
+      speed: Dotf.configs.player.speed
     }
   );
 

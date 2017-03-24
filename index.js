@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var fs = require('fs');
 var app = express();
 var http = require('http').Server(app);
 app.use(express.static(__dirname));

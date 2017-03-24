@@ -4,6 +4,4 @@ A game using Phaser.
 
 Usage:
 
-npm install
-
-gulp
+npm start

@@ -4,7 +4,7 @@ class PlayerController {
     Dotf.game.physics.p2.enable(this.sprite);
     this.sprite.body.fixedRotation = true;
     this.sprite.anchor.setTo(0.5, 0.5);
-    this.sprite.scale.setTo(3);
+    this.sprite.scale.setTo(5);
 
     this.sprite.smoothed = false;
     Dotf.left = this.sprite.animations.add('left', [0,1,2,3], 10, true);
@@ -19,13 +19,14 @@ class PlayerController {
     this.cursor = Dotf.game.add.sprite(Dotf.game.world.centerX, Dotf.game.world.centerY, cursor);
     Dotf.game.physics.p2.enable(this.cursor);
     this.cursor.body.fixedRotation = true;
+    this.cursor.scale.setTo(3);
     this.cursor.anchor.setTo(0.5, 0.5);
 
     this.gun = Dotf.game.add.sprite(this.sprite.body.x, this.sprite.body.y, gunName);
     Dotf.game.physics.p2.enable(this.gun);
     this.gun.body.fixedRotation = true;
     this.gun.anchor.setTo(0.5, 0.5);
-    this.gun.scale.setTo(2);
+    this.gun.scale.setTo(3.5);
   }
 
   tryFire() {
@@ -35,7 +36,7 @@ class PlayerController {
   update() {
 
     this.gun.body.x = this.sprite.body.x;
-    this.gun.body.y = this.sprite.body.y + 28;
+    this.gun.body.y = this.sprite.body.y + 40;
 
     this.cursor.body.x = Dotf.game.input.mousePointer.x + Dotf.game.camera.x;
     this.cursor.body.y = Dotf.game.input.mousePointer.y + Dotf.game.camera.y;
