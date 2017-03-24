@@ -2,7 +2,12 @@
 
 var Dotf = Dotf || {};
 
-Dotf.configs = {};
+Dotf.configs = {
+  GAME_WIDTH_MAX: 800,
+  GAME_HEIGHT_MAX: 640,
+  GAME_WIDTH_MIN: 320,
+  GAME_HEIGHT_MIN: 480
+};
 
 window.onload = function(){
   Dotf.game = new Phaser.Game(800,640,Phaser.CANVAS,'',
@@ -16,11 +21,11 @@ window.onload = function(){
 }
 
 // preparations before game starts
-const preload = function(){
+const preload = () => {
   Dotf.game.scale.minWidth = 320;
   Dotf.game.scale.minHeight = 480;
-  Dotf.game.scale.maxWidth = 800;
-  Dotf.game.scale.maxHeight = 640;
+  Dotf.game.scale.maxWidth = Dotf.configs.GAME_WIDTH_MAX;
+  Dotf.game.scale.maxHeight = Dotf.configs.GAME_HEIGHT_MAX;
   Dotf.game.scale.pageAlignHorizontally = true;
   Dotf.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
@@ -32,21 +37,24 @@ const preload = function(){
 
   //TODO create a spritesheet including all animations of an object.
 
+  Dotf.game.load.image('cursor', 'Assets/cursors/1crosshair.png');
+  Dotf.game.load.image('gun', 'Assets/guns/flamthrower/flamethrower_down.png');
+
   Dotf.game.load.spritesheet('character1_down', 'Assets/characters/animation_down.png', 16, 21);
 }
 
 // initialize the game
-const create = function(){
+const create = () => {
   Dotf.game.physics.startSystem(Phaser.Physics.ARCADE);
   Dotf.game.physics.startSystem(Phaser.Physics.P2JS);
   Dotf.keyboard = Dotf.game.input.keyboard;
 
-  background1 = Dotf.game.add.tileSprite(0, 0, 1920, 1080, 'background');
+  Dotf.background1 = Dotf.game.add.tileSprite(0, 0, 1920, 1080, 'background');
   Dotf.game.world.setBounds(0, 0, 1920, 1080);
 
   Dotf.playerGroup = Dotf.game.add.physicsGroup();
 
-  Dotf.player = new PlayerController('character1', {
+  Dotf.player = new PlayerController('character1', 'cursor', 'gun', {
       down: 'character1_down'
     },
     {
@@ -61,9 +69,10 @@ const create = function(){
 }
 
 // update game state each frame
-const update = function(){
+const update = () => {
   Dotf.player.update();
+
 }
 
 // before camera render (mostly for debug)
-const render = function(){}
+const render = () => {}
