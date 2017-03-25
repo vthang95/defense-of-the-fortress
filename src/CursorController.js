@@ -1,7 +1,7 @@
 class CursorController {
   constructor(spriteName) {
     this.sprite = Dotf.game.add.sprite(Dotf.game.world.centerX, Dotf.game.world.centerY, spriteName);
-    Dotf.game.physics.p2.enable(this.sprite);
+    Dotf.game.physics.arcade.enable(this.sprite);
     this.sprite.body.fixedRotation = true;
     this.sprite.scale.setTo(3);
     this.sprite.anchor.setTo(0.5, 0.5);
