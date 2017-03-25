@@ -42,7 +42,8 @@ const preload = () => {
   Dotf.game.load.image('cursor', 'Assets/cursors/1crosshair.png');
   Dotf.game.load.image('gun', 'Assets/guns/flamthrower/flamethrower_down.png');
   Dotf.game.load.image('fountain', 'Assets/other/base.png');
-  Dotf.game.load.spritesheet('character1_down', 'Assets/characters/animation_down.png', 16, 21);
+  Dotf.game.load.spritesheet('character1_animation', 'Assets/spritesheet/character1.png', 16, 21);
+  Dotf.game.load.image('bulleta', 'Assets/other/bulleta.png', 32, 32);
 }
 
 // initialize the game
@@ -59,12 +60,10 @@ const create = () => {
 
   Dotf.playerGroup = Dotf.game.add.physicsGroup();
   Dotf.towers = Dotf.game.add.physicsGroup();
-  // TODO Create TowerController class.
+  Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
+  // TODO Create TowerController class. TownerGroup.
 
-  Dotf.player = new PlayerController(Dotf.playerGroup, 'character1', 'gun', {
-      down: 'character1_down'
-    },
-    {
+  Dotf.player = new PlayerController(Dotf.playerGroup, 'character1', 'character1_animation', {
       up: Phaser.Keyboard.W,
       down: Phaser.Keyboard.S,
       left: Phaser.Keyboard.A,
