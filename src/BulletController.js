@@ -7,7 +7,8 @@ class BulletController {
     this.sprite.body.checkWorldBounds = true;
     this.sprite.body.outOfBoundsKill = true;
     this.sprite.anchor.setTo(0.5, 0.5);
-    this.sprite.body.velocity = direction.setMagnitude(this.configs.bulletSpeed);
+    // this.sprite.body.velocity = direction.setMagnitude(this.configs.bulletSpeed);
     this.sprite.scale.setTo(4);
+    Dotf.game.physics.arcade.moveToPointer(this.sprite, this.configs.bulletSpeed);
   }
 }

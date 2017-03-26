@@ -7,9 +7,9 @@ Dotf.configs = {
   GAME_HEIGHT_MIN: 480,
   GAME_WORLD_WIDTH: 2960,
   GAME_WORLD_HEIGHT: 2160,
-  gameSize: {
-    GAME_WIDTH: window.innerWidth,
-    GAME_HEIGHT: window.innerHeight
+  gun: {
+    bulletSpeed: 1500
+    // TODO add types of gun
   },
   player: {
     speed: 200
@@ -37,13 +37,17 @@ const preload = () => {
   Dotf.game.time.advancedTiming = true;
   // Dotf.game.load.atlasJSONHash('assets', 'Assets/assets.png', 'Assets/assets.json');
   Dotf.game.load.image('background', 'Assets/maps/map1.png');
-  Dotf.game.load.image('character1', 'Assets/characters/1.png');
-  //TODO create a spritesheet including all animations of an object.
   Dotf.game.load.image('cursor', 'Assets/cursors/1crosshair.png');
+  //TODO create a spritesheet including all animations of an object.
+  // <GUN TYPE>
   Dotf.game.load.image('gun', 'Assets/guns/flamthrower/flamethrower_down.png');
+  // <CONTRUCTIONS>
   Dotf.game.load.image('fountain', 'Assets/other/base.png');
-  Dotf.game.load.spritesheet('character1_animation', 'Assets/spritesheet/character1.png', 16, 21);
+  // <BULLET TYPE>
   Dotf.game.load.image('bulleta', 'Assets/other/bulleta.png', 32, 32);
+  // <ANIMATION>
+  Dotf.game.load.spritesheet('character1_animation', 'Assets/spritesheet/character1.png', 16, 21);
+
 }
 
 // initialize the game
@@ -56,14 +60,16 @@ const create = () => {
   Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, 'background');
   Dotf.background1.scale.setTo(2);
 
+  Dotf.base = Dotf.game.add.sprite(1880 , 500, 'fountain');
+  Dotf.base.scale.setTo(3);
 
-
+  // physic Groups
   Dotf.playerGroup = Dotf.game.add.physicsGroup();
   Dotf.towers = Dotf.game.add.physicsGroup();
   Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
   // TODO Create TowerController class. TownerGroup.
 
-  Dotf.player = new PlayerController(Dotf.playerGroup, 'character1', 'character1_animation', {
+  Dotf.player = new PlayerController(Dotf.playerGroup, 'character1_animation', {
       up: Phaser.Keyboard.W,
       down: Phaser.Keyboard.S,
       left: Phaser.Keyboard.A,

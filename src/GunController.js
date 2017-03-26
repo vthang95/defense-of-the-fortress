@@ -11,8 +11,16 @@ class GunController {
   }
   tryFire() {
     this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
-    if (this.sprite.timeSinceLastFire > 0.4) {
-      new BulletController(this.sprite.position, new Phaser.Point(0, 1), 'bulleta', Dotf.playerBulletGroup, {bulletSpeed: 500});
+    if (this.sprite.timeSinceLastFire > 0.1) {
+      new BulletController(
+        this.sprite.position,
+        new Phaser.Point(0, 1),
+        'bulleta',
+        Dotf.playerBulletGroup,
+        {
+          bulletSpeed: Dotf.configs.gun.bulletSpeed
+        }
+      );
       this.sprite.timeSinceLastFire = 0;
     }
     // direction, spriteName, physicsGroup, configs
@@ -23,8 +31,6 @@ class GunController {
     this.sprite.body.y = this.fatherSprite.body.y + 55;
 
     if (Dotf.game.input.activePointer.isDown) this.tryFire();
-    if (Dotf.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) this.tryFire();
-    // console.log(this.bullets);
   }
 
 }

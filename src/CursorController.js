@@ -3,12 +3,12 @@ class CursorController {
     this.sprite = Dotf.game.add.sprite(Dotf.game.world.centerX, Dotf.game.world.centerY, spriteName);
     Dotf.game.physics.arcade.enable(this.sprite);
     this.sprite.body.fixedRotation = true;
+    this.sprite.anchor = new Phaser.Point(0.5, 0.5);
     this.sprite.scale.setTo(3);
-    this.sprite.anchor.setTo(0.5, 0.5);
   }
 
   update() {
-    this.sprite.body.x = Dotf.game.input.mousePointer.x + Dotf.game.camera.x;
-    this.sprite.body.y = Dotf.game.input.mousePointer.y + Dotf.game.camera.y;
+    this.sprite.position.x = Dotf.game.input.mousePointer.x + Dotf.game.camera.x;
+    this.sprite.position.y = Dotf.game.input.mousePointer.y + Dotf.game.camera.y;
   }
 }
