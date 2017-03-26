@@ -11,16 +11,12 @@ class GunController {
         this.sprite.timeSinceLastFire = 0;
     }
     tryFire() {
-        Dotf.game.camera.shake(0.004, 200);
+        Dotf.game.camera.shake(0.009, 200);
         this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
         if (this.sprite.timeSinceLastFire > 0.2) {
-            new BulletController(
+            new BulletaController(
                 this.sprite.position,
-                new Phaser.Point(0, 1),
-                'bulleta',
-                Dotf.playerBulletGroup, {
-                    bulletSpeed: Dotf.configs.gun.bulletSpeed
-                }
+                new Phaser.Point(0, 1)
             );
             this.sprite.timeSinceLastFire = 0;
         }
@@ -58,17 +54,17 @@ class GunController {
             this.sprite.body.x = this.fatherSprite.body.x + 25;
             this.sprite.body.y = this.fatherSprite.body.y + 25;
         }
-        if (this.angleBetweenSpriteAndPointer > -67.5 && this.angleBetweenSpriteAndPointer < - 22.5) {
+        if (this.angleBetweenSpriteAndPointer > -67.5 && this.angleBetweenSpriteAndPointer < -22.5) {
             this.sprite.play('rightCrossUp');
             this.sprite.body.x = this.fatherSprite.body.x + 30;
             this.sprite.body.y = this.fatherSprite.body.y + 15;
         }
-        if (this.angleBetweenSpriteAndPointer > -112.5 && this.angleBetweenSpriteAndPointer < - 67.5) {
+        if (this.angleBetweenSpriteAndPointer > -112.5 && this.angleBetweenSpriteAndPointer < -67.5) {
             this.sprite.play('up');
             this.sprite.body.x = this.fatherSprite.body.x + 10;
             this.sprite.body.y = this.fatherSprite.body.y + 25;
         }
-        if (this.angleBetweenSpriteAndPointer > - 157.5 && this.angleBetweenSpriteAndPointer < -112.5) {
+        if (this.angleBetweenSpriteAndPointer > -157.5 && this.angleBetweenSpriteAndPointer < -112.5) {
             this.sprite.play('leftCrossUp');
             this.sprite.body.x = this.fatherSprite.body.x - 21;
             this.sprite.body.y = this.fatherSprite.body.y + 3;
@@ -81,7 +77,7 @@ class GunController {
     }
 
     update() {
-        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.sprite, this.fatherSprite.cursor.sprite));
+        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.fatherSprite, this.fatherSprite.cursor.sprite));
         this.changeAnimation();
         // this.sprite.rotation = Dotf.game.physics.arcade.angleBetween(this.sprite, this.fatherSprite.cursor.sprite) - Math.PI / 2;
         if (Dotf.game.input.activePointer.isDown) this.tryFire();

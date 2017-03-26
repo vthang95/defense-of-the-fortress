@@ -23,7 +23,7 @@ window.onload = function() {
         update: update,
         render: render
     }, false, false);
-}
+};
 
 // preparations before game starts
 const preload = () => {
@@ -41,13 +41,15 @@ const preload = () => {
     Dotf.game.load.image('gun', 'Assets/guns/flamthrower/flamethrower_down.png');
     // <CONTRUCTIONS>
     Dotf.game.load.image('fountain', 'Assets/other/base.png');
+    Dotf.game.load.image('healthBar', 'Assets/other/healthBar.png');
+    Dotf.game.load.image('healthBarBG', 'Assets/other/healthBarBG.png');
     // <BULLET TYPE>
     Dotf.game.load.image('bulleta', 'Assets/other/bulleta.png', 32, 32);
     // <ANIMATION>
     Dotf.game.load.spritesheet('character1_animation', 'Assets/spritesheet/character1.png', 16, 21);
     Dotf.game.load.spritesheet('flaming_gun_animation', 'Assets/guns/flamthrower/flaming_gun.png', 21, 16);
 
-}
+};
 
 // initialize the game
 const create = () => {
@@ -59,15 +61,14 @@ const create = () => {
     Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, 'background');
     Dotf.background1.scale.setTo(2);
 
-    Dotf.base = Dotf.game.add.sprite(1880, 500, 'fountain');
-    Dotf.base.scale.setTo(3);
 
     // physic Groups
     Dotf.playerGroup = Dotf.game.add.physicsGroup();
     Dotf.gunGroup = Dotf.game.add.physicsGroup();
-    Dotf.towers = Dotf.game.add.physicsGroup();
+    Dotf.constructions = Dotf.game.add.physicsGroup();
     Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
     // TODO Create TowerController class. TownerGroup.
+    Dotf.base = new BaseController(1880, 500, Dotf.constructions, 'fountain', {});
 
     Dotf.player = new PlayerController(Dotf.playerGroup, 'character1_animation', {
         up: Phaser.Keyboard.W,
@@ -78,10 +79,20 @@ const create = () => {
     });
 }
 
+var onBulletHitBase = (playerBulletSprite, BaseSprite) => {
+    BaseSprite.damage(playerBulletSprite.setDamage);
+    playerBulletSprite.kill();
+}
 // update game state each frame
 const update = () => {
     Dotf.player.update();
-}
+    Dotf.base.update();
+
+    Dotf.game.physics.arcade.overlap(
+        Dotf.playerBulletGroup,
+        Dotf.constructions,
+        onBulletHitBase);
+};
 
 // before camera render (mostly for debug)
-const render = () => {}
+const render = () => {};
