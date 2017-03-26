@@ -73,7 +73,7 @@ const create = () => {
 
 
     // physic Groups
-    Dotf.constructions = Dotf.game.add.physicsGroup();
+    Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
     Dotf.playerGroup = Dotf.game.add.physicsGroup();
     Dotf.gunGroup = Dotf.game.add.physicsGroup();
     Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
@@ -81,7 +81,7 @@ const create = () => {
 
     Dotf.greenEnemies = [];
     // TODO Create TowerController class. TownerGroup.
-    Dotf.base = new BaseController(1880, 500, Dotf.constructions, 'fountain', {});
+    Dotf.base = new BaseController(1880, 500, {});
 
     Dotf.player = new PlayerController(Dotf.playerGroup, 'character1_animation', {
         up: Phaser.Keyboard.W,
@@ -124,7 +124,7 @@ const update = () => {
 
     Dotf.game.physics.arcade.overlap(
         Dotf.enemiesGroup,
-        Dotf.constructions,
+        Dotf.constructionsGroup,
         onEnemyHitBase
     );
 
