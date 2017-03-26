@@ -3,8 +3,6 @@ class PlayerController {
         this.sprite = physicsGroup.create(Dotf.configs.GAME_WORLD_WIDTH / 2, Dotf.configs.GAME_WORLD_HEIGHT / 2, spritesheet, 0);
         this.sprite.anchor.setTo(0.5, 0.5);
         Dotf.game.physics.arcade.enable(this.sprite);
-        this.sprite.body.fixedRotation = true;
-        this.sprite.smoothed = false;
         this.sprite.scale.setTo(3);
 
         this.addAnimation();

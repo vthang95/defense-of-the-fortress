@@ -11,7 +11,7 @@ class GunController {
         this.sprite.timeSinceLastFire = 0;
     }
     tryFire() {
-        Dotf.game.camera.shake(0.009, 200);
+        Dotf.game.camera.shake(0.003, 200);
         this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
         if (this.sprite.timeSinceLastFire > 0.2) {
             new BulletaController(

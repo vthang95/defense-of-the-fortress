@@ -13,6 +13,13 @@ Dotf.configs = {
     },
     player: {
         speed: 200
+    },
+    enemy: {
+        position: {
+            x: Math.floor(Math.random() * 2960) + 1,
+            y: Math.floor(Math.random() * 2160) + 1
+            // reference GAME_WIDTH_MAX, GAME_HEIGHT_MAX
+        }
     }
 };
 
@@ -48,11 +55,14 @@ const preload = () => {
     // <ANIMATION>
     Dotf.game.load.spritesheet('character1_animation', 'Assets/spritesheet/character1.png', 16, 21);
     Dotf.game.load.spritesheet('flaming_gun_animation', 'Assets/guns/flamthrower/flaming_gun.png', 21, 16);
+    // <ENEMY>
+    Dotf.game.load.spritesheet('enemy', 'Assets/monster/slime1_front.png', 16, 16);
 
 };
 
 // initialize the game
 const create = () => {
+
     Dotf.game.physics.startSystem(Phaser.Physics.ARCADE);
     Dotf.keyboard = Dotf.game.input.keyboard;
     Dotf.game.input.mouse.capture = true;
@@ -63,10 +73,13 @@ const create = () => {
 
 
     // physic Groups
+    Dotf.constructions = Dotf.game.add.physicsGroup();
     Dotf.playerGroup = Dotf.game.add.physicsGroup();
     Dotf.gunGroup = Dotf.game.add.physicsGroup();
-    Dotf.constructions = Dotf.game.add.physicsGroup();
     Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
+    Dotf.enemiesGroup = Dotf.game.add.physicsGroup();
+
+    Dotf.greenEnemies = [];
     // TODO Create TowerController class. TownerGroup.
     Dotf.base = new BaseController(1880, 500, Dotf.constructions, 'fountain', {});
 
@@ -77,21 +90,50 @@ const create = () => {
         right: Phaser.Keyboard.D,
         speed: Dotf.configs.player.speed
     });
+
+    setInterval(function() {
+        new EnemyController({
+                x: Math.floor(Math.random() * 2960) + 1,
+                y: Math.floor(Math.random() * 2160) + 1
+                // reference GAME_WIDTH_MAX, GAME_HEIGHT_MAX
+            },
+            'enemy',
+            Dotf.enemiesGroup, {
+                speed: 100
+            });
+    }, 2000);
+
 }
 
-var onBulletHitBase = (playerBulletSprite, BaseSprite) => {
-    BaseSprite.damage(playerBulletSprite.setDamage);
+var onEnemyHitBase = (enemySprite, BaseSprite) => {
+    BaseSprite.damage(enemySprite.setDamage);
+    enemySprite.kill();
+}
+
+var onBulletHitEnemy = (playerBulletSprite, enemySprite) => {
+    enemySprite.damage(playerBulletSprite.setDamage);
     playerBulletSprite.kill();
 }
+
 // update game state each frame
 const update = () => {
     Dotf.player.update();
     Dotf.base.update();
 
+    Dotf.greenEnemies.forEach(enemy => enemy.update());
+
+    Dotf.game.physics.arcade.overlap(
+        Dotf.enemiesGroup,
+        Dotf.constructions,
+        onEnemyHitBase
+    );
+
     Dotf.game.physics.arcade.overlap(
         Dotf.playerBulletGroup,
-        Dotf.constructions,
-        onBulletHitBase);
+        Dotf.enemiesGroup,
+        onBulletHitEnemy
+    );
+
 };
 
 // before camera render (mostly for debug)

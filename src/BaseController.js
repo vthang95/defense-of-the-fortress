@@ -1,6 +1,6 @@
 class BaseController {
     constructor(x, y, physicsGroup, spriteName, configs) {
-        this.sprite = physicsGroup.create(x, y, spriteName, 1);
+        this.sprite = physicsGroup.create(x, y, spriteName, 0);
         Dotf.game.physics.arcade.enable(this.sprite);
         this.configs = configs;
         this.sprite.health = 100;
