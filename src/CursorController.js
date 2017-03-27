@@ -1,10 +1,9 @@
 class CursorController {
-    constructor(spriteName, fatherObject) {
+    constructor(spriteName) {
         this.sprite = Dotf.game.add.sprite(Dotf.game.world.centerX, Dotf.game.world.centerY, spriteName);
         Dotf.game.physics.arcade.enable(this.sprite);
         this.sprite.anchor = new Phaser.Point(0.5, 0.5);
         this.sprite.scale.setTo(3);
-        this.fatherObject = fatherObject;
     }
 
     update() {

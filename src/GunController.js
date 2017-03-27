@@ -9,7 +9,7 @@ class GunController {
         // TODO check self remove object when it is destroyed
         this.sprite.timeSinceLastFire = 0;
 
-        this.sprite.cursor = new CursorController('default', this);
+        this.sprite.cursor = new CursorController('default');
     }
     // overide changeCursor function when create an instance
     changeCursor() {

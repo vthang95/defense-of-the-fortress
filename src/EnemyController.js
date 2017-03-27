@@ -7,16 +7,17 @@ class EnemyController {
         this.sprite.setDamage = 5;
         this.configs = configs;
         Dotf.greenEnemies.push(this);
-        this.sprite.coin = 5;
+        this.sprite.coin = 1;
         this.sprite.events.onKilled.add(this.remove, this);
 
         this.sprite.animations.add('run', [0, 1, 2, 3], 5, true);
 
         this.sprite.dropCoin = () => {
-            let random = () => Math.floor(Math.random() * 40 + 1);
-            new CoinController(this.sprite.position.x, this.sprite.position.y, 'coin', {coinValue: 1});
-            new CoinController(this.sprite.position.x + random(), this.sprite.position.y - random(), 'coin', {coinValue: 1});
-            new CoinController(this.sprite.position.x + random(), this.sprite.position.y - random(), 'coin', {coinValue: 1});
+            let cordinateX = this.sprite.position.x;
+            let cordinateY = this.sprite.position.y;
+            new CoinController({x: cordinateX, y: cordinateY}, 'coin', {coinValue: this.sprite.coin, speed: 100}, this.sprite);
+            new CoinController({x: cordinateX, y: cordinateY}, 'coin', {coinValue: this.sprite.coin, speed: 100}, this.sprite);
+            new CoinController({x: cordinateX, y: cordinateY}, 'coin', {coinValue: this.sprite.coin, speed: 100}, this.sprite);
         };
     }
 
