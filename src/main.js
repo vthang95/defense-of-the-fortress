@@ -89,6 +89,8 @@ const create = () => {
     Dotf.greenEnemies = [];
     Dotf.coins = [];
     Dotf.constructions = [];
+    // TODO Just the gun is actived can change the cursor
+    Dotf.gunIsEquiped = [];
     // TODO Create TowerController class. TownerGroup.
     Dotf.base = new BaseController(1880, 500, {});
 

@@ -84,6 +84,7 @@ class GunController {
     }
 
     update() {
+        this.changeCursor();
         this.sprite.cursor.update();
         this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.fatherSprite, this.sprite.cursor.sprite));
         this.changeAnimation();

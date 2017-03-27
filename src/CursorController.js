@@ -9,7 +9,6 @@ class CursorController {
 
     update() {
         // this.sprite.rotation = Dotf.game.physics.arcade.angleBetween(this.sprite, this.fatherSprite.cursor.sprite) - Math.PI / 2;
-        this.fatherObject.changeCursor();
         this.sprite.position.x = Dotf.game.input.mousePointer.x + Dotf.game.camera.x;
         this.sprite.position.y = Dotf.game.input.mousePointer.y + Dotf.game.camera.y;
     }
