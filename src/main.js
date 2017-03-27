@@ -76,6 +76,7 @@ const create = () => {
 
     // physic Groups
     Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
+    Dotf.healthBarGroup = Dotf.game.add.physicsGroup();
     Dotf.playerGroup = Dotf.game.add.physicsGroup();
     Dotf.gunGroup = Dotf.game.add.physicsGroup();
     Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
@@ -83,6 +84,8 @@ const create = () => {
     Dotf.coinGroup = Dotf.game.add.physicsGroup();
 
     Dotf.greenEnemies = [];
+    Dotf.coins = [];
+    Dotf.constructions = [];
     // TODO Create TowerController class. TownerGroup.
     Dotf.base = new BaseController(1880, 500, {});
 
@@ -102,7 +105,7 @@ const create = () => {
             },
             'enemy',
             Dotf.enemiesGroup, {
-                speed: 100
+                speed: 200
             });
     }, 2000);
 
@@ -129,6 +132,8 @@ const update = () => {
     Dotf.player.update();
     Dotf.base.update();
 
+    Dotf.constructions.forEach(construction => construction.update());
+    Dotf.coins.forEach(coin => coin.update());
     Dotf.greenEnemies.forEach(enemy => enemy.update());
 
     Dotf.game.physics.arcade.overlap(

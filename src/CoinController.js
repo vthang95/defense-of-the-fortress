@@ -1,18 +1,24 @@
 class CoinController {
-    constructor(position, spriteName, configs) {
-        this.sprite = Dotf.coinGroup.create(position.x, position.y, spriteName, 1);
+    constructor(x, y, spriteName, configs) {
+        this.sprite = Dotf.coinGroup.create(x, y, spriteName, 1);
         Dotf.game.physics.arcade.enable(this.sprite);
-        this.sprite.coinValue = 5;
         this.configs = configs;
+        this.sprite.coinValue = this.configs.coinValue;
+        Dotf.coins.push(this);
         this.sprite.scale.setTo(2);
         this.sprite.anchor.setTo(0.5, 0.5);
         this.autoRemove();
-
-        // TODO add coin animation
+        this.sprite.animations.add('spin', [0, 1, 2, 3, 4, 5, 6, 7], 10, true);
+        // TODO add coin dropping effect
     }
+
+    update() {
+        this.sprite.play('spin');
+    };
 
     autoRemove() {
         setTimeout(() => {
+            Dotf.coins.splice(Dotf.coins.indexOf(this), 1);
             this.sprite.destroy();
             // TODO add auto remove instance
         }, 5000)
