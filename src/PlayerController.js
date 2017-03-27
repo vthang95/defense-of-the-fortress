@@ -5,13 +5,16 @@ class PlayerController {
         Dotf.game.physics.arcade.enable(this.sprite);
         this.sprite.scale.setTo(3);
 
+        this.sprite.health = 50;
+        this.sprite.coin = 0;
+
         this.addAnimation();
 
         this.configs = configs;
 
         Dotf.game.camera.follow(this.sprite);
         Dotf.game.camera.follow(this.sprite, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
-        
+
         this.gun = new GunController(Dotf.gunGroup, 'flaming_gun_animation', this.sprite);
 
         this.sprite.cursor = new CursorController('cursor');

@@ -8,10 +8,16 @@ class EnemyController {
         this.sprite.setDamage = 5;
         this.configs = configs;
         Dotf.greenEnemies.push(this);
+        this.sprite.coin = 5;
         this.sprite.events.onKilled.add(this.remove, this);
+
+        this.sprite.dropCoin = () => {
+            new CoinController(this.sprite.position, 'coin', {});
+        };
     }
 
     remove() {
+        if (this.sprite.dropCoin) this.sprite.dropCoin();
         Dotf.greenEnemies.splice(Dotf.greenEnemies.indexOf(this), 1);
     }
 

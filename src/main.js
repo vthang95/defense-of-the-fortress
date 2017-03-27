@@ -57,6 +57,8 @@ const preload = () => {
     Dotf.game.load.spritesheet('flaming_gun_animation', 'Assets/guns/flamthrower/flaming_gun.png', 21, 16);
     // <ENEMY>
     Dotf.game.load.spritesheet('enemy', 'Assets/monster/slime1_front.png', 16, 16);
+    // Others
+    Dotf.game.load.spritesheet('coin', 'Assets/other/coin2.png', 16, 16);
 
 };
 
@@ -78,6 +80,7 @@ const create = () => {
     Dotf.gunGroup = Dotf.game.add.physicsGroup();
     Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
     Dotf.enemiesGroup = Dotf.game.add.physicsGroup();
+    Dotf.coinGroup = Dotf.game.add.physicsGroup();
 
     Dotf.greenEnemies = [];
     // TODO Create TowerController class. TownerGroup.
@@ -107,12 +110,18 @@ const create = () => {
 
 var onEnemyHitBase = (enemySprite, BaseSprite) => {
     BaseSprite.damage(enemySprite.setDamage);
+    enemySprite.dropCoin = null;
     enemySprite.kill();
 }
 
 var onBulletHitEnemy = (playerBulletSprite, enemySprite) => {
     enemySprite.damage(playerBulletSprite.setDamage);
     playerBulletSprite.kill();
+}
+
+var onPlayerPickCoin = (playerSprite, coinSprite) => {
+    playerSprite.coin += coinSprite.coinValue;
+    coinSprite.destroy();
 }
 
 // update game state each frame
@@ -132,6 +141,12 @@ const update = () => {
         Dotf.playerBulletGroup,
         Dotf.enemiesGroup,
         onBulletHitEnemy
+    );
+
+    Dotf.game.physics.arcade.overlap(
+        Dotf.playerGroup,
+        Dotf.coinGroup,
+        onPlayerPickCoin
     );
 
 };
