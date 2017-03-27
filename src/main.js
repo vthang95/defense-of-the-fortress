@@ -42,7 +42,10 @@ const preload = () => {
     Dotf.game.time.advancedTiming = true;
     // Dotf.game.load.atlasJSONHash('assets', 'Assets/assets.png', 'Assets/assets.json');
     Dotf.game.load.image('background', 'Assets/maps/map1.png');
-    Dotf.game.load.image('cursor', 'Assets/cursors/1crosshair.png');
+    // <CURSOR>
+    Dotf.game.load.image('bulleta_cursor1', 'Assets/cursors/1crosshair.png');
+    Dotf.game.load.image('bulleta_cursor2', 'Assets/cursors/1crosshair2.png');
+    Dotf.game.load.image('default', 'Assets/cursors/mouse_pointer.png');
     //TODO create a spritesheet including all animations of an object.
     // <GUN TYPE>
     Dotf.game.load.image('gun', 'Assets/guns/flamthrower/flamethrower_down.png');

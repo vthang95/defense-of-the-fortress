@@ -2,14 +2,21 @@ class GunController {
     constructor(physicsGroup, spriteName, playerSprite) {
         this.fatherSprite = playerSprite;
         this.sprite = physicsGroup.create(this.fatherSprite.body.x, this.fatherSprite.body.y, spriteName, 3);
-        Dotf.game.physics.arcade.enable(this.sprite);
         this.sprite.body.fixedRotation = true;
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.scale.setTo(2);
         this.addAnimation();
         // TODO check self remove object when it is destroyed
         this.sprite.timeSinceLastFire = 0;
+
+        this.sprite.cursor = new CursorController('default', this);
     }
+    // overide changeCursor function when create an instance
+    changeCursor() {
+        if (Dotf.game.input.activePointer.isDown) this.sprite.cursor.sprite.loadTexture('bulleta_cursor2');
+            else this.sprite.cursor.sprite.loadTexture('bulleta_cursor1');
+    }
+
     tryFire() {
         Dotf.game.camera.shake(0.003, 200);
         this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
@@ -77,7 +84,8 @@ class GunController {
     }
 
     update() {
-        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.fatherSprite, this.fatherSprite.cursor.sprite));
+        this.sprite.cursor.update();
+        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.fatherSprite, this.sprite.cursor.sprite));
         this.changeAnimation();
         // this.sprite.rotation = Dotf.game.physics.arcade.angleBetween(this.sprite, this.fatherSprite.cursor.sprite) - Math.PI / 2;
         if (Dotf.game.input.activePointer.isDown) this.tryFire();

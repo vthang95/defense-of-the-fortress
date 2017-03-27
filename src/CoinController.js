@@ -1,7 +1,6 @@
 class CoinController {
     constructor(x, y, spriteName, configs) {
         this.sprite = Dotf.coinGroup.create(x, y, spriteName, 1);
-        Dotf.game.physics.arcade.enable(this.sprite);
         this.configs = configs;
         this.sprite.coinValue = this.configs.coinValue;
         Dotf.coins.push(this);

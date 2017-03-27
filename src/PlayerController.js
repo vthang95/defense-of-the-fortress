@@ -2,7 +2,6 @@ class PlayerController {
     constructor(physicsGroup, spritesheet, configs) {
         this.sprite = physicsGroup.create(Dotf.configs.GAME_WORLD_WIDTH / 2, Dotf.configs.GAME_WORLD_HEIGHT / 2, spritesheet, 0);
         this.sprite.anchor.setTo(0.5, 0.5);
-        // Dotf.game.physics.arcade.enable(this.sprite);
         this.sprite.scale.setTo(3);
 
         this.sprite.health = 50;
@@ -17,19 +16,18 @@ class PlayerController {
 
         this.gun = new GunController(Dotf.gunGroup, 'flaming_gun_animation', this.sprite);
 
-        this.sprite.cursor = new CursorController('cursor');
         this.angleBetweenSpriteAndPointer = 90;
     }
 
     addAnimation() {
-        this.sprite.animations.add('left', [25, 26, 27, 28], 10, true);
-        this.sprite.animations.add('right', [21, 22, 23, 24], 10, true);
-        this.sprite.animations.add('up', [9, 10, 11, 12], 10, true);
-        this.sprite.animations.add('down', [17, 18, 19, 20], 10, true);
-        this.sprite.animations.add('leftCrossUp', [5, 6, 7, 8], 10, true);
-        this.sprite.animations.add('rightCrossUp', [1, 2, 3, 4], 10, true);
-        this.sprite.animations.add('leftCrossDown', [33, 34, 35, 36], 10, true);
-        this.sprite.animations.add('rightCrossDown', [29, 30, 31, 32], 10, true);
+        this.sprite.animations.add('left', [25, 26, 27, 28], 5, true);
+        this.sprite.animations.add('right', [21, 22, 23, 24], 5, true);
+        this.sprite.animations.add('up', [9, 10, 11, 12], 5, true);
+        this.sprite.animations.add('down', [17, 18, 19, 20], 5, true);
+        this.sprite.animations.add('leftCrossUp', [5, 6, 7, 8], 5, true);
+        this.sprite.animations.add('rightCrossUp', [1, 2, 3, 4], 5, true);
+        this.sprite.animations.add('leftCrossDown', [33, 34, 35, 36], 5, true);
+        this.sprite.animations.add('rightCrossDown', [29, 30, 31, 32], 5, true);
     }
 
     changeAnimation() {
@@ -61,9 +59,8 @@ class PlayerController {
 
     update() {
         this.gun.update();
-        this.sprite.cursor.update();
 
-        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.sprite, this.sprite.cursor.sprite));
+        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.sprite, this.gun.sprite.cursor.sprite));
         this.changeAnimation();
 
         this.sprite.body.velocity.x = 0;
