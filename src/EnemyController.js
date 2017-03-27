@@ -28,7 +28,12 @@ class EnemyController {
 
     update() {
         this.sprite.play('run');
-        Dotf.game.physics.arcade.moveToXY(this.sprite, Dotf.base.sprite.position.x, Dotf.base.sprite.position.y, this.configs.speed);
+        if (!Dotf.base.sprite.health) {
+            this.sprite.body.velocity.x = 0;
+            this.sprite.body.velocity.y = 0;
+        } else {
+            Dotf.game.physics.arcade.moveToXY(this.sprite, Dotf.base.sprite.position.x, Dotf.base.sprite.position.y, this.configs.speed);
+        }
     }
 
 }
