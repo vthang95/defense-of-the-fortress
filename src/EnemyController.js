@@ -1,28 +1,40 @@
 class EnemyController {
     constructor(position, spriteName, physicsGroup, configs) {
         this.sprite = physicsGroup.create(position.x, position.y, spriteName, 2);
+        this.configs = configs;
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.scale.setTo(3);
-        this.sprite.health = 20;
-        this.sprite.setDamage = 5;
-        this.configs = configs;
         Dotf.greenEnemies.push(this);
-        this.sprite.coin = 1;
+        this.sprite.animations.add('run', [0, 1, 2, 3], 5, true);
         this.sprite.events.onKilled.add(this.remove, this);
 
-        this.sprite.animations.add('run', [0, 1, 2, 3], 5, true);
+        this.sprite.health = 20;
+        this.sprite.coin = 1;
+        this.sprite.setDamage = 5;
 
         this.sprite.dropCoin = () => {
             let cordinateX = this.sprite.position.x;
             let cordinateY = this.sprite.position.y;
-            new CoinController({x: cordinateX, y: cordinateY}, 'coin', {coinValue: this.sprite.coin, speed: 100}, this.sprite);
-            new CoinController({x: cordinateX, y: cordinateY}, 'coin', {coinValue: this.sprite.coin, speed: 100}, this.sprite);
-            new CoinController({x: cordinateX, y: cordinateY}, 'coin', {coinValue: this.sprite.coin, speed: 100}, this.sprite);
+            let coinQuantity = 3;
+            this.createCoin(cordinateX, cordinateY, coinQuantity);
         };
+
+        // TODO: change enemy's color when get hit
+    }
+    createCoin(corX, corY, multiple) {
+        for (let i = 0; i < multiple; i++) {
+            new CoinController({x: corX, y: corY}, 'coin', {coinValue: this.sprite.coin, speed: 1000}, this.sprite);
+        }
+    }
+
+    randomCoinDropRate() {
+        let numberForChecking = Math.floor(Math.random() * 100 + 1) / 100;
+        if (numberForChecking < this.configs.coinDroppingRate) return true;
+        return false;
     }
 
     remove() {
-        if (this.sprite.dropCoin) this.sprite.dropCoin();
+        if (this.sprite.dropCoin && this.randomCoinDropRate()) this.sprite.dropCoin();
         Dotf.greenEnemies.splice(Dotf.greenEnemies.indexOf(this), 1);
     }
 

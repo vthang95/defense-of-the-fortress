@@ -8,7 +8,7 @@ Dotf.configs = {
     GAME_WORLD_WIDTH: 2960,
     GAME_WORLD_HEIGHT: 2160,
     gun: {
-        bulletSpeed: 1500
+        bulletSpeed: 1000
         // TODO add types of gun
     },
     player: {
@@ -55,6 +55,7 @@ const preload = () => {
     Dotf.game.load.image('healthBarBG', 'Assets/other/healthBarBG.png');
     // <BULLET TYPE>
     Dotf.game.load.image('bulleta', 'Assets/other/bulleta.png', 32, 32);
+    Dotf.game.load.image('bulletc', 'Assets/other/bulletc.png', 11, 8);
     // <ANIMATION>
     Dotf.game.load.spritesheet('character1_animation', 'Assets/spritesheet/character1.png', 16, 21);
     Dotf.game.load.spritesheet('flaming_gun_animation', 'Assets/guns/flamthrower/flaming_gun.png', 21, 16);
@@ -80,18 +81,20 @@ const create = () => {
     // physic Groups
     Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
     Dotf.healthBarGroup = Dotf.game.add.physicsGroup();
+    Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
     Dotf.playerGroup = Dotf.game.add.physicsGroup();
     Dotf.gunGroup = Dotf.game.add.physicsGroup();
-    Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
     Dotf.enemiesGroup = Dotf.game.add.physicsGroup();
     Dotf.coinGroup = Dotf.game.add.physicsGroup();
+
+    Dotf.playerBulletGroup.setAll('outOfBoundsKill', true);
+    Dotf.playerBulletGroup.setAll('checkWorldBounds', true);
 
     Dotf.greenEnemies = [];
     Dotf.coins = [];
     Dotf.constructions = [];
     // TODO Just the gun is actived can change the cursor
     Dotf.gunIsEquiped = [];
-    // TODO Create TowerController class. TownerGroup.
     Dotf.base = new BaseController(1880, 500, {});
 
     Dotf.player = new PlayerController(Dotf.playerGroup, 'character1_animation', {
@@ -110,7 +113,8 @@ const create = () => {
             },
             'enemy',
             Dotf.enemiesGroup, {
-                speed: 200
+                speed: 200,
+                coinDroppingRate: 0.7
             });
     }, 2000);
 

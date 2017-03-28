@@ -5,11 +5,13 @@ class GunController {
         this.sprite.body.fixedRotation = true;
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.scale.setTo(2);
-        this.addAnimation();
         // TODO check self remove object when it is destroyed
-        this.sprite.timeSinceLastFire = 0;
-
         this.sprite.cursor = new CursorController('default');
+
+        this.sprite.timeSinceLastFire = 0;
+        this.bullets = [];
+
+        this.addAnimation();
     }
     // overide changeCursor function when create an instance
     changeCursor() {
@@ -21,9 +23,9 @@ class GunController {
         Dotf.game.camera.shake(0.003, 200);
         this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
         if (this.sprite.timeSinceLastFire > 0.2) {
-            new BulletaController(
+            new BulletcController(
                 this.sprite.position,
-                new Phaser.Point(0, 1)
+                this
             );
             this.sprite.timeSinceLastFire = 0;
         }
@@ -86,6 +88,8 @@ class GunController {
     update() {
         this.changeCursor();
         this.sprite.cursor.update();
+        this.bullets.forEach(bullet => bullet.update());
+
         this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.fatherSprite, this.sprite.cursor.sprite));
         this.changeAnimation();
         // this.sprite.rotation = Dotf.game.physics.arcade.angleBetween(this.sprite, this.fatherSprite.cursor.sprite) - Math.PI / 2;

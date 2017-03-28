@@ -1,6 +1,6 @@
 class BulletaController extends BulletController {
-    constructor(position, direction) {
-        super(position, direction, 'bulleta', Dotf.playerBulletGroup, {
+    constructor(position, fatherObject) {
+        super(position, 'bulleta', Dotf.playerBulletGroup, fatherObject, {
             bulletSpeed: Dotf.configs.gun.bulletSpeed
         });
     }
