@@ -27,19 +27,25 @@ class EnemyController {
         }
     }
 
-    randomCoinDropRate() {
+    checkRandomCoinDropRate() {
         let numberForChecking = Math.floor(Math.random() * 100 + 1) / 100;
         if (numberForChecking < this.configs.coinDroppingRate) return true;
         return false;
     }
 
+    createExplosion() {
+        new ExplodeController(this.sprite.position, 'shockwave', {});
+    }
+
     remove() {
-        if (this.sprite.dropCoin && this.randomCoinDropRate()) this.sprite.dropCoin();
+        this.createExplosion();
+        if (this.sprite.dropCoin && this.checkRandomCoinDropRate()) this.sprite.dropCoin();
         Dotf.greenEnemies.splice(Dotf.greenEnemies.indexOf(this), 1);
     }
 
     update() {
         this.sprite.play('run');
+
         if (!Dotf.base.sprite.health) {
             this.sprite.body.velocity.x = 0;
             this.sprite.body.velocity.y = 0;

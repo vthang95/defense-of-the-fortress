@@ -19,17 +19,7 @@ class GunController {
             else this.sprite.cursor.sprite.loadTexture('bulleta_cursor1');
     }
 
-    tryFire() {
-        Dotf.game.camera.shake(0.003, 200);
-        this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
-        if (this.sprite.timeSinceLastFire > 0.2) {
-            new BulletcController(
-                this.sprite.position,
-                this
-            );
-            this.sprite.timeSinceLastFire = 0;
-        }
-    }
+
 
     addAnimation() {
         this.sprite.animations.add('down', [3], 1, true);
@@ -82,6 +72,18 @@ class GunController {
             this.sprite.play('left');
             this.sprite.body.x = this.fatherSprite.body.x - 28;
             this.sprite.body.y = this.fatherSprite.body.y + 22;
+        }
+    }
+
+    tryFire() {
+        Dotf.game.camera.shake(0.003, 200);
+        this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
+        if (this.sprite.timeSinceLastFire > 0.2) {
+            new BulletcController(
+                this.sprite.position,
+                this
+            );
+            this.sprite.timeSinceLastFire = 0;
         }
     }
 

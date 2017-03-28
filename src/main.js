@@ -63,6 +63,7 @@ const preload = () => {
     Dotf.game.load.spritesheet('enemy', 'Assets/monster/slime1_front.png', 16, 16);
     // Others
     Dotf.game.load.spritesheet('coin', 'Assets/other/coin2.png', 16, 16);
+    Dotf.game.load.spritesheet('shockwave', 'Assets/other/shockwave.png', 80, 80);
 
 };
 
@@ -91,6 +92,7 @@ const create = () => {
 
     Dotf.greenEnemies = [];
     Dotf.coins = [];
+    Dotf.explosions = [];
     Dotf.constructions = [];
     // TODO Just the gun is actived can change the cursor
     Dotf.gunIsEquiped = [];
@@ -132,7 +134,14 @@ var onEnemyHitBase = (enemySprite, BaseSprite) => {
     enemySprite.kill();
 }
 
+// tint function will create a color filter to the sprite.
+// sprite.tint = 0xffffff will remove all tint effect.
+// TODO: tint a frame when player got damage
 var onBulletHitEnemy = (playerBulletSprite, enemySprite) => {
+    enemySprite.tint = 0xff0000;
+    setTimeout(() => {
+        enemySprite.tint = 0xffffff;
+    }, 100);
     enemySprite.damage(playerBulletSprite.setDamage);
     playerBulletSprite.kill();
 }
@@ -153,6 +162,7 @@ const update = () => {
     Dotf.constructions.forEach(construction => construction.update());
     Dotf.coins.forEach(coin => coin.update());
     Dotf.greenEnemies.forEach(enemy => enemy.update());
+    Dotf.explosions.forEach(explosion => explosion.update());
 
     Dotf.game.physics.arcade.overlap(
         Dotf.enemiesGroup,
