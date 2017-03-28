@@ -10,6 +10,10 @@ class GunController {
         this.sprite.timeSinceLastFire = 0;
 
         this.sprite.cursor = new CursorController('default');
+
+        if (Dotf.configs.typeBullet == 3) {
+          GunController.COOLDOWN = 0.07;
+        }
     }
     // overide changeCursor function when create an instance
     changeCursor() {
@@ -20,10 +24,11 @@ class GunController {
     tryFire() {
         Dotf.game.camera.shake(0.003, 200);
         this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
-        if (this.sprite.timeSinceLastFire > 0.2) {
-            new BulletaController(
+        if (this.sprite.timeSinceLastFire > GunController.COOLDOWN) {
+            new BulletcController(
                 this.sprite.position,
-                new Phaser.Point(0, 1)
+                new Phaser.Point(0, 1),
+                this.angleBetweenSpriteAndPointer
             );
             this.sprite.timeSinceLastFire = 0;
         }
@@ -93,3 +98,5 @@ class GunController {
     }
 
 }
+
+GunController.COOLDOWN = 0.2;

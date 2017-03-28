@@ -1,7 +1,7 @@
 class BulletController {
     constructor(position, direction, spriteName, physicsGroup, configs) {
         this.sprite = physicsGroup.create(position.x, position.y, spriteName, 1);
-        this.direction = direction;
+        // this.direction = direction;
         this.configs = configs;
         this.sprite.setDamage = 5;
         this.sprite.body.checkWorldBounds = true;
