@@ -77,7 +77,6 @@ const create = () => {
     Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, 'background');
     Dotf.background1.scale.setTo(2);
 
-
     // physic Groups
     Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
     Dotf.healthBarGroup = Dotf.game.add.physicsGroup();
@@ -104,6 +103,13 @@ const create = () => {
         right: Phaser.Keyboard.D,
         speed: Dotf.configs.player.speed
     });
+
+    Dotf.playerHealth = Dotf.game.add.text(50, 20, `Health: ${ Dotf.player.sprite.health }`, { font: '24px Arial', fill: '#fff' });
+    Dotf.playerHealth.fixedToCamera = true;
+    Dotf.playerCoin = Dotf.game.add.text(200, 20, `Coin: ${ Dotf.player.sprite.coin }`, { font: '24px Arial', fill: '#fff' });
+    Dotf.playerCoin.fixedToCamera = true;
+    Dotf.baseHealth = Dotf.game.add.text(320, 20, `Base Health: ${ Dotf.base.sprite.heath }`, { font: '24px Arial', fill: '#fff' });
+    Dotf.baseHealth.fixedToCamera = true;
 
     setInterval(function() {
         new EnemyController({
@@ -138,6 +144,9 @@ var onPlayerPickCoin = (playerSprite, coinSprite) => {
 
 // update game state each frame
 const update = () => {
+    Dotf.playerHealth.setText(`Health: ${ Dotf.player.sprite.health }`);
+    Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
+    Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);
     Dotf.player.update();
     Dotf.base.update();
 
