@@ -61,6 +61,7 @@ const preload = () => {
     Dotf.game.load.spritesheet('flaming_gun_animation', 'Assets/guns/flamthrower/flaming_gun.png', 21, 16);
     // <ENEMY>
     Dotf.game.load.spritesheet('enemy', 'Assets/monster/slime1_front.png', 16, 16);
+    Dotf.game.load.spritesheet('catscratch', 'Assets/other/catscratch.png', 18, 18);
     // Others
     Dotf.game.load.spritesheet('coin', 'Assets/other/coin2.png', 16, 16);
     Dotf.game.load.spritesheet('shockwave', 'Assets/other/shockwave.png', 80, 80);

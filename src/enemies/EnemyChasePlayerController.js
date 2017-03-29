@@ -1,6 +1,6 @@
 class EnemyChasePlayerController extends EnemyController {
     constructor(position, physicsGroup, configs) {
-        super(position, 'enemy', physicsGroup, configs);
+        super(position, 'catscratch', physicsGroup, configs);
     }
 
     update() {
