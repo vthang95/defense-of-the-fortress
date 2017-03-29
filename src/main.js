@@ -56,12 +56,14 @@ const preload = () => {
     // <BULLET TYPE>
     Dotf.game.load.image('bulleta', 'Assets/other/bulleta.png', 32, 32);
     Dotf.game.load.image('bulletc', 'Assets/other/bulletc.png', 11, 8);
+    Dotf.game.load.image('cannonball', 'Assets/other/cannonball.png', 16, 16);
     // <ANIMATION>
     Dotf.game.load.spritesheet('character1_animation', 'Assets/spritesheet/character1.png', 16, 21);
     Dotf.game.load.spritesheet('flaming_gun_animation', 'Assets/guns/flamthrower/flaming_gun.png', 21, 16);
     // <ENEMY>
     Dotf.game.load.spritesheet('enemy', 'Assets/monster/slime1_front.png', 16, 16);
     Dotf.game.load.spritesheet('catscratch', 'Assets/other/catscratch.png', 18, 18);
+    Dotf.game.load.spritesheet('enemyshoot', 'Assets/monster/slime_explode.png', 34, 34);
     // Others
     Dotf.game.load.spritesheet('coin', 'Assets/other/coin2.png', 16, 16);
     Dotf.game.load.spritesheet('shockwave', 'Assets/other/shockwave.png', 80, 80);
@@ -86,6 +88,7 @@ const create = () => {
     Dotf.playerGroup = Dotf.game.add.physicsGroup();
     Dotf.gunGroup = Dotf.game.add.physicsGroup();
     Dotf.enemiesGroup = Dotf.game.add.physicsGroup();
+    Dotf.chasingEnemyGroup = Dotf.game.add.physicsGroup();
     Dotf.coinGroup = Dotf.game.add.physicsGroup();
 
     Dotf.playerBulletGroup.setAll('outOfBoundsKill', true);
@@ -121,7 +124,7 @@ const create = () => {
                   y: Math.floor(Math.random() * 2160) + 1
                   // reference GAME_WIDTH_MAX, GAME_HEIGHT_MAX
               },
-              Dotf.enemiesGroup, {
+              Dotf.chasingEnemyGroup, {
                   speed: 200,
                   coinDroppingRate: 0.7
               });
@@ -201,9 +204,15 @@ const update = () => {
     );
 
     Dotf.game.physics.arcade.overlap(
-        Dotf.enemiesGroup,
+        Dotf.chasingEnemyGroup,
         Dotf.playerGroup,
         onEnemyHitPlayer
+    );
+
+    Dotf.game.physics.arcade.overlap(
+        Dotf.playerBulletGroup,
+        Dotf.chasingEnemyGroup,
+        onBulletHitEnemy
     );
 
 };
