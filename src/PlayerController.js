@@ -58,6 +58,11 @@ class PlayerController {
     }
 
     update() {
+
+        if (!this.sprite.alive) {
+            this.gun.sprite.kill();
+        }
+
         this.gun.update();
 
         this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.sprite, this.gun.sprite.cursor.sprite));

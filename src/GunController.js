@@ -16,7 +16,7 @@ class GunController {
     // overide changeCursor function when create an instance
     changeCursor() {
         if (Dotf.game.input.activePointer.isDown) this.sprite.cursor.sprite.loadTexture('bulleta_cursor2');
-            else this.sprite.cursor.sprite.loadTexture('bulleta_cursor1');
+        else this.sprite.cursor.sprite.loadTexture('bulleta_cursor1');
     }
 
 
@@ -76,6 +76,7 @@ class GunController {
     }
 
     tryFire() {
+        if (!this.sprite.alive) return;
         Dotf.game.camera.shake(0.003, 200);
         this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
         if (this.sprite.timeSinceLastFire > 0.2) {
