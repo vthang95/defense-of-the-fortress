@@ -114,16 +114,28 @@ const create = () => {
     Dotf.baseHealth.fixedToCamera = true;
 
     setInterval(function() {
-        new EnemyController({
-                x: Math.floor(Math.random() * 2960) + 1,
-                y: Math.floor(Math.random() * 2160) + 1
-                // reference GAME_WIDTH_MAX, GAME_HEIGHT_MAX
-            },
-            'enemy',
-            Dotf.enemiesGroup, {
-                speed: 200,
-                coinDroppingRate: 0.7
-            });
+        if (Math.random() > 0.5) {
+          new EnemyChasePlayerController({
+                  x: Math.floor(Math.random() * 2960) + 1,
+                  y: Math.floor(Math.random() * 2160) + 1
+                  // reference GAME_WIDTH_MAX, GAME_HEIGHT_MAX
+              },
+              Dotf.enemiesGroup, {
+                  speed: 200,
+                  coinDroppingRate: 0.7
+              });
+        } else {
+          new EnemyController({
+                  x: Math.floor(Math.random() * 2960) + 1,
+                  y: Math.floor(Math.random() * 2160) + 1
+                  // reference GAME_WIDTH_MAX, GAME_HEIGHT_MAX
+              },
+              'enemy',
+              Dotf.enemiesGroup, {
+                  speed: 200,
+                  coinDroppingRate: 0.7
+              });
+        }
     }, 2000);
 
 }
@@ -149,6 +161,11 @@ var onBulletHitEnemy = (playerBulletSprite, enemySprite) => {
 var onPlayerPickCoin = (playerSprite, coinSprite) => {
     playerSprite.coin += coinSprite.coinValue;
     coinSprite.destroy();
+}
+
+var onEnemyHitPlayer = (enemySprite, playerSprite) => {
+    playerSprite.damage(enemySprite.setDamage);
+    enemySprite.kill();
 }
 
 // update game state each frame
@@ -180,6 +197,12 @@ const update = () => {
         Dotf.playerGroup,
         Dotf.coinGroup,
         onPlayerPickCoin
+    );
+
+    Dotf.game.physics.arcade.overlap(
+        Dotf.enemiesGroup,
+        Dotf.playerGroup,
+        onEnemyHitPlayer
     );
 
 };
