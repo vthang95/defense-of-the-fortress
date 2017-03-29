@@ -6,7 +6,6 @@ class GunController {
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.scale.setTo(2);
         // TODO check self remove object when it is destroyed
-        this.sprite.cursor = new CursorController('default');
 
         this.sprite.timeSinceLastFire = 0;
         this.bullets = [];
@@ -15,8 +14,8 @@ class GunController {
     }
     // overide changeCursor function when create an instance
     changeCursor() {
-        if (Dotf.game.input.activePointer.isDown) this.sprite.cursor.sprite.loadTexture('bulleta_cursor2');
-        else this.sprite.cursor.sprite.loadTexture('bulleta_cursor1');
+        if (Dotf.game.input.activePointer.isDown) Dotf.cursor.sprite.loadTexture('bulleta_cursor2');
+        else Dotf.cursor.sprite.loadTexture('bulleta_cursor1');
     }
 
 
@@ -90,10 +89,9 @@ class GunController {
 
     update() {
         this.changeCursor();
-        this.sprite.cursor.update();
         this.bullets.forEach(bullet => bullet.update());
 
-        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.fatherSprite, this.sprite.cursor.sprite));
+        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.fatherSprite, Dotf.cursor.sprite));
         this.changeAnimation();
         // this.sprite.rotation = Dotf.game.physics.arcade.angleBetween(this.sprite, this.fatherSprite.cursor.sprite) - Math.PI / 2;
         if (Dotf.game.input.activePointer.isDown) this.tryFire();

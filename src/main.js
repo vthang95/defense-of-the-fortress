@@ -81,6 +81,8 @@ const create = () => {
     Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, 'background');
     Dotf.background1.scale.setTo(2);
 
+    Dotf.cursor = new CursorController('default');
+
     // physic Groups
     Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
     Dotf.healthBarGroup = Dotf.game.add.physicsGroup();
@@ -174,6 +176,7 @@ var onEnemyHitPlayer = (enemySprite, playerSprite) => {
 
 // update game state each frame
 const update = () => {
+    Dotf.cursor.update();
     Dotf.playerHealth.setText(`Health: ${ Dotf.player.sprite.health }`);
     Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
     Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);

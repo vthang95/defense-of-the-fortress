@@ -65,7 +65,7 @@ class PlayerController {
 
         this.gun.update();
 
-        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.sprite, this.gun.sprite.cursor.sprite));
+        this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.sprite, Dotf.cursor.sprite));
         this.changeAnimation();
 
         this.sprite.body.velocity.x = 0;
