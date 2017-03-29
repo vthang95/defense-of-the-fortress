@@ -52,7 +52,7 @@ const preload = () => {
     // <CONTRUCTIONS>
     Dotf.game.load.image('fountain', 'Assets/other/base.png');
     Dotf.game.load.image('healthBar', 'Assets/other/healthBar.png');
-    Dotf.game.load.image('healthBarBG', 'Assets/other/healthBarBG.png');
+    Dotf.game.load.image('healthBarBG', 'Assets/other/healthbarBG.png');
     // <BULLET TYPE>
     Dotf.game.load.image('bulleta', 'Assets/other/bulleta.png', 32, 32);
     Dotf.game.load.image('bulletc', 'Assets/other/bulletc.png', 11, 8);
