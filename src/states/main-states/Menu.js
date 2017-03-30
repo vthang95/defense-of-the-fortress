@@ -1,6 +1,6 @@
 const Menu = {
   preload: function() {
-    Dotf.game.load.image("startButton", "assets/startbutton.gif");
+    Dotf.game.load.image("startButton", "Assets/startbutton.gif");
     Dotf.game.load.image('default', 'Assets/cursors/mouse_pointer.png');
   },
 
