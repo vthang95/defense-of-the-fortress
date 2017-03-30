@@ -14,6 +14,7 @@ class GunController {
     }
     // overide changeCursor function when create an instance
     changeCursor() {
+        Dotf.cursor.sprite.anchor.setTo(0.5, 0.5);
         if (Dotf.game.input.activePointer.isDown) Dotf.cursor.sprite.loadTexture('bulleta_cursor2');
         else Dotf.cursor.sprite.loadTexture('bulleta_cursor1');
     }
