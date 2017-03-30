@@ -29,6 +29,11 @@ const sharedOnEnemyHitPlayer = (enemySprite, playerSprite) => {
   playerSprite.damage(enemySprite.setDamage);
   enemySprite.kill();
 };
+
+sharedOnEnemyBulletHitPlayer = (enemyBulletSprite, playerSprite) => {
+  playerSprite.damage(enemyBulletSprite.setDamage);
+  enemyBulletSprite.kill();
+}
 //*************************** finish defining overlap events ************************
 
 const sharedGlobalSetup = () => {
@@ -68,6 +73,7 @@ const sharedGlobalObject = () => {
   Dotf.playerGroup = Dotf.game.add.physicsGroup();
   Dotf.gunGroup = Dotf.game.add.physicsGroup();
   Dotf.enemiesGroup = Dotf.game.add.physicsGroup();
+  Dotf.enemyBulletGroup = Dotf.game.add.physicsGroup();
   Dotf.chasingEnemyGroup = Dotf.game.add.physicsGroup();
   Dotf.coinGroup = Dotf.game.add.physicsGroup();
 
@@ -104,6 +110,12 @@ const sharedCollideChecking = () => {
     Dotf.playerBulletGroup,
     Dotf.chasingEnemyGroup,
     sharedOnBulletHitEnemy
+  );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.enemyBulletGroup,
+    Dotf.playerGroup,
+    sharedOnEnemyBulletHitPlayer
   );
 };
 
