@@ -1,5 +1,5 @@
-const Stage1 = {
-  stageId: 1,
+const Stage2 = {
+  stageId: 2,
   isInStage: true,
   preload: function() {
     sharedPreloadResource();
@@ -8,15 +8,12 @@ const Stage1 = {
     sharedGlobalSetup();
     sharedCreateBackgroundForStage('background');
     sharedGlobalObject();
-
     sharedInitializeObjectOfStage('character1_animation');
-    sharedGameInfo(this.stageId, Dotf.player.sprite.data);
+    sharedFetchDataFromPreviewStage();
+    sharedGameInfo(this.stageId, Dotf.playerData);
 
     setInterval(() => {
-      if (!this.isInStage) {
-        console.log('stop')
-        return
-      };
+      if (!this.isInStage) return;
       if (!Dotf.player.sprite.alive || !Dotf.base.sprite.alive) return;
       if (Math.random() > 0.5) {
         new EnemyChasePlayerController({
@@ -42,23 +39,18 @@ const Stage1 = {
       }
     }, 2000);
 
-
   },
   update: function() {
     // Pass stage
-    if (Dotf.player.sprite.coin > 10) {
+    if (Dotf.player.sprite.coin > 20) {
       sharedStopPlayer();
       sharedSaveDataToNextStage();
-      sharedNextStage('Stage2', this.isInStage);
+      sharedNextStage('Winning', this.isInStage);
       this.isInStage = false;
       return;
     }
-
     sharedUpdateInfoOfStage();
     sharedUpdateSpritesOfStage();
     sharedCollideChecking();
-  },
-  render: function() {
-
   }
 }
