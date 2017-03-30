@@ -2,7 +2,7 @@ const Stage2 = {
   stageId: 2,
   isInStage: true,
   preload: function() {
-    sharedPreloadResource();
+
   },
   create: function() {
     sharedGlobalSetup();
