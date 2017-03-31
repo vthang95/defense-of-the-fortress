@@ -15,7 +15,7 @@ class EnemyController {
     this.sprite.dropCoin = () => {
       let cordinateX = this.sprite.position.x;
       let cordinateY = this.sprite.position.y;
-      let coinQuantity = 3;
+      let coinQuantity = Math.floor(Math.random() * 4 +1);
       this.createCoin(cordinateX, cordinateY, coinQuantity);
     };
 
