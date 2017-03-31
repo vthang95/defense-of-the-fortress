@@ -10,7 +10,7 @@ class BurnBulletControtroller extends BulletController {
   update() {
     this.sprite.play('run');
     this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
-    if (this.sprite.timeSinceLastFire >= 0.7) {
+    if (this.sprite.timeSinceLastFire >= 0.6) {
       Dotf.game.physics.arcade.moveToXY(this.sprite, 0, 0, 0);
       if (this.sprite.timeSinceLastFire >= 2.5) this.sprite.kill();
     }
