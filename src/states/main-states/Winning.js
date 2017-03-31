@@ -1,4 +1,7 @@
 var Winning = {
+    init : function (){
+      console.log(money);
+    },
     preload: function() {
         Dotf.game.load.image('youhigh', 'Assets/youhigh.png');
     },
@@ -14,6 +17,6 @@ var Winning = {
         winningText.anchor.setTo(0.5, 0.5);
     },
     turnBackToMenu: function() {
-        Dotf.game.state.start('Menu');
+        Dotf.game.state.start('Stage1');
     }
 }

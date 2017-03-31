@@ -1,4 +1,5 @@
-var Stage1 = {
+var Stage1 = function (){}
+Stage1.prototype = {
     preload: function() {
         Dotf.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         Dotf.game.scale.pageAlignHorizontally = true;
@@ -36,6 +37,7 @@ var Stage1 = {
 
     },
     create: function() {
+
         sharedGlobalSetup();
 
         Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, 'background');
@@ -59,7 +61,7 @@ var Stage1 = {
 
         Dotf.playerHealth = Dotf.game.add.text(50, 20, `Health: ${ Dotf.player.sprite.health }`, { font: '24px Arial', fill: '#fff' });
         Dotf.playerHealth.fixedToCamera = true;
-        Dotf.playerCoin = Dotf.game.add.text(200, 20, `Coin: ${ Dotf.player.sprite.coin }`, { font: '24px Arial', fill: '#fff' });
+        Dotf.playerCoin = Dotf.game.add.text(200, 20, `Coin: ${Dotf.player.sprite.coin }`, { font: '24px Arial', fill: '#fff' });
         Dotf.playerCoin.fixedToCamera = true;
         Dotf.baseHealth = Dotf.game.add.text(320, 20, `Base Health: ${ Dotf.base.sprite.heath }`, { font: '24px Arial', fill: '#fff' });
         Dotf.baseHealth.fixedToCamera = true;
@@ -91,13 +93,12 @@ var Stage1 = {
                   });
             }
         }, 2000);
-
-
     },
     update: function() {
         // Pass stage
+        money = Dotf.player.sprite.coin;
         if (Dotf.player.sprite.coin > 19) {
-            Dotf.game.state.start('Winning');
+            Dotf.game.state.start('Store',money);
             return;
         }
 
@@ -106,12 +107,12 @@ var Stage1 = {
         Dotf.cursor.update();
         Dotf.playerHealth.setText(`Health: ${ Dotf.player.sprite.health }`);
         Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
-        Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);
+        Dotf.playerCoin.setText(`Coin: ${ money }`);
         Dotf.player.update();
         Dotf.base.update();
 
         Dotf.constructions.forEach(construction => construction.update());
-        Dotf.coins.forEach(coin => coin.update());
+        Dotf.coins.forEach(coin => coin.update() );
         Dotf.greenEnemies.forEach(enemy => enemy.update());
         Dotf.explosions.forEach(explosion => explosion.update());
 

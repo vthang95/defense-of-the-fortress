@@ -31,8 +31,7 @@ window.onload = function() {
     Dotf.game.state.add('Menu', Menu);
     Dotf.game.state.add('Preload', Preload);
     Dotf.game.state.add("Winning", Winning);
-
+    Dotf.game.state.add('Store' , Store);
     Dotf.game.state.add("Stage1", Stage1);
-
     Dotf.game.state.start('Menu');
 };
