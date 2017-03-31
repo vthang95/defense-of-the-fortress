@@ -80,7 +80,7 @@ class GunController {
     Dotf.game.camera.shake(0.003, 200);
     this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
     if (this.sprite.timeSinceLastFire > 0.2) {
-      new BulletcController(
+      new BurnBulletControtroller(
         this.sprite.position,
         this
       );
