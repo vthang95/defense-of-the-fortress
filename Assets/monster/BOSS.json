@@ -1,0 +1,108 @@
+{"frames": [
+
+{
+	"filename": "446-Monsterror.png",
+	"frame": {"x":599,"y":9,"w":270,"h":300},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":270,"h":300},
+	"sourceSize": {"w":270,"h":300}
+},
+{
+	"filename": "5b7218ae796e60fe6a2e216e2d7b7c24.jpg",
+	"frame": {"x":659,"y":869,"w":732,"h":731},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":8,"w":732,"h":731},
+	"sourceSize": {"w":736,"h":749}
+},
+{
+	"filename": "GigaGiga.png",
+	"frame": {"x":9,"y":9,"w":176,"h":123},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":176,"h":123},
+	"sourceSize": {"w":176,"h":123}
+},
+{
+	"filename": "XII_deathgaze_render.png",
+	"frame": {"x":965,"y":309,"w":644,"h":560},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":644,"h":560},
+	"sourceSize": {"w":650,"h":562}
+},
+{
+	"filename": "deus-machina2-vx.png",
+	"frame": {"x":9,"y":309,"w":433,"h":286},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":2,"w":433,"h":286},
+	"sourceSize": {"w":435,"h":288}
+},
+{
+	"filename": "gallery_25428_4_11262.png",
+	"frame": {"x":442,"y":309,"w":523,"h":514},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":523,"h":514},
+	"sourceSize": {"w":523,"h":520}
+},
+{
+	"filename": "gallery_25428_4_164891.png",
+	"frame": {"x":9,"y":869,"w":650,"h":450},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":650,"h":450},
+	"sourceSize": {"w":650,"h":450}
+},
+{
+	"filename": "gallery_25428_4_7577.png",
+	"frame": {"x":376,"y":9,"w":223,"h":290},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":44,"y":0,"w":223,"h":290},
+	"sourceSize": {"w":343,"h":290}
+},
+{
+	"filename": "monstersh-i.hydra.png",
+	"frame": {"x":869,"y":9,"w":288,"h":199},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":288,"h":199},
+	"sourceSize": {"w":288,"h":199}
+},
+{
+	"filename": "mxp006.png",
+	"frame": {"x":185,"y":9,"w":191,"h":225},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":191,"h":225},
+	"sourceSize": {"w":191,"h":225}
+},
+{
+	"filename": "rpg_maker_vx_battlers_by_jameswhite89-d356qwy.png",
+	"frame": {"x":1448,"y":9,"w":374,"h":266},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":374,"h":266},
+	"sourceSize": {"w":376,"h":266}
+},
+{
+	"filename": "???.png",
+	"frame": {"x":1157,"y":9,"w":291,"h":295},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":291,"h":295},
+	"sourceSize": {"w":291,"h":295}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "BOSS.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9109466db378340dfebdf1b234cc5b0c:1/1$"
+}
+}
