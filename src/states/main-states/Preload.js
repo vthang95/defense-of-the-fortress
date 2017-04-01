@@ -27,6 +27,9 @@ const Preload = {
     Dotf.game.load.image('bulletc', 'Assets/other/bulletc.png', 11, 8);
     Dotf.game.load.image('cannonball', 'Assets/other/cannonball.png', 16, 16);
     Dotf.game.load.image('laser_bullet', 'Assets/other/laser_bullet.png', 65, 15);
+    Dotf.game.load.image('homing_bullet', 'Assets/other/homing_bullet.png', 20, 46);
+    // <BOSS
+    Dotf.game.load.image('boss', 'Assets/boss/boss.png', 896, 553);
     // <ANIMATION>
     Dotf.game.load.spritesheet('character1_animation', 'Assets/spritesheet/character1.png', 16, 21);
     Dotf.game.load.spritesheet('flaming_gun_animation', 'Assets/guns/flamthrower/flaming_gun.png', 21, 16);

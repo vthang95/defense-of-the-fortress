@@ -51,6 +51,21 @@ const sharedOnEnemyBulletHitPlayer = (enemyBulletSprite, playerSprite) => {
   playerSprite.damage(enemyBulletSprite.setDamage);
   enemyBulletSprite.kill();
 }
+
+const sharedOnPlayerBulletHitBoss = (playerBulletSprite, bossSprite) => {
+  bossSprite.damage(playerBulletSprite.setDamage);
+  playerBulletSprite.kill();
+}
+
+const sharedOnBossBulletHitPlayerBullet = (bossBulletSprite, playerBulletSprite) => {
+  bossBulletSprite.kill();
+  playerBulletSprite.kill();
+}
+
+const sharedOnBossBulletHitPlayer = (bossBulletSprite, playerSprite) => {
+  bossBulletSprite.kill();
+  playerSprite.damage(bossBulletSprite.setDamage);
+}
 //*************************** finish defining overlap events ************************
 
 const sharedGlobalSetup = () => {
@@ -88,6 +103,7 @@ const sharedGlobalObject = () => {
   Dotf.explosions = [];
   Dotf.constructions = [];
   Dotf.gunIsEquiped = [];
+  Dotf.bosses = [];
 
   // TODO Just the gun is actived can change the cursor
   Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
@@ -100,6 +116,8 @@ const sharedGlobalObject = () => {
   Dotf.chasingEnemyGroup = Dotf.game.add.physicsGroup();
   Dotf.coinGroup = Dotf.game.add.physicsGroup();
   Dotf.expGroup = Dotf.game.add.physicsGroup();
+  Dotf.bossGroup = Dotf.game.add.physicsGroup();
+  Dotf.bossBulletGroup = Dotf.game.add.physicsGroup();
 
   Dotf.playerBulletGroup.setAll('outOfBoundsKill', true);
   Dotf.playerBulletGroup.setAll('checkWorldBounds', true);
@@ -147,6 +165,24 @@ const sharedCollideChecking = () => {
     Dotf.playerGroup,
     sharedOnEnemyBulletHitPlayer
   );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.playerBulletGroup,
+    Dotf.bossGroup,
+    sharedOnPlayerBulletHitBoss
+  );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.bossBulletGroup,
+    Dotf.playerBulletGroup,
+    sharedOnBossBulletHitPlayerBullet
+  );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.bossBulletGroup,
+    Dotf.playerGroup,
+    sharedOnBossBulletHitPlayer
+  );
 };
 
 const sharedUpdateInfoOfStage = () => {
@@ -170,6 +206,7 @@ const sharedUpdateSpritesOfStage = () => {
   Dotf.greenEnemies.forEach(enemy => enemy.update());
   Dotf.greenEnemies.forEach(enemy => enemy.increaseHealthWhenPlayerLevelUp());
   Dotf.explosions.forEach(explosion => explosion.update());
+  Dotf.bosses.forEach(boss => boss.update());
 };
 
 const sharedNextStage = (nextStage, isInStage) => {

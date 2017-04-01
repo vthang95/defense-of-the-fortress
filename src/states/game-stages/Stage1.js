@@ -13,6 +13,9 @@ const Stage1 = {
     sharedInitializeObjectOfStage('character1_animation');
     sharedGameInfo(this.stageId, Dotf.player.sprite.data);
 
+    new BossController(new Phaser.Point(500, 500), Dotf.bossGroup, 'boss', {
+      speedBoss:  200
+    });
     this.randomEnemy();
   },
   randomEnemy: function() {
@@ -59,7 +62,7 @@ const Stage1 = {
       console.log('ss');
       Dotf.game.state.start('GameOver');
     }
-    if (Dotf.player.sprite.coin > 80) {
+    if (Dotf.bosses.length === 0) {
       sharedStopPlayer();
       sharedSaveDataToNextStage();
       clearInterval(this.setIntervalId);
