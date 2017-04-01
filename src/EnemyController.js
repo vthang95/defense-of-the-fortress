@@ -73,7 +73,7 @@ class EnemyController {
   remove() {
     this.createExplosion();
     if (this.sprite.dropCoin && this.checkRandomCoinDropRate()) this.sprite.dropCoin();
-    this.sprite.dropExp();
+    if (this.sprite.dropExp)this.sprite.dropExp();
     Dotf.greenEnemies.splice(Dotf.greenEnemies.indexOf(this), 1);
   }
 

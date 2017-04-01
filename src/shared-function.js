@@ -13,6 +13,7 @@ const sharedOnEnemyHitBase = (enemySprite, baseSprite) => {
   sharedTintASprite(baseSprite);
   baseSprite.damage(enemySprite.setDamage);
   enemySprite.dropCoin = null;
+  enemySprite.dropExp = null;
   enemySprite.kill();
 };
 
@@ -40,6 +41,8 @@ const sharedOnPlayerPickExp = (playerSprite, expSprite) => {
 const sharedOnEnemyHitPlayer = (enemySprite, playerSprite) => {
   sharedTintASprite(playerSprite);
   playerSprite.damage(enemySprite.setDamage);
+  enemySprite.dropCoin = null;
+  enemySprite.dropExp = null;
   enemySprite.kill();
 };
 
