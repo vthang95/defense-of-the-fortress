@@ -1,5 +1,5 @@
 class GunController {
-  constructor(physicsGroup, spriteName, playerSprite) {
+  constructor(physicsGroup, spriteName, playerSprite, configs) {
     this.fatherSprite = playerSprite;
     this.sprite = physicsGroup.create(this.fatherSprite.body.x, this.fatherSprite.body.y, spriteName, 3);
     this.sprite.body.fixedRotation = true;
@@ -9,6 +9,7 @@ class GunController {
 
     this.sprite.timeSinceLastFire = 0;
     this.bullets = [];
+    this.configs = configs;
 
     this.addAnimation();
   }
@@ -19,7 +20,12 @@ class GunController {
     else Dotf.cursor.sprite.loadTexture('bulleta_cursor1');
   }
 
-
+  createBullet() {
+    new BulletcController(
+      this.sprite.position,
+      this
+    );
+  }
 
   addAnimation() {
     this.sprite.animations.add('down', [3], 1, true);
@@ -79,11 +85,8 @@ class GunController {
     if (!this.sprite.alive) return;
     Dotf.game.camera.shake(0.003, 200);
     this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
-    if (this.sprite.timeSinceLastFire > 0.2) {
-      new BurnBulletControtroller(
-        this.sprite.position,
-        this
-      );
+    if (this.sprite.timeSinceLastFire > this.configs.cooldown) {
+      this.createBullet();
       this.sprite.timeSinceLastFire = 0;
     }
   }
