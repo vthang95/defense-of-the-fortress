@@ -148,6 +148,7 @@ const sharedCollideChecking = () => {
 
 const sharedUpdateInfoOfStage = () => {
   Dotf.cursor.update();
+  Dotf.arrowNavigation.update();
   Dotf.playerHealth.setText(`Health: ${ Dotf.player.sprite.health }`);
   Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
   Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);
@@ -223,4 +224,6 @@ const sharedInitializeObjectOfStage = (characterSpriteName) => {
     right: Phaser.Keyboard.D,
     speed: Dotf.configs.player.speed
   });
+
+  Dotf.arrowNavigation = new ArrowNavigationController();
 };
