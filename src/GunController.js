@@ -7,9 +7,10 @@ class GunController {
     this.sprite.scale.setTo(2);
     // TODO check self remove object when it is destroyed
 
-    this.sprite.timeSinceLastFire = 0;
     this.bullets = [];
     this.configs = configs;
+    this.nextTime = 0;
+    this.fireRate = 500;
 
     this.addAnimation();
   }
@@ -84,10 +85,9 @@ class GunController {
   tryFire() {
     if (!this.sprite.alive) return;
     Dotf.game.camera.shake(0.003, 200);
-    this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
-    if (this.sprite.timeSinceLastFire > this.configs.cooldown) {
+    if (Dotf.game.time.now > this.nextTime) {
+      this.nextTime = Dotf.game.time.now + this.fireRate;
       this.createBullet();
-      this.sprite.timeSinceLastFire = 0;
     }
   }
 
