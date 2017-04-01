@@ -236,43 +236,43 @@ const sharedGameInfo = (stageId, data) => {
 const sharedCreateBackgroundForStage = (spriteName) => {
   Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, spriteName);
   Dotf.background1.scale.setTo(2);
-  shop = Dotf.game.add.text(Dotf.configs.GAME_WORLD_WIDTH / 2+300, Dotf.configs.GAME_WORLD_HEIGHT / 2, 'shop', {
-    font: '50px Courier',
-    fill: '#ff0000'
-  })
-  shop.anchor.setTo(0.5, 0.5);
-  shop.inputEnabled = true;
-  shop.events.onInputUp.add(function (){
-    var shopGroup;
-    shopGroup = Dotf.game.add.group();
-    shop1 = Dotf.game.add.sprite(Dotf.configs.GAME_WORLD_WIDTH/2+300,Dotf.configs.GAME_WORLD_HEIGHT/2+20,'gun');
-    $shop1 = Dotf.game.add.text(Dotf.configs.GAME_WORLD_WIDTH/2+300,Dotf.configs.GAME_WORLD_HEIGHT/2+30,'2$',
-    {
-      font: '30px Courier',
-      fill : '#ff0000'
-    })
-    shop1.inputEnabled =true ;
-    shop1.events.onInputUp.add(listener1,this);
-    function listener1 (){
-      gunAlive = false;
-      let money = Dotf.player.sprite.coin;
-      if(money > 2){
-      money = money -2;
-      Dotf.player.sprite.coin = money;
-      gunAlive = true;
-    }else { alert("Not enough money");}
-    }
-    // add shop1 && $shop1
-    shopGroup.add(shop1);
-    shopGroup.add($shop1);
-    Dotf.game.input.onDown.add(dissapearShop,self);
-    function dissapearShop (events){
-      if(events.x > 0 && events.x <1300 && events.y > 0 && events.y <300){
-        shopGroup.remove(shop1);
-        shopGroup.remove($shop1);
-      }
-    }
-  });
+  // shop = Dotf.game.add.text(Dotf.configs.GAME_WORLD_WIDTH / 2+300, Dotf.configs.GAME_WORLD_HEIGHT / 2, 'shop', {
+  //   font: '50px Courier',
+  //   fill: '#ff0000'
+  // })
+  // shop.anchor.setTo(0.5, 0.5);
+  // shop.inputEnabled = true;
+  // shop.events.onInputUp.add(function (){
+  //   var shopGroup;
+  //   shopGroup = Dotf.game.add.group();
+  //   shop1 = Dotf.game.add.sprite(Dotf.configs.GAME_WORLD_WIDTH/2+300,Dotf.configs.GAME_WORLD_HEIGHT/2+20,'gun');
+  //   $shop1 = Dotf.game.add.text(Dotf.configs.GAME_WORLD_WIDTH/2+300,Dotf.configs.GAME_WORLD_HEIGHT/2+30,'2$',
+  //   {
+  //     font: '30px Courier',
+  //     fill : '#ff0000'
+  //   })
+    // shop1.inputEnabled =true ;
+  //   shop1.events.onInputUp.add(listener1,this);
+  //   function listener1 (){
+  //     gunAlive = false;
+  //     let money = Dotf.player.sprite.coin;
+  //     if(money > 2){
+  //     money = money -2;
+  //     Dotf.player.sprite.coin = money;
+  //     gunAlive = true;
+  //   }else { alert("Not enough money");}
+  //   }
+  //   // add shop1 && $shop1
+  //   shopGroup.add(shop1);
+  //   shopGroup.add($shop1);
+  //   Dotf.game.input.onDown.add(dissapearShop,self);
+  //   function dissapearShop (events){
+  //     if(events.x > 0 && events.x <1300 && events.y > 0 && events.y <300){
+  //       shopGroup.remove(shop1);
+  //       shopGroup.remove($shop1);
+  //     }
+  //   }
+  // });
 
 };
 
