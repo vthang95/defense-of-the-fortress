@@ -8,10 +8,13 @@ class EnemyController {
     this.sprite.animations.add('run', [0, 1, 2, 3], 5, true);
     this.sprite.events.onKilled.add(this.remove, this);
 
-    this.sprite.health = 20;
+    this.sprite.baseHealth = 25;
+    this.sprite.health = this.sprite.baseHealth + (Dotf.player.sprite.level - 1) * 4;
     this.sprite.coinValue = 1;
     this.sprite.expValue = 5;
     this.sprite.setDamage = 5;
+    this.isPlayerLevelUp = false;
+    this.currentPlayerLevel = Dotf.player.sprite.level;
 
     this.sprite.dropCoin = () => {
       let cordinateX = this.sprite.position.x;
@@ -26,9 +29,24 @@ class EnemyController {
       let coinQuantity = Math.floor(Math.random() * 4 +1);
       this.createExp(cordinateX, cordinateY, coinQuantity);
     };
-
     // TODO: change enemy's color when get hit
   }
+
+  increaseHealthWhenPlayerLevelUp() {
+    this.checkPlayerLevelUp();
+    if (this.isPlayerLevelUp) {
+      this.sprite.health = this.sprite.baseHealth + (Dotf.player.sprite.level - 1) * 4;
+    }
+    this.isPlayerLevelUp = false;
+  }
+
+  checkPlayerLevelUp() {
+    if (Dotf.player.sprite.level > this.currentPlayerLevel) {
+      this.isPlayerLevelUp = true;
+      this.currentPlayerLevel = Dotf.player.sprite.level
+    }
+  }
+
   createCoin(corX, corY, multiple) {
     for (let i = 0; i < multiple; i++) {
       new CoinController({
@@ -43,7 +61,6 @@ class EnemyController {
 
   createExp(corX, corY, multiple) {
     for (let i = 0; i < multiple; i++) {
-      console.log('x')
       new ExpController({
         x: corX,
         y: corY
@@ -60,12 +77,6 @@ class EnemyController {
     return false;
   }
 
-  // checkRandomExpDropRate() {
-  //   let numberForChecking = Math.floor(Math.random() * 100 + 1) / 100;
-  //   if (numberForChecking < this.configs.ExpDroppingRate) return true;
-  //   return false;
-  // }
-
   createExplosion() {
     new ExplodeController(this.sprite.position, 'shockwave', {});
   }
@@ -79,7 +90,6 @@ class EnemyController {
 
   update() {
     this.sprite.play('run');
-
     if (!Dotf.base.sprite.health) {
       this.sprite.body.velocity.x = 0;
       this.sprite.body.velocity.y = 0;

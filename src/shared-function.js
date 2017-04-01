@@ -24,7 +24,7 @@ const sharedOnEnemyHitBase = (enemySprite, baseSprite) => {
 
 const sharedOnBulletHitEnemy = (playerBulletSprite, enemySprite) => {
   sharedTintASprite(enemySprite);
-  enemySprite.damage(playerBulletSprite.setDamage);
+  enemySprite.damage(Dotf.player.sprite.realDamage);
   playerBulletSprite.kill();
 };
 
@@ -52,14 +52,19 @@ const sharedOnEnemyBulletHitPlayer = (enemyBulletSprite, playerSprite) => {
   enemyBulletSprite.kill();
 }
 
-sharedOnPlayerBulletHitBoss = (playerBulletSprite, bossSprite) => {
+const sharedOnPlayerBulletHitBoss = (playerBulletSprite, bossSprite) => {
   bossSprite.damage(playerBulletSprite.setDamage);
   playerBulletSprite.kill();
 }
 
-sharedOnBossBulletHitPlayerBullet = (bossBulletSprite, playerBulletSprite) => {
+const sharedOnBossBulletHitPlayerBullet = (bossBulletSprite, playerBulletSprite) => {
   bossBulletSprite.kill();
   playerBulletSprite.kill();
+}
+
+const sharedOnBossBulletHitPlayer = (bossBulletSprite, playerSprite) => {
+  bossBulletSprite.kill();
+  playerSprite.damage(bossBulletSprite.setDamage);
 }
 //*************************** finish defining overlap events ************************
 
@@ -81,6 +86,9 @@ const sharedFetchDataFromPreviewStage = () => {
   Dotf.player.sprite.heatlh = Dotf.playerData.health;
   Dotf.player.sprite.coin = Dotf.playerData.coin;
   Dotf.player.sprite.exp = Dotf.playerData.exp;
+  Dotf.player.sprite.speed = Dotf.playerData.speed;
+  Dotf.player.sprite.realDamage = Dotf.playerData.realDamage;
+  Dotf.player.sprite.maxHealth = Dotf.playerData.maxHealth;
   console.log(Dotf.playerData.exp)
 }
 
@@ -95,6 +103,7 @@ const sharedGlobalObject = () => {
   Dotf.explosions = [];
   Dotf.constructions = [];
   Dotf.gunIsEquiped = [];
+  Dotf.bosses = [];
 
   // TODO Just the gun is actived can change the cursor
   Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
@@ -168,14 +177,25 @@ const sharedCollideChecking = () => {
     Dotf.playerBulletGroup,
     sharedOnBossBulletHitPlayerBullet
   );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.bossBulletGroup,
+    Dotf.playerGroup,
+    sharedOnBossBulletHitPlayer
+  );
 };
 
 const sharedUpdateInfoOfStage = () => {
   Dotf.cursor.update();
+  Dotf.arrowNavigation.update();
   Dotf.playerHealth.setText(`Health: ${ Dotf.player.sprite.health }`);
   Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
   Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);
   Dotf.playerExp.setText(`Exp: ${ Dotf.player.sprite.exp }`);
+  Dotf.playerRealDamage.setText(`Damage: ${ Dotf.player.sprite.realDamage }`);
+  Dotf.playerMaxHealth.setText(`Max Health: ${ Dotf.player.sprite.maxHealth }`);
+  Dotf.playerSpeed.setText(`Speed: ${ Dotf.player.sprite.speed }`);
+  Dotf.playerLevel.setText(`Level: ${ Dotf.player.sprite.level }`);
   Dotf.player.update();
   Dotf.base.update();
 };
@@ -184,8 +204,9 @@ const sharedUpdateSpritesOfStage = () => {
   Dotf.coins.forEach(coin => coin.update());
   Dotf.exps.forEach(exp => exp.update());
   Dotf.greenEnemies.forEach(enemy => enemy.update());
+  Dotf.greenEnemies.forEach(enemy => enemy.increaseHealthWhenPlayerLevelUp());
   Dotf.explosions.forEach(explosion => explosion.update());
-  Dotf.boss.forEach(boss => boss.update());
+  Dotf.bosses.forEach(boss => boss.update());
 };
 
 const sharedNextStage = (nextStage, isInStage) => {
@@ -226,11 +247,70 @@ const sharedGameInfo = (stageId, data) => {
     fill: '#fff'
   });
   Dotf.playerExp.fixedToCamera = true;
+  Dotf.playerRealDamage = Dotf.game.add.text(50, 700, `Damage: ${ data.realDamage }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.playerRealDamage.fixedToCamera = true;
+  Dotf.playerMaxHealth = Dotf.game.add.text(220, 700, `Max Health: ${ data.maxHealth }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.playerMaxHealth.fixedToCamera = true;
+  Dotf.playerSpeed = Dotf.game.add.text(400, 700, `Speed: ${ data.speed }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.playerSpeed.fixedToCamera = true;
+  Dotf.playerLevel = Dotf.game.add.text(550, 700, `Speed: ${ data.level }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.playerLevel.fixedToCamera = true;
+
 };
 
 const sharedCreateBackgroundForStage = (spriteName) => {
   Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, spriteName);
   Dotf.background1.scale.setTo(2);
+  // shop = Dotf.game.add.text(Dotf.configs.GAME_WORLD_WIDTH / 2+300, Dotf.configs.GAME_WORLD_HEIGHT / 2, 'shop', {
+  //   font: '50px Courier',
+  //   fill: '#ff0000'
+  // })
+  // shop.anchor.setTo(0.5, 0.5);
+  // shop.inputEnabled = true;
+  // shop.events.onInputUp.add(function (){
+  //   var shopGroup;
+  //   shopGroup = Dotf.game.add.group();
+  //   shop1 = Dotf.game.add.sprite(Dotf.configs.GAME_WORLD_WIDTH/2+300,Dotf.configs.GAME_WORLD_HEIGHT/2+20,'gun');
+  //   $shop1 = Dotf.game.add.text(Dotf.configs.GAME_WORLD_WIDTH/2+300,Dotf.configs.GAME_WORLD_HEIGHT/2+30,'2$',
+  //   {
+  //     font: '30px Courier',
+  //     fill : '#ff0000'
+  //   })
+    // shop1.inputEnabled =true ;
+  //   shop1.events.onInputUp.add(listener1,this);
+  //   function listener1 (){
+  //     gunAlive = false;
+  //     let money = Dotf.player.sprite.coin;
+  //     if(money > 2){
+  //     money = money -2;
+  //     Dotf.player.sprite.coin = money;
+  //     gunAlive = true;
+  //   }else { alert("Not enough money");}
+  //   }
+  //   // add shop1 && $shop1
+  //   shopGroup.add(shop1);
+  //   shopGroup.add($shop1);
+  //   Dotf.game.input.onDown.add(dissapearShop,self);
+  //   function dissapearShop (events){
+  //     if(events.x > 0 && events.x <1300 && events.y > 0 && events.y <300){
+  //       shopGroup.remove(shop1);
+  //       shopGroup.remove($shop1);
+  //     }
+  //   }
+  // });
+
 };
 
 const sharedInitializeObjectOfStage = (characterSpriteName) => {
@@ -249,8 +329,5 @@ const sharedInitializeObjectOfStage = (characterSpriteName) => {
     speed: Dotf.configs.player.speed
   });
 
-  Dotf.boss = [];
-  Dotf.boss.push(new BossController(new Phaser.Point(1000, 500), Dotf.bossGroup, 'boss', {
-    speedBoss:  200
-  }));
+  Dotf.arrowNavigation = new ArrowNavigationController();
 };

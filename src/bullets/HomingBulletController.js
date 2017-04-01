@@ -4,6 +4,7 @@ class HomingBulletController extends BulletController{
       bulletSpeed:  HomingBulletController.BULLET_SPEED
     });
     this.sprite.scale.setTo(1, 1);
+    this.sprite.setDamage = 5;
     this.sprite.body.velocity = new Phaser.Point(0, 1).setMagnitude(HomingBulletController.BULLET_SPEED);
   }
 

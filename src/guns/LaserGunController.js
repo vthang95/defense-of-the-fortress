@@ -1,6 +1,7 @@
 class LaserGunController extends GunController {
   constructor(playerSprite, configs) {
     super(Dotf.gunGroup, 'laser_gun_animation', playerSprite, configs);
+    this.sprite.setDamage = 10;
   }
 
   changeCursor() {

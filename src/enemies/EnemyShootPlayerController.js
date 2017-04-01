@@ -1,6 +1,7 @@
 class EnemyShootPlayerController extends EnemyController {
     constructor(position, physicsGroup, configs) {
         super(position, 'enemy_fire', physicsGroup, configs);
+        this.sprite.baseHealth = 30;
         this.sprite.timeSinceLastFire = 0;
         this.bullets = [];
         this.sprite.scale.setTo(2, 2);

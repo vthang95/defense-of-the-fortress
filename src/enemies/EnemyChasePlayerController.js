@@ -1,6 +1,7 @@
 class EnemyChasePlayerController extends EnemyController {
     constructor(position, physicsGroup, configs) {
         super(position, 'catscratch', physicsGroup, configs);
+        this.sprite.baseHealth = 25;
     }
 
     update() {

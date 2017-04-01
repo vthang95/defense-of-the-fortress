@@ -5,6 +5,7 @@ class GunController {
     this.sprite.body.fixedRotation = true;
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.scale.setTo(2);
+    this.sprite.setDamage = 5;
     // TODO check self remove object when it is destroyed
 
     this.bullets = [];
@@ -84,7 +85,7 @@ class GunController {
 
   tryFire() {
     if (!this.sprite.alive) return;
-    Dotf.game.camera.shake(0.003, 200);
+    Dotf.game.camera.shake(0.001, 200);
     if (Dotf.game.time.now > this.nextTime) {
       this.nextTime = Dotf.game.time.now + this.fireRate;
       this.createBullet();
