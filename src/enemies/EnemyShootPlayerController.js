@@ -48,4 +48,4 @@ class EnemyShootPlayerController extends EnemyController {
 }
 
 EnemyShootPlayerController.DISTANCE_SHOOT = 500;
-EnemyShootPlayerController.ENEMY_SPEED = 200;
+EnemyShootPlayerController.ENEMY_SPEED = 250;

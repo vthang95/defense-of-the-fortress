@@ -51,6 +51,16 @@ const sharedOnEnemyBulletHitPlayer = (enemyBulletSprite, playerSprite) => {
   playerSprite.damage(enemyBulletSprite.setDamage);
   enemyBulletSprite.kill();
 }
+
+sharedOnPlayerBulletHitBoss = (playerBulletSprite, bossSprite) => {
+  bossSprite.damage(playerBulletSprite.setDamage);
+  playerBulletSprite.kill();
+}
+
+sharedOnBossBulletHitPlayerBullet = (bossBulletSprite, playerBulletSprite) => {
+  bossBulletSprite.kill();
+  playerBulletSprite.kill();
+}
 //*************************** finish defining overlap events ************************
 
 const sharedGlobalSetup = () => {
@@ -97,6 +107,8 @@ const sharedGlobalObject = () => {
   Dotf.chasingEnemyGroup = Dotf.game.add.physicsGroup();
   Dotf.coinGroup = Dotf.game.add.physicsGroup();
   Dotf.expGroup = Dotf.game.add.physicsGroup();
+  Dotf.bossGroup = Dotf.game.add.physicsGroup();
+  Dotf.bossBulletGroup = Dotf.game.add.physicsGroup();
 
   Dotf.playerBulletGroup.setAll('outOfBoundsKill', true);
   Dotf.playerBulletGroup.setAll('checkWorldBounds', true);
@@ -144,6 +156,18 @@ const sharedCollideChecking = () => {
     Dotf.playerGroup,
     sharedOnEnemyBulletHitPlayer
   );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.playerBulletGroup,
+    Dotf.bossGroup,
+    sharedOnPlayerBulletHitBoss
+  );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.bossBulletGroup,
+    Dotf.playerBulletGroup,
+    sharedOnBossBulletHitPlayerBullet
+  );
 };
 
 const sharedUpdateInfoOfStage = () => {
@@ -161,6 +185,7 @@ const sharedUpdateSpritesOfStage = () => {
   Dotf.exps.forEach(exp => exp.update());
   Dotf.greenEnemies.forEach(enemy => enemy.update());
   Dotf.explosions.forEach(explosion => explosion.update());
+  Dotf.boss.forEach(boss => boss.update());
 };
 
 const sharedNextStage = (nextStage, isInStage) => {
@@ -223,4 +248,9 @@ const sharedInitializeObjectOfStage = (characterSpriteName) => {
     right: Phaser.Keyboard.D,
     speed: Dotf.configs.player.speed
   });
+
+  Dotf.boss = [];
+  Dotf.boss.push(new BossController(new Phaser.Point(1000, 500), Dotf.bossGroup, 'boss', {
+    speedBoss:  200
+  }));
 };
