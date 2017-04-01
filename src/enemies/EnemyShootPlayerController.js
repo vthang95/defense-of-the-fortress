@@ -1,9 +1,11 @@
 class EnemyShootPlayerController extends EnemyController {
     constructor(position, physicsGroup, configs) {
-        super(position, 'enemy', physicsGroup, configs);
+        super(position, 'enemy_fire', physicsGroup, configs);
         this.sprite.timeSinceLastFire = 0;
         this.bullets = [];
+        this.sprite.scale.setTo(2, 2);
         Dotf.configs.enemy.speed = EnemyShootPlayerController.ENEMY_SPEED;
+        this.sprite.animations.add('run', [1, 2, 3], 5, true);
     }
 
     update() {
