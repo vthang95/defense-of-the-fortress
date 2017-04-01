@@ -66,6 +66,17 @@ const sharedOnBossBulletHitPlayer = (bossBulletSprite, playerSprite) => {
   bossBulletSprite.kill();
   playerSprite.damage(bossBulletSprite.setDamage);
 }
+
+const sharedOnEnemyHitGuard = (enemySprite, guardSprite) => {
+  enemySprite.dropCoin = null;
+  enemySprite.dropExp = null;
+  enemySprite.kill();
+}
+
+const sharedOnPlayerPickBaseImmuneItem = (playerSprite, immuneItemSprite) => {
+  immuneItemSprite.kill();
+  new GuardController();
+}
 //*************************** finish defining overlap events ************************
 
 const sharedGlobalSetup = () => {
@@ -103,6 +114,7 @@ const sharedGlobalObject = () => {
   Dotf.constructions = [];
   Dotf.gunIsEquiped = [];
   Dotf.bosses = [];
+  Dotf.guards = [];
 
   // TODO Just the gun is actived can change the cursor
   Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
@@ -118,6 +130,7 @@ const sharedGlobalObject = () => {
   Dotf.expGroup = Dotf.game.add.physicsGroup();
   Dotf.bossGroup = Dotf.game.add.physicsGroup();
   Dotf.bossBulletGroup = Dotf.game.add.physicsGroup();
+  Dotf.immuneItemGroup = Dotf.game.add.physicsGroup();
 
   Dotf.playerBulletGroup.setAll('outOfBoundsKill', true);
   Dotf.playerBulletGroup.setAll('checkWorldBounds', true);
@@ -183,12 +196,29 @@ const sharedCollideChecking = () => {
     Dotf.playerGroup,
     sharedOnBossBulletHitPlayer
   );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.enemiesGroup,
+    Dotf.guardGroup,
+    sharedOnEnemyHitGuard
+  );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.playerBulletGroup,
+    Dotf.enemiesGroup,
+    sharedOnBulletHitEnemy
+  );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.playerGroup,
+    Dotf.immuneItemGroup,
+    sharedOnPlayerPickBaseImmuneItem
+  );
 };
 
 const sharedUpdateInfoOfStage = () => {
   Dotf.cursor.update();
   Dotf.arrowNavigation.update();
-  Dotf.guard.update();
   Dotf.playerHealth.setText(`Health: ${ Dotf.player.sprite.health }`);
   Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
   Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);
@@ -208,6 +238,7 @@ const sharedUpdateSpritesOfStage = () => {
   Dotf.greenEnemies.forEach(enemy => enemy.increaseHealthWhenPlayerLevelUp());
   Dotf.explosions.forEach(explosion => explosion.update());
   Dotf.bosses.forEach(boss => boss.update());
+  Dotf.guards.forEach(guard => guard.update());
 };
 
 const sharedNextStage = (nextStage, isInStage) => {
@@ -321,7 +352,6 @@ const sharedInitializeObjectOfStage = (characterSpriteName) => {
   });
 
   Dotf.base = new BaseController(1880, 500, {});
-  Dotf.guard = new GuardController();
 
   Dotf.player = new PlayerController(Dotf.playerGroup, characterSpriteName, {
     up: Phaser.Keyboard.W,

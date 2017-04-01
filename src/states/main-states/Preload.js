@@ -46,7 +46,8 @@ const Preload = {
     Dotf.game.load.spritesheet('enemy_fire','Assets/monster/enemy_fire.png', 34, 32);
     Dotf.game.load.image('arrow_navigation','Assets/other/arrow_navigation.png', 32, 32);
     Dotf.game.load.image('compass','Assets/other/compass.png');
-    Dotf.game.load.spritesheet('shield','Assets/other/Shield.png');
+    Dotf.game.load.image('shield','Assets/other/Shield.png');
+    Dotf.game.load.image('immune_item','Assets/other/icon2.png');
   },
   create: function() {
     Dotf.game.state.start('Stage1');

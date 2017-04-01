@@ -7,6 +7,7 @@ Dotf.configs = {
   GAME_HEIGHT_MIN: 480,
   GAME_WORLD_WIDTH: 2960,
   GAME_WORLD_HEIGHT: 2160,
+  baseImmuneTime: 30000,
   gun: {
     bulletSpeed: 1000
     // TODO add types of gun
