@@ -6,6 +6,7 @@ class PlayerController {
 
     this.sprite.health = 50;
     this.sprite.coin = 0;
+    this.sprite.exp = 1;
     this.sprite.data = {};
 
     this.addAnimation();
@@ -61,7 +62,8 @@ class PlayerController {
   update() {
     this.sprite.data = {
       health: this.sprite.health,
-      coin: this.sprite.coin
+      coin: this.sprite.coin,
+      exp: this.sprite.exp
     };
     if (!this.sprite.alive) {
       this.gun.sprite.kill();

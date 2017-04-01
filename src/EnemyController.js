@@ -9,7 +9,8 @@ class EnemyController {
     this.sprite.events.onKilled.add(this.remove, this);
 
     this.sprite.health = 20;
-    this.sprite.coin = 1;
+    this.sprite.coinValue = 1;
+    this.sprite.expValue = 5;
     this.sprite.setDamage = 5;
 
     this.sprite.dropCoin = () => {
@@ -17,6 +18,13 @@ class EnemyController {
       let cordinateY = this.sprite.position.y;
       let coinQuantity = Math.floor(Math.random() * 4 +1);
       this.createCoin(cordinateX, cordinateY, coinQuantity);
+    };
+
+    this.sprite.dropExp = () => {
+      let cordinateX = this.sprite.position.x;
+      let cordinateY = this.sprite.position.y;
+      let coinQuantity = Math.floor(Math.random() * 4 +1);
+      this.createExp(cordinateX, cordinateY, coinQuantity);
     };
 
     // TODO: change enemy's color when get hit
@@ -27,7 +35,20 @@ class EnemyController {
         x: corX,
         y: corY
       }, 'coin', {
-        coinValue: this.sprite.coin,
+        coinValue: this.sprite.coinValue,
+        speed: 1000
+      }, this.sprite);
+    }
+  }
+
+  createExp(corX, corY, multiple) {
+    for (let i = 0; i < multiple; i++) {
+      console.log('x')
+      new ExpController({
+        x: corX,
+        y: corY
+      }, 'powerup', {
+        expValue: this.sprite.expValue,
         speed: 1000
       }, this.sprite);
     }
@@ -39,6 +60,12 @@ class EnemyController {
     return false;
   }
 
+  // checkRandomExpDropRate() {
+  //   let numberForChecking = Math.floor(Math.random() * 100 + 1) / 100;
+  //   if (numberForChecking < this.configs.ExpDroppingRate) return true;
+  //   return false;
+  // }
+
   createExplosion() {
     new ExplodeController(this.sprite.position, 'shockwave', {});
   }
@@ -46,6 +73,7 @@ class EnemyController {
   remove() {
     this.createExplosion();
     if (this.sprite.dropCoin && this.checkRandomCoinDropRate()) this.sprite.dropCoin();
+    this.sprite.dropExp();
     Dotf.greenEnemies.splice(Dotf.greenEnemies.indexOf(this), 1);
   }
 

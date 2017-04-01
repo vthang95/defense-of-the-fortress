@@ -1,0 +1,4 @@
+
+
+Dotf.playerData = {};
+Dotf.baseData = {};

@@ -39,7 +39,7 @@ const Stage1 = {
           'enemy',
           Dotf.enemiesGroup, {
             speed: 200,
-            coinDroppingRate: 0.7
+            coinDroppingRate: 0.7,
           });
       } else {
         new EnemyShootPlayerController({

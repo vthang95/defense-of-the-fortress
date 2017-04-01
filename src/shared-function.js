@@ -32,6 +32,11 @@ const sharedOnPlayerPickCoin = (playerSprite, coinSprite) => {
   coinSprite.destroy();
 };
 
+const sharedOnPlayerPickExp = (playerSprite, expSprite) => {
+  playerSprite.exp += expSprite.expValue;
+  expSprite.destroy();
+};
+
 const sharedOnEnemyHitPlayer = (enemySprite, playerSprite) => {
   sharedTintASprite(playerSprite);
   playerSprite.damage(enemySprite.setDamage);
@@ -52,8 +57,7 @@ const sharedGlobalSetup = () => {
   Dotf.game.world.setBounds(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT);
 };
 
-Dotf.playerData = {};
-Dotf.baseData = {};
+
 // TODO: make data;
 
 const sharedSaveDataToNextStage = () => {
@@ -63,6 +67,8 @@ const sharedSaveDataToNextStage = () => {
 const sharedFetchDataFromPreviewStage = () => {
   Dotf.player.sprite.heatlh = Dotf.playerData.health;
   Dotf.player.sprite.coin = Dotf.playerData.coin;
+  Dotf.player.sprite.exp = Dotf.playerData.exp;
+  console.log(Dotf.playerData.exp)
 }
 
 const sharedStopPlayer = () => {
@@ -72,10 +78,12 @@ const sharedStopPlayer = () => {
 const sharedGlobalObject = () => {
   Dotf.greenEnemies = [];
   Dotf.coins = [];
+  Dotf.exps = [];
   Dotf.explosions = [];
   Dotf.constructions = [];
-  // TODO Just the gun is actived can change the cursor
   Dotf.gunIsEquiped = [];
+
+  // TODO Just the gun is actived can change the cursor
   Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
   Dotf.healthBarGroup = Dotf.game.add.physicsGroup();
   Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
@@ -85,6 +93,7 @@ const sharedGlobalObject = () => {
   Dotf.enemyBulletGroup = Dotf.game.add.physicsGroup();
   Dotf.chasingEnemyGroup = Dotf.game.add.physicsGroup();
   Dotf.coinGroup = Dotf.game.add.physicsGroup();
+  Dotf.expGroup = Dotf.game.add.physicsGroup();
 
   Dotf.playerBulletGroup.setAll('outOfBoundsKill', true);
   Dotf.playerBulletGroup.setAll('checkWorldBounds', true);
@@ -107,6 +116,12 @@ const sharedCollideChecking = () => {
     Dotf.playerGroup,
     Dotf.coinGroup,
     sharedOnPlayerPickCoin
+  );
+
+  Dotf.game.physics.arcade.overlap(
+    Dotf.playerGroup,
+    Dotf.expGroup,
+    sharedOnPlayerPickExp
   );
 
   Dotf.game.physics.arcade.overlap(
@@ -133,12 +148,14 @@ const sharedUpdateInfoOfStage = () => {
   Dotf.playerHealth.setText(`Health: ${ Dotf.player.sprite.health }`);
   Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
   Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);
+  Dotf.playerExp.setText(`Exp: ${ Dotf.player.sprite.exp }`);
   Dotf.player.update();
   Dotf.base.update();
 };
 const sharedUpdateSpritesOfStage = () => {
   Dotf.constructions.forEach(construction => construction.update());
   Dotf.coins.forEach(coin => coin.update());
+  Dotf.exps.forEach(exp => exp.update());
   Dotf.greenEnemies.forEach(enemy => enemy.update());
   Dotf.explosions.forEach(explosion => explosion.update());
 };
@@ -176,6 +193,11 @@ const sharedGameInfo = (stageId, data) => {
     fill: '#fff'
   });
   Dotf.stageName.fixedToCamera = true;
+  Dotf.playerExp = Dotf.game.add.text(700, 20, `Exp: ${ data.exp }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.playerExp.fixedToCamera = true;
 };
 
 const sharedCreateBackgroundForStage = (spriteName) => {
