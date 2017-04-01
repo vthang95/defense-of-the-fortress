@@ -13,7 +13,7 @@ const Stage1 = {
     sharedInitializeObjectOfStage('character1_animation');
     sharedGameInfo(this.stageId, Dotf.player.sprite.data);
 
-    new BossController(new Phaser.Point(500, 500), Dotf.bossGroup, 'boss', {
+    new BossController(new Phaser.Point(300, 250), Dotf.bossGroup, 'boss', {
       speedBoss:  200
     });
     this.randomEnemy();

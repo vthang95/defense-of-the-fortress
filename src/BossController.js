@@ -12,13 +12,13 @@ class BossController {
         this.bullets = [];
         Dotf.bosses.push(this);
         this.healthBar = new HealthBarController({
-            x: position.x - 45,
-            y: position.y + 78
-          }, {
-            x: position.x - 48,
-            y: position.y + 70
-          },
-          this
+                x: position.x - 45,
+                y: position.y + 78
+            }, {
+                x: position.x - 48,
+                y: position.y + 70
+            },
+            this
         );
         this.sprite.events.onKilled.add(this.remove, this);
     }
@@ -30,21 +30,19 @@ class BossController {
     }
 
     update() {
-      this.bullets.forEach(bullet => bullet.update());
-      this.healthBar.healthBar.position.x = this.sprite.position.x -46 ;
-      this.healthBar.healthBar.position.y = this.sprite.position.y - 92;
-      this.healthBar.healthBarBG.position.x = this.sprite.position.x - 49;
-      this.healthBar.healthBarBG.position.y = this.sprite.position.y - 100;
-      this.healthBar.update()
-
-        // if (!this.sprite.alive) this.remove();
-        // if (Dotf.bosses.length == 0) return;
+        console.log(Dotf.player.sprite.position.x + "   " + Dotf.player.sprite.position.y);
+        this.bullets.forEach(bullet => bullet.update());
+        this.healthBar.healthBar.position.x = this.sprite.position.x - 46;
+        this.healthBar.healthBar.position.y = this.sprite.position.y - 92;
+        this.healthBar.healthBarBG.position.x = this.sprite.position.x - 49;
+        this.healthBar.healthBarBG.position.y = this.sprite.position.y - 100;
+        this.healthBar.update()
 
         this.sprite.timeSinceLastMove += Dotf.game.time.physicsElapsed;
         this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
 
         if (this.sprite.timeSinceLastMove >= 3) {
-            this.positionDes = new Phaser.Point(Math.floor(Math.random() * 1000) + 1, Math.floor(Math.random() * 1000) + 1);
+            this.positionDes = new Phaser.Point(Math.floor(Math.random() * 687) + 163, Math.floor(Math.random() * 516) + 17);
             Dotf.game.physics.arcade.moveToXY(
                 this.sprite,
                 this.positionDes.x,
@@ -62,11 +60,11 @@ class BossController {
         );
 
         if (distanceBetweenPlayerAndEnemy <= BossController.DISTANCE_SHOOT &&
-          this.sprite.timeSinceLastFire >= 2) {
-          new HomingBulletController(this.sprite.position, this);
-          this.sprite.timeSinceLastFire = 0;
+            this.sprite.timeSinceLastFire >= 2) {
+            new HomingBulletController(this.sprite.position, this);
+            this.sprite.timeSinceLastFire = 0;
         }
     }
 }
 
-BossController.DISTANCE_SHOOT = 500;
+BossController.DISTANCE_SHOOT = 450;
