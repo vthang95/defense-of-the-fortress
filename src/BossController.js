@@ -30,19 +30,26 @@ class BossController {
     }
 
     update() {
+      if (!Dotf.guard.sprite.alive) {
+        Dotf.game.physics.arcade.moveToXY(this.sprite, 0, 0, 0);
+        this.sprite.health = this.sprite.baseHealth;
+        this.healthBar.update();
+        console.log("ok men");
+        return;
+      }
         this.bullets.forEach(bullet => bullet.update());
         this.healthBar.healthBar.position.x = this.sprite.position.x - 46;
         this.healthBar.healthBar.position.y = this.sprite.position.y - 92;
         this.healthBar.healthBarBG.position.x = this.sprite.position.x - 49;
         this.healthBar.healthBarBG.position.y = this.sprite.position.y - 100;
-        this.healthBar.update()
+        this.healthBar.update();
 
         this.sprite.timeSinceLastMove += Dotf.game.time.physicsElapsed;
         this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
 
         var positionDes;
         if (this.sprite.timeSinceLastMove >= 3) {
-             positionDes = new Phaser.Point(Math.floor(Math.random() * 1000) - 200, Math.floor(Math.random() * 1000) - 300);
+             positionDes = new Phaser.Point(Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000));
             Dotf.game.physics.arcade.moveToXY(
                 this.sprite,
                 positionDes.x,

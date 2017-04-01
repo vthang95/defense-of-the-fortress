@@ -1,6 +1,7 @@
 class ArrowNavigationController {
   constructor() {
     this.sprite = Dotf.game.add.sprite(Dotf.configs.GAME_WIDTH_MAX - 50, 40, 'arrow_navigation');
+    this.sprite.scale.setTo(0.07);
     this.compass = Dotf.game.add.sprite(Dotf.configs.GAME_WIDTH_MAX - 50, 40, 'compass');
     this.compass.fixedToCamera = true;
     this.compass.anchor.setTo(0.5, 0.5);
@@ -11,6 +12,6 @@ class ArrowNavigationController {
   }
 
   update() {
-    this.sprite.rotation = Dotf.game.physics.arcade.angleBetween(Dotf.player.sprite, Dotf.base.sprite) + 3 * Math.PI / 4;
+    this.sprite.rotation = Dotf.game.physics.arcade.angleBetween(Dotf.player.sprite, Dotf.base.sprite);
   }
 }

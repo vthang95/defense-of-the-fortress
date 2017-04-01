@@ -64,7 +64,7 @@ const sharedOnBossBulletHitPlayerBullet = (bossBulletSprite, playerBulletSprite)
 
 const sharedOnBossBulletHitPlayer = (bossBulletSprite, playerSprite) => {
   bossBulletSprite.kill();
-  playerSprite.damage(bossBulletSprite.setDamage);
+  if (Dotf.guard.sprite.alive) playerSprite.damage(bossBulletSprite.setDamage);
 }
 //*************************** finish defining overlap events ************************
 
@@ -89,7 +89,6 @@ const sharedFetchDataFromPreviewStage = () => {
   Dotf.player.sprite.speed = Dotf.playerData.speed;
   Dotf.player.sprite.realDamage = Dotf.playerData.realDamage;
   Dotf.player.sprite.maxHealth = Dotf.playerData.maxHealth;
-  console.log(Dotf.playerData.exp)
 }
 
 const sharedStopPlayer = () => {
@@ -107,6 +106,7 @@ const sharedGlobalObject = () => {
 
   // TODO Just the gun is actived can change the cursor
   Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
+  Dotf.guardGroup = Dotf.game.add.physicsGroup();
   Dotf.healthBarGroup = Dotf.game.add.physicsGroup();
   Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
   Dotf.playerGroup = Dotf.game.add.physicsGroup();
@@ -188,6 +188,7 @@ const sharedCollideChecking = () => {
 const sharedUpdateInfoOfStage = () => {
   Dotf.cursor.update();
   Dotf.arrowNavigation.update();
+  Dotf.guard.update();
   Dotf.playerHealth.setText(`Health: ${ Dotf.player.sprite.health }`);
   Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
   Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);
@@ -320,6 +321,7 @@ const sharedInitializeObjectOfStage = (characterSpriteName) => {
   });
 
   Dotf.base = new BaseController(1880, 500, {});
+  Dotf.guard = new GuardController();
 
   Dotf.player = new PlayerController(Dotf.playerGroup, characterSpriteName, {
     up: Phaser.Keyboard.W,
