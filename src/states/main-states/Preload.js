@@ -40,6 +40,7 @@ const Preload = {
     Dotf.game.load.spritesheet('powerup', 'Assets/other/powerup.png', 16, 16);
     Dotf.game.load.spritesheet('shockwave', 'Assets/other/shockwave.png', 80, 80);
     Dotf.game.load.spritesheet('burning', 'Assets/other/burning.png', 18, 13);
+    Dotf.game.load.spritesheet('enemy_fire','Assets/monster/enemy_fire.png', 34, 32);
   },
   create: function() {
     Dotf.game.state.start('Stage1');
