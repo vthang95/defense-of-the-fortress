@@ -30,7 +30,6 @@ class BossController {
     }
 
     update() {
-        console.log(Dotf.player.sprite.position.x + "   " + Dotf.player.sprite.position.y);
         this.bullets.forEach(bullet => bullet.update());
         this.healthBar.healthBar.position.x = this.sprite.position.x - 46;
         this.healthBar.healthBar.position.y = this.sprite.position.y - 92;
@@ -41,12 +40,13 @@ class BossController {
         this.sprite.timeSinceLastMove += Dotf.game.time.physicsElapsed;
         this.sprite.timeSinceLastFire += Dotf.game.time.physicsElapsed;
 
+        var positionDes;
         if (this.sprite.timeSinceLastMove >= 3) {
-            this.positionDes = new Phaser.Point(Math.floor(Math.random() * 687) + 163, Math.floor(Math.random() * 516) + 17);
+             positionDes = new Phaser.Point(Math.floor(Math.random() * 1000) - 200, Math.floor(Math.random() * 1000) - 300);
             Dotf.game.physics.arcade.moveToXY(
                 this.sprite,
-                this.positionDes.x,
-                this.positionDes.y,
+                positionDes.x,
+                positionDes.y,
                 this.configs.speedBoss
             );
             this.sprite.timeSinceLastMove = 0;
