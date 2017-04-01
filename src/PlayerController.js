@@ -6,7 +6,11 @@ class PlayerController {
 
     this.sprite.health = 50;
     this.sprite.coin = 0;
-    this.sprite.exp = 1;
+    this.sprite.exp = 0;
+    this.sprite.speed = configs.speed;
+    this.sprite.setDamage = 5;
+    this.sprite.maxHealth = 50;
+    this.sprite.level = 1;
     this.sprite.data = {};
 
     this.addAnimation();
@@ -17,8 +21,14 @@ class PlayerController {
     Dotf.game.camera.follow(this.sprite, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 
     this.gun = new LaserGunController(this.sprite, {cooldown: 0.7});
+    this.sprite.realDamage = this.sprite.setDamage + this.gun.sprite.setDamage;
 
     this.angleBetweenSpriteAndPointer = 90;
+  }
+
+  checkRealDamage() {
+    this.sprite.level = Math.floor(this.sprite.exp / 300) + 1;
+    this.sprite.realDamage = this.sprite.setDamage + this.gun.sprite.setDamage + (this.sprite.level) * 5;
   }
 
   addAnimation() {
@@ -63,8 +73,13 @@ class PlayerController {
     this.sprite.data = {
       health: this.sprite.health,
       coin: this.sprite.coin,
-      exp: this.sprite.exp
+      exp: this.sprite.exp,
+      speed: this.sprite.speed,
+      realDamage: this.sprite.realDamage,
+      maxHealth: this.sprite.maxHealth
     };
+
+    this.checkRealDamage();
     if (!this.sprite.alive) {
       this.gun.sprite.kill();
     }
@@ -80,14 +95,14 @@ class PlayerController {
     // this.gun.sprite.rotation = Dotf.game.physics.arcade.angleBetween(this.gun.sprite, this.sprite.cursor.sprite) - Math.PI / 2;
 
     if (Dotf.keyboard.isDown(this.configs.up)) {
-      this.sprite.body.velocity.y = -this.configs.speed;
+      this.sprite.body.velocity.y = -this.sprite.speed;
     } else if (Dotf.keyboard.isDown(this.configs.down)) {
-      this.sprite.body.velocity.y = this.configs.speed;
+      this.sprite.body.velocity.y = this.sprite.speed;
     }
     if (Dotf.keyboard.isDown(this.configs.left)) {
-      this.sprite.body.velocity.x = -this.configs.speed;
+      this.sprite.body.velocity.x = -this.sprite.speed;
     } else if (Dotf.keyboard.isDown(this.configs.right)) {
-      this.sprite.body.velocity.x = this.configs.speed;
+      this.sprite.body.velocity.x = this.sprite.speed;
     }
     // Stop animation
     if (this.sprite.body.velocity.x === 0 && this.sprite.body.velocity.y === 0) this.sprite.animations.stop();

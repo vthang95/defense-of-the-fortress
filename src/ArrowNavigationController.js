@@ -12,6 +12,5 @@ class ArrowNavigationController {
 
   update() {
     this.sprite.rotation = Dotf.game.physics.arcade.angleBetween(Dotf.player.sprite, Dotf.base.sprite) + 3 * Math.PI / 4;
-    console.log(this.compass)
   }
 }

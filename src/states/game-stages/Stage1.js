@@ -55,6 +55,10 @@ const Stage1 = {
   },
   update: function() {
     // Next stage condition
+    if (!Dotf.player.sprite.alive || !Dotf.base.sprite.alive) {
+      console.log('ss');
+      Dotf.game.state.start('GameOver');
+    }
     if (Dotf.player.sprite.coin > 80) {
       sharedStopPlayer();
       sharedSaveDataToNextStage();

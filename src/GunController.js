@@ -5,6 +5,7 @@ class GunController {
     this.sprite.body.fixedRotation = true;
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.scale.setTo(2);
+    this.sprite.setDamage = 5;
     // TODO check self remove object when it is destroyed
 
     this.bullets = [];

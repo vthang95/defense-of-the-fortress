@@ -24,7 +24,7 @@ const sharedOnEnemyHitBase = (enemySprite, baseSprite) => {
 
 const sharedOnBulletHitEnemy = (playerBulletSprite, enemySprite) => {
   sharedTintASprite(enemySprite);
-  enemySprite.damage(playerBulletSprite.setDamage);
+  enemySprite.damage(Dotf.player.sprite.realDamage);
   playerBulletSprite.kill();
 };
 
@@ -71,6 +71,9 @@ const sharedFetchDataFromPreviewStage = () => {
   Dotf.player.sprite.heatlh = Dotf.playerData.health;
   Dotf.player.sprite.coin = Dotf.playerData.coin;
   Dotf.player.sprite.exp = Dotf.playerData.exp;
+  Dotf.player.sprite.speed = Dotf.playerData.speed;
+  Dotf.player.sprite.realDamage = Dotf.playerData.realDamage;
+  Dotf.player.sprite.maxHealth = Dotf.playerData.maxHealth;
   console.log(Dotf.playerData.exp)
 }
 
@@ -153,6 +156,10 @@ const sharedUpdateInfoOfStage = () => {
   Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
   Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);
   Dotf.playerExp.setText(`Exp: ${ Dotf.player.sprite.exp }`);
+  Dotf.playerRealDamage.setText(`Damage: ${ Dotf.player.sprite.realDamage }`);
+  Dotf.playerMaxHealth.setText(`Max Health: ${ Dotf.player.sprite.maxHealth }`);
+  Dotf.playerSpeed.setText(`Speed: ${ Dotf.player.sprite.speed }`);
+  Dotf.playerLevel.setText(`Level: ${ Dotf.player.sprite.level }`);
   Dotf.player.update();
   Dotf.base.update();
 };
@@ -161,6 +168,7 @@ const sharedUpdateSpritesOfStage = () => {
   Dotf.coins.forEach(coin => coin.update());
   Dotf.exps.forEach(exp => exp.update());
   Dotf.greenEnemies.forEach(enemy => enemy.update());
+  Dotf.greenEnemies.forEach(enemy => enemy.increaseHealthWhenPlayerLevelUp());
   Dotf.explosions.forEach(explosion => explosion.update());
 };
 
@@ -202,6 +210,27 @@ const sharedGameInfo = (stageId, data) => {
     fill: '#fff'
   });
   Dotf.playerExp.fixedToCamera = true;
+  Dotf.playerRealDamage = Dotf.game.add.text(50, 700, `Damage: ${ data.realDamage }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.playerRealDamage.fixedToCamera = true;
+  Dotf.playerMaxHealth = Dotf.game.add.text(220, 700, `Max Health: ${ data.maxHealth }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.playerMaxHealth.fixedToCamera = true;
+  Dotf.playerSpeed = Dotf.game.add.text(400, 700, `Speed: ${ data.speed }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.playerSpeed.fixedToCamera = true;
+  Dotf.playerLevel = Dotf.game.add.text(550, 700, `Speed: ${ data.level }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.playerLevel.fixedToCamera = true;
+
 };
 
 const sharedCreateBackgroundForStage = (spriteName) => {
