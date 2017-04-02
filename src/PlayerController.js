@@ -11,6 +11,7 @@ class PlayerController {
     this.sprite.mana = 1000;
     this.sprite.manaMax = 1000;
     this.sprite.manaRegen = 2;
+    this.sprite.hpRegen = 1;
     this.sprite.speed = configs.speed;
     this.sprite.setDamage = 5;
     this.sprite.baseDamage = 5;
@@ -31,8 +32,10 @@ class PlayerController {
     // this.buffSpeedKey.onDown.add(this.buffSpeed, this);
     this.nextTimeBuffSpeed = 0;
     this.nextTimeRegenMana = 0;
+    this.nextTimeRegenHp = 0;
     this.decreaseManaRate = 100;
     this.regenManaRate = 1000;
+    this.regenHpRate = 5000;
     this.angleBetweenSpriteAndPointer = 90;
   }
 
@@ -44,6 +47,18 @@ class PlayerController {
     if (Dotf.game.time.now > this.nextTimeRegenMana) {
       this.nextTimeRegenMana = Dotf.game.time.now + this.regenManaRate;
       this.sprite.mana += this.sprite.manaRegen;
+    }
+  }
+
+  regenHp() {
+    // if (this.sprite.health <  this.sprite.maxHealth) {
+    //   console.log('s')
+    //   this.sprite.health = this.sprite.maxHealth;
+    //   return;
+    // }
+    if (Dotf.game.time.now > this.nextTimeRegenHp && this.sprite.health < this.sprite.maxHealth) {
+      this.nextTimeRegenHp = Dotf.game.time.now + this.regenHpRate;
+      this.sprite.health += this.sprite.hpRegen;
     }
   }
 
@@ -118,9 +133,11 @@ class PlayerController {
       speed: this.sprite.speed,
       realDamage: this.sprite.realDamage,
       maxHealth: this.sprite.maxHealth,
+      health: this.sprite.health,
       mana: this.sprite.mana
     };
     this.regenMana();
+    this.regenHp();
     this.checkRealDamage();
     if (!this.sprite.alive) {
       this.gun.sprite.kill();

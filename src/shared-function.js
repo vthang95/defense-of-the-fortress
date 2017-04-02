@@ -101,6 +101,7 @@ const sharedFetchDataFromPreviewStage = () => {
   Dotf.player.sprite.speed = Dotf.playerData.speed;
   Dotf.player.sprite.realDamage = Dotf.playerData.realDamage;
   Dotf.player.sprite.maxHealth = Dotf.playerData.maxHealth;
+  Dotf.player.sprite.health = Dotf.playerData.health;
   Dotf.player.sprite.mana = Dotf.playerData.mana;
 }
 

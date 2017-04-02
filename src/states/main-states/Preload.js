@@ -1,14 +1,8 @@
 const Preload = {
   preload: function() {
     // TODO: shared preload contents should be load here
-    Dotf.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    Dotf.game.scale.pageAlignHorizontally = true;
-    Dotf.game.scale.pageAlignVertically = true;
-    Dotf.game.scale.setScreenSize = true;
-    // TODO fix responsive
-    Dotf.game.time.advancedTiming = true;
     // Dotf.game.load.atlasJSONHash('assets', 'Assets/assets.png', 'Assets/assets.json');
-    Dotf.game.load.image('background', 'Assets/maps/map1.png');
+    Dotf.game.load.image('background', 'Assets/maps/Map1.png');
     // <CURSOR>
     Dotf.game.load.image('bulleta_cursor1', 'Assets/cursors/1crosshair.png');
     Dotf.game.load.image('bulleta_cursor2', 'Assets/cursors/1crosshair2.png');

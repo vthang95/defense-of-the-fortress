@@ -40,6 +40,7 @@ class GuardController {
 
   update() {
     this.checkTimeOut();
+    this.sprite.angle += 1;
     if (!this.sprite.alive) return;
     let timeBarScale = (Dotf.configs.baseImmuneTime - (Dotf.game.time.now - this.timeCountDown.timeFromStart)) / Dotf.configs.baseImmuneTime;
     this.timeCountDown.scale.setTo(timeBarScale, 1);

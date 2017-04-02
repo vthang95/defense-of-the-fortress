@@ -2,13 +2,17 @@ const Stage1 = {
   stageId: 1,
   isInStage: true,
   preload: function() {
-
+    Dotf.game.load.audio('soundtrack_stage1','Assets/audio/Game Sound2.mp3');
   },
   create: function() {
     this.isInStage = true;
     sharedGlobalSetup();
     sharedCreateBackgroundForStage('background');
     sharedGlobalObject();
+
+    this.music = Dotf.game.add.audio('soundtrack_stage1');
+    this.music.play();
+    this.music.loop = true;
 
     sharedInitializeObjectOfStage('character1_animation');
     sharedGameInfo(this.stageId);
@@ -55,18 +59,19 @@ const Stage1 = {
           });
       }
     }, 2000);
-    soundGun1=Dotf.game.add.audio('SoundGun1');
   },
   update: function() {
     // Next stage condition
     if (!Dotf.player.sprite.alive || !Dotf.base.sprite.alive) {
       clearInterval(this.setIntervalId);
+      this.music.stop();
       Dotf.game.state.start('GameOver');
     }
     if (Dotf.bosses.length === 0) {
       sharedStopPlayer();
       sharedSaveDataToNextStage();
       clearInterval(this.setIntervalId);
+      this.music.stop();
       sharedNextStage('Stage2', this.isInStage);
       this.isInStage = false;
       return;
