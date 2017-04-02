@@ -29,11 +29,14 @@ const Preload = {
     Dotf.game.load.image('laser_bullet', 'Assets/other/laser_bullet.png', 65, 15);
     Dotf.game.load.image('homing_bullet', 'Assets/other/homing_bullet.png', 20, 46);
     // <BOSS
-    Dotf.game.load.image('boss', 'Assets/boss/boss.png', 896, 553);
+    Dotf.game.load.image('boss_level_one', 'Assets/boss/boss_up_left.gif', 872, 632);
+    Dotf.game.load.image('boss_level_two', 'Assets/boss/boss.png', 872, 632);
+
     // <ANIMATION>
     Dotf.game.load.spritesheet('character1_animation', 'Assets/spritesheet/character1.png', 16, 21);
     Dotf.game.load.spritesheet('flaming_gun_animation', 'Assets/guns/flamthrower/flaming_gun.png', 21, 16);
     Dotf.game.load.spritesheet('laser_gun_animation', 'Assets/guns/laser/laser_gun.png', 16, 12);
+    Dotf.game.load.spritesheet('bullet_boss_level_one', 'Assets/other/Bullet3.png', 22, 22);
     // <ENEMY>
     Dotf.game.load.spritesheet('enemy', 'Assets/monster/slime1_front.png', 16, 16);
     Dotf.game.load.spritesheet('catscratch', 'Assets/other/catscratch.png', 18, 18);
