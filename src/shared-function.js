@@ -64,7 +64,7 @@ const sharedOnBossBulletHitPlayerBullet = (bossBulletSprite, playerBulletSprite)
 
 const sharedOnBossBulletHitPlayer = (bossBulletSprite, playerSprite) => {
   bossBulletSprite.kill();
-  playerSprite.damage(bossBulletSprite.setDamage);
+  if (Dotf.guards.length > 0) playerSprite.damage(bossBulletSprite.setDamage);
 }
 
 const sharedOnEnemyHitGuard = (enemySprite, guardSprite) => {
