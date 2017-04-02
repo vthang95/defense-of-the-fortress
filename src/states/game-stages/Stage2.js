@@ -11,8 +11,11 @@ const Stage2 = {
     sharedGlobalObject();
     sharedInitializeObjectOfStage('character1_animation');
     sharedFetchDataFromPreviewStage();
+    sharedGameInfo(this.stageId);
 
     this.randomEnemy();
+    new BossLevelOneController({speedBoss:  200});
+    new BossLevelTwoController({speedBoss:  200});
 
   },
   randomEnemy: function() {
@@ -58,7 +61,7 @@ const Stage2 = {
     if (!Dotf.player.sprite.alive || !Dotf.base.sprite.alive) {
       Dotf.game.state.start('GameOver');
     }
-    if (Dotf.player.sprite.coin > 160) {
+    if (Dotf.bosses.length === 0) {
       sharedStopPlayer();
       sharedSaveDataToNextStage();
       clearInterval(this.setIntervalId);

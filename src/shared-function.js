@@ -247,6 +247,14 @@ const sharedNextStage = (nextStage, isInStage) => {
   return;
 };
 
+const sharedGameInfo = (stageId) => {
+  Dotf.stageName = Dotf.game.add.text(550, 20, `Stage: ${ stageId }`, {
+    font: '24px Arial',
+    fill: '#fff'
+  });
+  Dotf.stageName.fixedToCamera = true;
+};
+
 const sharedCreateBackgroundForStage = (spriteName) => {
   Dotf.background1 = Dotf.game.add.tileSprite(0, 0, Dotf.configs.GAME_WORLD_WIDTH, Dotf.configs.GAME_WORLD_HEIGHT, spriteName);
   Dotf.background1.scale.setTo(2);

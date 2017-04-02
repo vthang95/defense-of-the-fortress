@@ -79,7 +79,7 @@ class PlayerInformation {
     this.infoHealth.setText(`${ Dotf.player.sprite.health } / ${ Dotf.player.sprite.maxHealth }`);
     // this.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
     this.infoCoin.setText(`${ Dotf.player.sprite.coin }`);
-    this.infoExp.setText(`${ Dotf.player.sprite.exp }`);
+    this.infoExp.setText(`${ Dotf.player.sprite.exp % 300} / 300 `);
     this.infoDamage.setText(`${ Dotf.player.sprite.baseDamage } + ${ Dotf.player.gun.sprite.setDamage }`);
     // this.infoMaxHealth.setText(`Max Health: ${ Dotf.player.sprite.maxHealth }`);
     this.infoSpeed.setText(`${ Dotf.player.sprite.speed }`);

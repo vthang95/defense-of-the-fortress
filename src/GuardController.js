@@ -8,12 +8,12 @@ class GuardController {
     this.timeCountDown.fixedToCamera = true;
     Dotf.guards.push(this);
 
-    Dotf.timeLeft = Dotf.game.add.text(Dotf.configs.GAME_WIDTH_MAX / 2, 80, `Time left`, {
+    this.timeLeft = Dotf.game.add.text(Dotf.configs.GAME_WIDTH_MAX / 2, 80, `Time left`, {
       font: '24px Arial',
       fill: '#fff'
     });
-    Dotf.timeLeft.fixedToCamera = true;
-    Dotf.timeLeft.anchor.setTo(0.5, 0.5);
+    this.timeLeft.fixedToCamera = true;
+    this.timeLeft.anchor.setTo(0.5, 0.5);
 
     this.timeCountDown.timeFromStart = Dotf.game.time.now;
   }
@@ -22,6 +22,7 @@ class GuardController {
       if (condition) {
         this.sprite.destroy();
         this.timeCountDown.destroy();
+        this.timeLeft.destroy();
         Dotf.guards.splice(Dotf.guards.indexOf(this), 1);
       }
   }
