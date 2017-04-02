@@ -29,6 +29,11 @@ class EnemyController {
       let coinQuantity = Math.floor(Math.random() * 4 +1);
       this.createExp(cordinateX, cordinateY, coinQuantity);
     };
+    this.sprite.dropBaseImmuneItem = () => {
+      let cordinateX = this.sprite.position.x;
+      let cordinateY = this.sprite.position.y;
+      this.createBaseImmuneItem(cordinateX, cordinateY);
+    }
     // TODO: change enemy's color when get hit
   }
 
@@ -71,9 +76,22 @@ class EnemyController {
     }
   }
 
+  createBaseImmuneItem(corX, corY) {
+    new BaseImmuneItemController({
+      x: corX,
+      y: corY
+    });
+  }
+
   checkRandomCoinDropRate() {
     let numberForChecking = Math.floor(Math.random() * 100 + 1) / 100;
     if (numberForChecking < this.configs.coinDroppingRate) return true;
+    return false;
+  }
+
+  checkRandomBaseImmuneRate() {
+    let numberForChecking = Math.floor(Math.random() * 100 + 1) / 100;
+    if (numberForChecking < 0.1) return true;
     return false;
   }
 
@@ -85,6 +103,7 @@ class EnemyController {
     this.createExplosion();
     if (this.sprite.dropCoin && this.checkRandomCoinDropRate()) this.sprite.dropCoin();
     if (this.sprite.dropExp)this.sprite.dropExp();
+    if (this.checkRandomBaseImmuneRate()) this.sprite.dropBaseImmuneItem();
     Dotf.greenEnemies.splice(Dotf.greenEnemies.indexOf(this), 1);
   }
 

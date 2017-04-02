@@ -3,6 +3,7 @@ class PlayerController {
     this.sprite = physicsGroup.create(Dotf.base.sprite.position.x, Dotf.base.sprite.position.y, spritesheet, 0);
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.scale.setTo(3);
+    this.sprite.body.collideWorldBounds = true;
 
     this.sprite.health = 50;
     this.sprite.coin = 0;

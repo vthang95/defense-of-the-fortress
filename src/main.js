@@ -7,6 +7,7 @@ Dotf.configs = {
   GAME_HEIGHT_MIN: 480,
   GAME_WORLD_WIDTH: 2960,
   GAME_WORLD_HEIGHT: 2160,
+  baseImmuneTime: 30000,
   gun: {
     bulletSpeed: 1000
     // TODO add types of gun
@@ -32,7 +33,7 @@ window.onload = function() {
   Dotf.game.state.add('Preload', Preload);
   Dotf.game.state.add("Winning", Winning);
   Dotf.game.state.add('GameOver', GameOver);
-
+  Dotf.game.state.add('Instruction',Instruction);
   Dotf.game.state.add("Stage1", Stage1);
   Dotf.game.state.add("Stage2", Stage2);
 

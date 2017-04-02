@@ -30,11 +30,10 @@ class BossController {
     }
 
     update() {
-      if (!Dotf.guard.sprite.alive) {
+      if (Dotf.guards.length === 0) {
         Dotf.game.physics.arcade.moveToXY(this.sprite, 0, 0, 0);
         this.sprite.health = this.sprite.baseHealth;
         this.healthBar.update();
-        console.log("ok men");
         return;
       }
         this.bullets.forEach(bullet => bullet.update());
