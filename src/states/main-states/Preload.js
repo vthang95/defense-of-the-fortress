@@ -51,6 +51,12 @@ const Preload = {
     Dotf.game.load.image('compass','Assets/other/compass.png');
     Dotf.game.load.image('shield','Assets/other/Shield.png');
     Dotf.game.load.image('immune_item','Assets/other/icon2.png');
+    // Player info
+    Dotf.game.load.image('player_board','Assets/other/player_board.png');
+    Dotf.game.load.image('red_health_bar','Assets/other/red_health_bar.png');
+    Dotf.game.load.image('yellow_bar','Assets/other/yellow_bar.png');
+    Dotf.game.load.image('blue_bar','Assets/other/blue_bar.png');
+    Dotf.game.load.image('avatar','Assets/other/avatar.png');
     //Audio
     Dotf.game.load.audio('SoundGun1','Assets/audio/SoundGun1.wav');
   },

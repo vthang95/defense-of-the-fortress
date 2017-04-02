@@ -11,7 +11,6 @@ const Stage1 = {
     sharedGlobalObject();
 
     sharedInitializeObjectOfStage('character1_animation');
-    sharedGameInfo(this.stageId, Dotf.player.sprite.data);
 
     new BossLevelOneController({speedBoss:  200});
     new BossLevelTwoController({speedBoss:  200});

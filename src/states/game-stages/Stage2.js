@@ -11,7 +11,6 @@ const Stage2 = {
     sharedGlobalObject();
     sharedInitializeObjectOfStage('character1_animation');
     sharedFetchDataFromPreviewStage();
-    sharedGameInfo(this.stageId, Dotf.playerData);
 
     this.randomEnemy();
 

@@ -53,6 +53,7 @@ const sharedOnEnemyBulletHitPlayer = (enemyBulletSprite, playerSprite) => {
 }
 
 const sharedOnPlayerBulletHitBoss = (playerBulletSprite, bossSprite) => {
+  sharedTintASprite(bossSprite);
   bossSprite.damage(playerBulletSprite.setDamage);
   playerBulletSprite.kill();
 }
@@ -219,14 +220,7 @@ const sharedCollideChecking = () => {
 const sharedUpdateInfoOfStage = () => {
   Dotf.cursor.update();
   Dotf.arrowNavigation.update();
-  Dotf.playerHealth.setText(`Health: ${ Dotf.player.sprite.health }`);
-  Dotf.baseHealth.setText(`Base Health: ${ Dotf.base.sprite.health }`);
-  Dotf.playerCoin.setText(`Coin: ${ Dotf.player.sprite.coin }`);
-  Dotf.playerExp.setText(`Exp: ${ Dotf.player.sprite.exp }`);
-  Dotf.playerRealDamage.setText(`Damage: ${ Dotf.player.sprite.realDamage }`);
-  Dotf.playerMaxHealth.setText(`Max Health: ${ Dotf.player.sprite.maxHealth }`);
-  Dotf.playerSpeed.setText(`Speed: ${ Dotf.player.sprite.speed }`);
-  Dotf.playerLevel.setText(`Level: ${ Dotf.player.sprite.level }`);
+  Dotf.playerInformationBoard.update();
   Dotf.player.update();
   Dotf.base.update();
 };
@@ -251,55 +245,6 @@ const sharedNextStage = (nextStage, isInStage) => {
   passStageText.fixedToCamera = true;
   setTimeout(() => Dotf.game.state.start(nextStage), 2000);
   return;
-};
-
-const sharedGameInfo = (stageId, data) => {
-  Dotf.playerHealth = Dotf.game.add.text(50, 20, `Health: ${ data.health }`, {
-    font: '24px Arial',
-    fill: '#fff'
-  });
-  Dotf.playerHealth.fixedToCamera = true;
-  Dotf.playerCoin = Dotf.game.add.text(200, 20, `Coin: ${ data.coin }`, {
-    font: '24px Arial',
-    fill: '#fff'
-  });
-  Dotf.playerCoin.fixedToCamera = true;
-  Dotf.baseHealth = Dotf.game.add.text(320, 20, `Base Health: ${ data.heath }`, {
-    font: '24px Arial',
-    fill: '#fff'
-  });
-  Dotf.baseHealth.fixedToCamera = true;
-  Dotf.stageName = Dotf.game.add.text(550, 20, `Stage: ${ stageId }`, {
-    font: '24px Arial',
-    fill: '#fff'
-  });
-  Dotf.stageName.fixedToCamera = true;
-  Dotf.playerExp = Dotf.game.add.text(700, 20, `Exp: ${ data.exp }`, {
-    font: '24px Arial',
-    fill: '#fff'
-  });
-  Dotf.playerExp.fixedToCamera = true;
-  Dotf.playerRealDamage = Dotf.game.add.text(50, 700, `Damage: ${ data.realDamage }`, {
-    font: '24px Arial',
-    fill: '#fff'
-  });
-  Dotf.playerRealDamage.fixedToCamera = true;
-  Dotf.playerMaxHealth = Dotf.game.add.text(220, 700, `Max Health: ${ data.maxHealth }`, {
-    font: '24px Arial',
-    fill: '#fff'
-  });
-  Dotf.playerMaxHealth.fixedToCamera = true;
-  Dotf.playerSpeed = Dotf.game.add.text(400, 700, `Speed: ${ data.speed }`, {
-    font: '24px Arial',
-    fill: '#fff'
-  });
-  Dotf.playerSpeed.fixedToCamera = true;
-  Dotf.playerLevel = Dotf.game.add.text(550, 700, `Speed: ${ data.level }`, {
-    font: '24px Arial',
-    fill: '#fff'
-  });
-  Dotf.playerLevel.fixedToCamera = true;
-
 };
 
 const sharedCreateBackgroundForStage = (spriteName) => {
@@ -362,4 +307,6 @@ const sharedInitializeObjectOfStage = (characterSpriteName) => {
   });
 
   Dotf.arrowNavigation = new ArrowNavigationController();
+
+  Dotf.playerInformationBoard = new PlayerInformation();
 };

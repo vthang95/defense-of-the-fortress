@@ -10,6 +10,7 @@ class PlayerController {
     this.sprite.exp = 0;
     this.sprite.speed = configs.speed;
     this.sprite.setDamage = 5;
+    this.sprite.baseDamage = 5;
     this.sprite.maxHealth = 50;
     this.sprite.level = 1;
     this.sprite.data = {};
@@ -29,7 +30,8 @@ class PlayerController {
 
   checkRealDamage() {
     this.sprite.level = Math.floor(this.sprite.exp / 300) + 1;
-    this.sprite.realDamage = this.sprite.setDamage + this.gun.sprite.setDamage + (this.sprite.level) * 5;
+    this.sprite.baseDamage = this.sprite.setDamage + this.sprite.level * 5;
+    this.sprite.realDamage = this.sprite.setDamage + this.gun.sprite.setDamage + this.sprite.level * 5;
   }
 
   addAnimation() {
@@ -71,6 +73,11 @@ class PlayerController {
   }
 
   update() {
+
+    if (this.sprite.health < 0) {
+      this.sprite.health = 0;
+    };
+
     this.sprite.data = {
       health: this.sprite.health,
       coin: this.sprite.coin,
@@ -83,6 +90,7 @@ class PlayerController {
     this.checkRealDamage();
     if (!this.sprite.alive) {
       this.gun.sprite.kill();
+      return
     }
 
     this.gun.update();
