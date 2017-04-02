@@ -122,6 +122,8 @@ const sharedGlobalObject = () => {
   Dotf.constructionsGroup = Dotf.game.add.physicsGroup();
   Dotf.guardGroup = Dotf.game.add.physicsGroup();
   Dotf.healthBarGroup = Dotf.game.add.physicsGroup();
+  Dotf.bossGroup = Dotf.game.add.physicsGroup();
+  Dotf.bossBulletGroup = Dotf.game.add.physicsGroup();
   Dotf.playerBulletGroup = Dotf.game.add.physicsGroup();
   Dotf.playerGroup = Dotf.game.add.physicsGroup();
   Dotf.gunGroup = Dotf.game.add.physicsGroup();
@@ -130,8 +132,6 @@ const sharedGlobalObject = () => {
   Dotf.chasingEnemyGroup = Dotf.game.add.physicsGroup();
   Dotf.coinGroup = Dotf.game.add.physicsGroup();
   Dotf.expGroup = Dotf.game.add.physicsGroup();
-  Dotf.bossGroup = Dotf.game.add.physicsGroup();
-  Dotf.bossBulletGroup = Dotf.game.add.physicsGroup();
   Dotf.immuneItemGroup = Dotf.game.add.physicsGroup();
 
   Dotf.playerBulletGroup.setAll('outOfBoundsKill', true);

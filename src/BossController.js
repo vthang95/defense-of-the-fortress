@@ -9,6 +9,11 @@ class BossController {
         this.sprite.baseHealth = 400;
         this.sprite.health = this.sprite.baseHealth;
         this.sprite.body.collideWorldBounds = true;
+        this.isImmuneWaring = Dotf.game.add.text(position.x, position.y + 70, "This Object is immune", {
+          font: '24px Arial',
+          fill: '#fff'
+        });
+        this.isImmuneWaring.anchor.setTo(0.5, 0.5);
         this.bullets = [];
         Dotf.bosses.push(this);
         this.healthBar = new HealthBarController({
@@ -31,17 +36,25 @@ class BossController {
 
     update() {
         if (Dotf.guards.length === 0) {
-            Dotf.game.physics.arcade.moveToXY(this.sprite, 0, 0, 0);
-            this.sprite.health = this.sprite.baseHealth;
-            this.healthBar.update();
-            return;
-        }
+          this.sprite.body.enable = false;
+          this.isImmuneWaring.visible = true;
+          Dotf.game.physics.arcade.moveToXY(this.sprite, 0, 0, 0);
+          this.sprite.health = this.sprite.baseHealth;
+          this.healthBar.update();
+          return;
+        } else {
+          this.isImmuneWaring.visible = false;
+          this.sprite.body.enable = true;
+        };
 
         this.bullets.forEach(bullet => bullet.update());
         this.healthBar.healthBar.position.x = this.sprite.position.x - 46;
         this.healthBar.healthBar.position.y = this.sprite.position.y - 92;
         this.healthBar.healthBarBG.position.x = this.sprite.position.x - 49;
         this.healthBar.healthBarBG.position.y = this.sprite.position.y - 100;
+        this.isImmuneWaring.x = this.sprite.position.x;
+        this.isImmuneWaring.y = this.sprite.position.y + 70;
+
         this.healthBar.update();
 
 

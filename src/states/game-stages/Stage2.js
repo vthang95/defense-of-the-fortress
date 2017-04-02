@@ -59,6 +59,7 @@ const Stage2 = {
   update: function() {
     // Next stage condition
     if (!Dotf.player.sprite.alive || !Dotf.base.sprite.alive) {
+      clearInterval(this.setIntervalId);
       Dotf.game.state.start('GameOver');
     }
     if (Dotf.bosses.length === 0) {
