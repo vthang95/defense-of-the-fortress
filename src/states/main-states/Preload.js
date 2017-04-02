@@ -48,6 +48,8 @@ const Preload = {
     Dotf.game.load.image('compass','Assets/other/compass.png');
     Dotf.game.load.image('shield','Assets/other/Shield.png');
     Dotf.game.load.image('immune_item','Assets/other/icon2.png');
+    //Audio
+    Dotf.game.load.audio('SoundGun1','Assets/audio/SoundGun1.wav');
   },
   create: function() {
     Dotf.game.state.start('Stage1');

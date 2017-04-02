@@ -85,6 +85,7 @@ class GunController {
 
   tryFire() {
     if (!this.sprite.alive) return;
+    soundGun1.play();
     Dotf.game.camera.shake(0.001, 200);
     if (Dotf.game.time.now > this.nextTime) {
       this.nextTime = Dotf.game.time.now + this.fireRate;
