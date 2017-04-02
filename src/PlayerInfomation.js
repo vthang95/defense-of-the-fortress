@@ -43,6 +43,11 @@ class PlayerInformation {
       fill: '#fff'
     });
     this.infoHealth.fixedToCamera = true;
+    this.infoMana = Dotf.game.add.text(182, 92, `${ Dotf.player.sprite.level }`, {
+      font: '12px Arial',
+      fill: '#fff'
+    });
+    this.infoMana.fixedToCamera = true;
     this.infoCoin = Dotf.game.add.text(85, 151, `${ Dotf.player.sprite.coin }`, {
       font: '12px Arial',
       fill: '#fff'
@@ -84,9 +89,11 @@ class PlayerInformation {
     // this.infoMaxHealth.setText(`Max Health: ${ Dotf.player.sprite.maxHealth }`);
     this.infoSpeed.setText(`${ Dotf.player.sprite.speed }`);
     this.infoLevel.setText(`${ Dotf.player.sprite.level }`);
+    this.infoMana.setText(`${ Dotf.player.sprite.mana }`);
 
     this.healthBar.scale.setTo((Dotf.player.sprite.health / Dotf.player.sprite.maxHealth) * 1.5, 1.5);
     this.expBar.scale.setTo(((Dotf.player.sprite.exp % 300) / 300) * 1.5, 1.5);
+    this.manaBar.scale.setTo((Dotf.player.sprite.mana / Dotf.player.sprite.manaMax) * 1.5, 1.5);
   }
 
  }

@@ -8,6 +8,9 @@ class PlayerController {
     this.sprite.health = 50;
     this.sprite.coin = 0;
     this.sprite.exp = 0;
+    this.sprite.mana = 1000;
+    this.sprite.manaMax = 1000;
+    this.sprite.manaRegen = 2;
     this.sprite.speed = configs.speed;
     this.sprite.setDamage = 5;
     this.sprite.baseDamage = 5;
@@ -24,8 +27,38 @@ class PlayerController {
 
     this.gun = new LaserGunController(this.sprite, {cooldown: 0.7});
     this.sprite.realDamage = this.sprite.setDamage + this.gun.sprite.setDamage;
-
+    // this.buffSpeedKey = Dotf.game.input.keyboard.addKey(this.configs.speedBuff);
+    // this.buffSpeedKey.onDown.add(this.buffSpeed, this);
+    this.nextTimeBuffSpeed = 0;
+    this.nextTimeRegenMana = 0;
+    this.decreaseManaRate = 100;
+    this.regenManaRate = 1000;
     this.angleBetweenSpriteAndPointer = 90;
+  }
+
+  regenMana() {
+    if (this.sprite.mana >= this.sprite.manaMax) {
+      this.sprite.mana = this.sprite.manaMax;
+      return;
+    }
+    if (Dotf.game.time.now > this.nextTimeRegenMana) {
+      this.nextTimeRegenMana = Dotf.game.time.now + this.regenManaRate;
+      this.sprite.mana += this.sprite.manaRegen;
+    }
+  }
+
+  buffSpeed() {
+    if (this.sprite.mana <= 0) {
+      this.sprite.mana = 0;
+      return
+    };
+    if (Dotf.keyboard.isDown(this.configs.speedBuff) && this.sprite.mana >= 10) {
+      if (Dotf.game.time.now > this.nextTimeBuffSpeed) {
+        this.nextTimeBuffSpeed = Dotf.game.time.now + this.decreaseManaRate;
+        this.sprite.mana -= 10;
+        this.sprite.speed = this.configs.speed + 100;
+      }
+    } else this.sprite.speed = this.configs.speed;
   }
 
   checkRealDamage() {
@@ -84,14 +117,18 @@ class PlayerController {
       exp: this.sprite.exp,
       speed: this.sprite.speed,
       realDamage: this.sprite.realDamage,
-      maxHealth: this.sprite.maxHealth
+      maxHealth: this.sprite.maxHealth,
+      mana: this.sprite.mana
     };
-
+    this.regenMana();
     this.checkRealDamage();
     if (!this.sprite.alive) {
       this.gun.sprite.kill();
       return
     }
+
+    // if mana === 0 => speed set to default
+
 
     this.gun.update();
 
@@ -113,6 +150,7 @@ class PlayerController {
     } else if (Dotf.keyboard.isDown(this.configs.right)) {
       this.sprite.body.velocity.x = this.sprite.speed;
     }
+    this.buffSpeed();
     // Stop animation
     if (this.sprite.body.velocity.x === 0 && this.sprite.body.velocity.y === 0) this.sprite.animations.stop();
   }

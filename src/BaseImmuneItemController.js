@@ -11,6 +11,6 @@ class BaseImmuneItemController {
     setTimeout(() => {
       this.sprite.destroy();
       // TODO add auto remove instance
-    }, Dotf.configs.baseImmuneTime);
+    }, 5000);
   }
 }

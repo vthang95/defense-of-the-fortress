@@ -14,8 +14,19 @@ class GuardController {
     });
     this.timeLeft.fixedToCamera = true;
     this.timeLeft.anchor.setTo(0.5, 0.5);
+    this.warning = Dotf.game.add.text(Dotf.configs.GAME_WIDTH_MAX / 2, Dotf.configs.GAME_HEIGHT_MAX / 2, `Your base is immune to green enemies\nTry to defeat all bosses in this stage!`, {
+      font: '24px Arial',
+      fill: '#fff'
+    });
+    this.warning.fixedToCamera = true;
+    this.warning.anchor.setTo(0.5, 0.5);
+    this.autoRemove();
 
     this.timeCountDown.timeFromStart = Dotf.game.time.now;
+  }
+
+  autoRemove() {
+    setTimeout(() => this.warning.destroy(), 3000)
   }
   checkTimeOut() {
       let condition = Dotf.game.time.now - Dotf.configs.baseImmuneTime > this.timeCountDown.timeFromStart;

@@ -101,6 +101,7 @@ const sharedFetchDataFromPreviewStage = () => {
   Dotf.player.sprite.speed = Dotf.playerData.speed;
   Dotf.player.sprite.realDamage = Dotf.playerData.realDamage;
   Dotf.player.sprite.maxHealth = Dotf.playerData.maxHealth;
+  Dotf.player.sprite.mana = Dotf.playerData.mana;
 }
 
 const sharedStopPlayer = () => {
@@ -311,6 +312,7 @@ const sharedInitializeObjectOfStage = (characterSpriteName) => {
     down: Phaser.Keyboard.S,
     left: Phaser.Keyboard.A,
     right: Phaser.Keyboard.D,
+    speedBuff: Phaser.Keyboard.SPACEBAR,
     speed: Dotf.configs.player.speed
   });
 
