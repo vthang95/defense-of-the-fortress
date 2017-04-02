@@ -55,6 +55,7 @@ const Stage1 = {
           });
       }
     }, 2000);
+    soundGun1=Dotf.game.add.audio('SoundGun1');
   },
   update: function() {
     // Next stage condition
