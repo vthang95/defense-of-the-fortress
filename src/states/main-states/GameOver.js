@@ -24,6 +24,9 @@ const GameOver = {
     // })
     // winningText.anchor.setTo(0.5, 0.5);
   },
+  update: function() {
+    Dotf.cursor.update();
+  },
   turnBackToMenu: function() {
     Dotf.game.state.start('Menu');
   }
