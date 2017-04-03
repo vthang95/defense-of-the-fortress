@@ -1,7 +1,7 @@
 const GameOver = {
   preload: function() {
-    Dotf.game.load.image('youhigh', 'Assets/youhigh.png');
-    Dotf.game.load.image('game_over', 'Assets/gameover.png');
+    Dotf.game.load.image('youhigh', './Assets/youhigh.png');
+    Dotf.game.load.image('game_over', './Assets/gameover.png');
   },
   create: function() {
     Dotf.game.stage.backgroundColor = "#71c5cf";

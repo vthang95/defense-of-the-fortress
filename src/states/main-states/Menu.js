@@ -1,15 +1,15 @@
 const Menu = {
   preload: function() {
-    Dotf.game.load.image("startButton", "Assets/startbutton.gif");
-    Dotf.game.load.image('default', 'Assets/cursors/mouse_pointer.png');
-    Dotf.game.load.image('menu_background', 'Assets/menu_bg.png');
-    Dotf.game.load.image('instruction_button','Assets/instruction_button.png');
-    Dotf.game.load.image('play_button','Assets/play_button.png');
-    Dotf.game.load.audio('start_game','Assets/audio/menu.wav');
-    Dotf.game.load.audio('laser_gun_audio','Assets/audio/Laser.wav');
-    Dotf.game.load.audio('mouseclick','Assets/audio/mouseclick2.wav');
-    Dotf.game.load.image('instructionBackground', 'Assets/instruction_bg.png');
-    Dotf.game.load.image('back_button', 'Assets/back_button.png');
+    Dotf.game.load.image("startButton", "./Assets/startbutton.gif");
+    Dotf.game.load.image('default', './Assets/cursors/mouse_pointer.png');
+    Dotf.game.load.image('menu_background', './Assets/menu_bg.png');
+    Dotf.game.load.image('instruction_button','./Assets/instruction_button.png');
+    Dotf.game.load.image('play_button','./Assets/play_button.png');
+    Dotf.game.load.audio('start_game','./Assets/audio/menu.wav');
+    Dotf.game.load.audio('laser_gun_audio','./Assets/audio/Laser.wav');
+    Dotf.game.load.audio('mouseclick','./Assets/audio/mouseclick2.wav');
+    Dotf.game.load.image('instructionBackground', './Assets/instruction_bg.png');
+    Dotf.game.load.image('back_button', './Assets/back_button.png');
   },
   create: function() {
     Dotf.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;

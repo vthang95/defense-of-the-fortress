@@ -1,6 +1,6 @@
 const Winning = {
   preload: function() {
-    Dotf.game.load.image('youhigh', 'Assets/youhigh.png');
+    Dotf.game.load.image('youhigh', './Assets/youhigh.png');
   },
   create: function() {
     Dotf.game.stage.backgroundColor = "#71c5cf";
