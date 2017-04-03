@@ -115,7 +115,6 @@ const sharedGlobalObject = () => {
   Dotf.exps = [];
   Dotf.explosions = [];
   Dotf.constructions = [];
-  Dotf.gunIsEquiped = [];
   Dotf.bosses = [];
   Dotf.guards = [];
 
@@ -250,7 +249,7 @@ const sharedNextStage = (nextStage, isInStage) => {
 };
 
 const sharedGameInfo = (stageId) => {
-  Dotf.stageName = Dotf.game.add.text(550, 20, `Stage: ${ stageId }`, {
+  Dotf.stageName = Dotf.game.add.text(Dotf.game.width / 2, 20, `Stage: ${ stageId }`, {
     font: '24px Arial',
     fill: '#fff'
   });
@@ -314,8 +313,11 @@ const sharedInitializeObjectOfStage = (characterSpriteName) => {
     left: Phaser.Keyboard.A,
     right: Phaser.Keyboard.D,
     speedBuff: Phaser.Keyboard.SPACEBAR,
+    changeWeapon: Phaser.Keyboard.Q,
     speed: Dotf.configs.player.speed
   });
+  // Dotf.gunIsEquiped.push(new LaserGunController(Dotf.player.sprite, {cooldown: 0.7}))
+// this.gun = new LaserGunController(this.sprite, {cooldown: 0.7});
 
   Dotf.arrowNavigation = new ArrowNavigationController();
 

@@ -5,13 +5,14 @@ class GunController {
     this.sprite.body.fixedRotation = true;
     this.sprite.anchor.setTo(0.5, 0.5);
     this.sprite.scale.setTo(2);
-    this.sprite.setDamage = 5;
+    this.sprite.setDamage = 2;
+    this.sprite.alpha = true;
     // TODO check self remove object when it is destroyed
 
     this.bullets = [];
     this.configs = configs;
     this.nextTime = 0;
-    this.fireRate = 500;
+    this.fireRate = configs.fireRate;
 
     this.addAnimation();
   }
@@ -38,6 +39,10 @@ class GunController {
     this.sprite.animations.add('rightCrossDown', [6], 1, true);
     this.sprite.animations.add('leftCrossUp', [5], 1, true);
     this.sprite.animations.add('leftCrossDown', [7], 1, true);
+  }
+
+  playSound() {
+
   }
 
   changeAnimation() {
@@ -88,15 +93,20 @@ class GunController {
     Dotf.game.camera.shake(0.001, 200);
     if (Dotf.game.time.now > this.nextTime) {
       this.nextTime = Dotf.game.time.now + this.fireRate;
+      this.playSound();
       this.createBullet();
     }
+  }
+
+  setAngleBetweenSpriteAndPointer() {
+    this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.fatherSprite, Dotf.cursor.sprite));
   }
 
   update() {
     this.changeCursor();
     this.bullets.forEach(bullet => bullet.update());
 
-    this.angleBetweenSpriteAndPointer = Phaser.Math.radToDeg(Dotf.game.physics.arcade.angleBetween(this.fatherSprite, Dotf.cursor.sprite));
+    this.setAngleBetweenSpriteAndPointer();
     this.changeAnimation();
     // this.sprite.rotation = Dotf.game.physics.arcade.angleBetween(this.sprite, this.fatherSprite.cursor.sprite) - Math.PI / 2;
     if (Dotf.game.input.activePointer.isDown) this.tryFire();

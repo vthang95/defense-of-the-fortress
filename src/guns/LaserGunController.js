@@ -2,12 +2,18 @@ class LaserGunController extends GunController {
   constructor(playerSprite, configs) {
     super(Dotf.gunGroup, 'laser_gun_animation', playerSprite, configs);
     this.sprite.setDamage = 10;
+    this.laserGunSound = Dotf.game.add.audio('laser_gun_audio');
+    this.laserGunSound.volume = 0.01;
   }
 
   changeCursor() {
     Dotf.cursor.sprite.anchor.setTo(0.5, 0.5);
     if (Dotf.game.input.activePointer.isDown) Dotf.cursor.sprite.loadTexture('bulletc_cursor2');
     else Dotf.cursor.sprite.loadTexture('bulletc_cursor1');
+  }
+
+  playSound() {
+    this.laserGunSound.play();
   }
 
   createBullet() {

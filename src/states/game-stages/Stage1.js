@@ -2,7 +2,7 @@ const Stage1 = {
   stageId: 1,
   isInStage: true,
   preload: function() {
-    Dotf.game.load.audio('soundtrack_stage1','Assets/audio/Game Sound2.mp3');
+    Dotf.game.load.audio('soundtrack_stage1','Assets/audio/soundtrack1.wav');
   },
   create: function() {
     this.isInStage = true;
@@ -11,8 +11,8 @@ const Stage1 = {
     sharedGlobalObject();
 
     this.music = Dotf.game.add.audio('soundtrack_stage1');
-    this.music.play();
-    this.music.loop = true;
+    this.music.loopFull();
+    // this.music.loop = true;
 
     sharedInitializeObjectOfStage('character1_animation');
     sharedGameInfo(this.stageId);
