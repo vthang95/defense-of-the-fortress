@@ -2,7 +2,7 @@ const Stage1 = {
   stageId: 1,
   isInStage: true,
   preload: function() {
-    Dotf.game.load.audio('soundtrack_stage1','./Assets/audio/soundtrack1.wav');
+    Dotf.game.load.audio('soundtrack_stage1','../Assets/audio/soundtrack1.wav');
   },
   create: function() {
     this.isInStage = true;
