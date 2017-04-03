@@ -1,8 +1,8 @@
 const Menu = {
   preload: function() {
+    Dotf.game.load.image('menu_background', '../Assets/menu_bg.png');
     Dotf.game.load.image("startButton", "../Assets/startbutton.gif");
     Dotf.game.load.image('default', '../Assets/cursors/mouse_pointer.png');
-    Dotf.game.load.image('menu_background', '../Assets/menu_bg.png');
     Dotf.game.load.image('instruction_button','../Assets/instruction_button.png');
     Dotf.game.load.image('play_button','../Assets/play_button.png');
     Dotf.game.load.audio('start_game','../Assets/audio/menu.wav');

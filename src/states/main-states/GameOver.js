@@ -28,6 +28,7 @@ const GameOver = {
     Dotf.cursor.update();
   },
   turnBackToMenu: function() {
+    mouseclick.play();
     Dotf.game.state.start('Menu');
   }
 }

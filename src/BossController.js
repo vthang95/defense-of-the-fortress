@@ -57,7 +57,6 @@ class BossController {
 
         this.healthBar.update();
 
-
         this.tryMove();
 
         this.tryFire();

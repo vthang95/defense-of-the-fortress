@@ -3,6 +3,7 @@ class BulletcController extends BulletController {
         super(position, 'bulletc', Dotf.playerBulletGroup, fatherObject, {
             bulletSpeed: BulletcController.BULLET_SPEED
         });
+        this.sprite.setDamage = 1;
     }
 }
 BulletcController.BULLET_C_MAX_TIME = 500;

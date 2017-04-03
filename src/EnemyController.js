@@ -91,7 +91,7 @@ class EnemyController {
 
   checkRandomBaseImmuneRate() {
     let numberForChecking = Math.floor(Math.random() * 100 + 1) / 100;
-    if (numberForChecking < 0.1) return true;
+    if (numberForChecking < 0.05) return true;
     return false;
   }
 
