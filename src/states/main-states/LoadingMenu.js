@@ -70,6 +70,7 @@ const LoadingMenu = {
     Dotf.game.load.spritesheet('flaming_gun_animation', './Assets/guns/flamthrower/flaming_gun.png', 21, 16);
     Dotf.game.load.spritesheet('laser_gun_animation', './Assets/guns/laser/laser_gun.png', 16, 12);
     Dotf.game.load.spritesheet('bullet_boss_level_one', './Assets/other/Bullet3.png', 22, 22);
+    Dotf.game.load.spritesheet('cannon_gun_animation', './Assets/guns/Cannon.png', 17, 13);
     // <ENEMY>
     Dotf.game.load.spritesheet('enemy', './Assets/monster/slime1_front.png', 16, 16);
     Dotf.game.load.spritesheet('catscratch', './Assets/other/catscratch.png', 18, 18);

@@ -23,7 +23,7 @@ class PlayerController {
 
     this.configs = configs;
     this.gunIsEquiped = [
-      new LaserGunController(this.sprite, {
+      new CannonGunController(this.sprite, {
         fireRate: 500
       }),
       new GunController(Dotf.gunGroup, 'flaming_gun_animation', this.sprite, {

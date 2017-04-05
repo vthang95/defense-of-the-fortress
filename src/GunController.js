@@ -46,46 +46,60 @@ class GunController {
 
   }
 
+  configGun() {
+    return {
+      down: {x: 10, y: 40},
+      right: {x: 25, y: 25},
+      up: {x: 10,y: 25},
+      left: {x: -28,y: 22},
+      leftCrossDown: {x: -15,y: 37},
+      rightCrossDown: {x: 18,y: 37},
+      rightCrossUp: {x: 30,y: 15},
+      leftCrossUp: {x: -21,y: 3},
+    }
+  }
+
   changeAnimation() {
+    let configs = this.configGun();
     if (this.angleBetweenSpriteAndPointer > 67.5 && this.angleBetweenSpriteAndPointer < 112.5) {
       this.sprite.play('down');
-      this.sprite.body.x = this.fatherSprite.body.x + 10;
-      this.sprite.body.y = this.fatherSprite.body.y + 40;
+      this.sprite.body.x = this.fatherSprite.body.x + configs.down.x;
+      this.sprite.body.y = this.fatherSprite.body.y + configs.down.y;
     }
     if (this.angleBetweenSpriteAndPointer > 112.5 && this.angleBetweenSpriteAndPointer < 157.5) {
       this.sprite.play('leftCrossDown');
-      this.sprite.body.x = this.fatherSprite.body.x - 15;
-      this.sprite.body.y = this.fatherSprite.body.y + 37;
+      this.sprite.body.x = this.fatherSprite.body.x + configs.leftCrossDown.x;
+      this.sprite.body.y = this.fatherSprite.body.y + configs.leftCrossDown.y;
     }
     if (this.angleBetweenSpriteAndPointer > 22.5 && this.angleBetweenSpriteAndPointer < 67.5) {
       this.sprite.play('rightCrossDown');
-      this.sprite.body.x = this.fatherSprite.body.x + 18;
-      this.sprite.body.y = this.fatherSprite.body.y + 37;
+      this.sprite.body.x = this.fatherSprite.body.x + configs.rightCrossDown.x;
+      this.sprite.body.y = this.fatherSprite.body.y + configs.rightCrossDown.y;
     }
     if (this.angleBetweenSpriteAndPointer > -22.5 && this.angleBetweenSpriteAndPointer < 22.5) {
       this.sprite.play('right');
-      this.sprite.body.x = this.fatherSprite.body.x + 25;
-      this.sprite.body.y = this.fatherSprite.body.y + 25;
+      this.sprite.body.x = this.fatherSprite.body.x + configs.right.x;
+      this.sprite.body.y = this.fatherSprite.body.y + configs.right.y;
     }
     if (this.angleBetweenSpriteAndPointer > -67.5 && this.angleBetweenSpriteAndPointer < -22.5) {
       this.sprite.play('rightCrossUp');
-      this.sprite.body.x = this.fatherSprite.body.x + 30;
-      this.sprite.body.y = this.fatherSprite.body.y + 15;
+      this.sprite.body.x = this.fatherSprite.body.x + configs.rightCrossUp.x;
+      this.sprite.body.y = this.fatherSprite.body.y + configs.rightCrossUp.y;
     }
     if (this.angleBetweenSpriteAndPointer > -112.5 && this.angleBetweenSpriteAndPointer < -67.5) {
       this.sprite.play('up');
-      this.sprite.body.x = this.fatherSprite.body.x + 10;
-      this.sprite.body.y = this.fatherSprite.body.y + 25;
+      this.sprite.body.x = this.fatherSprite.body.x + configs.up.x;
+      this.sprite.body.y = this.fatherSprite.body.y + configs.up.y;
     }
     if (this.angleBetweenSpriteAndPointer > -157.5 && this.angleBetweenSpriteAndPointer < -112.5) {
       this.sprite.play('leftCrossUp');
-      this.sprite.body.x = this.fatherSprite.body.x - 21;
-      this.sprite.body.y = this.fatherSprite.body.y + 3;
+      this.sprite.body.x = this.fatherSprite.body.x + configs.leftCrossUp.x;
+      this.sprite.body.y = this.fatherSprite.body.y + configs.leftCrossUp.y;
     }
     if ((this.angleBetweenSpriteAndPointer > -180 && this.angleBetweenSpriteAndPointer < -157.5) || (this.angleBetweenSpriteAndPointer > 157.5 && this.angleBetweenSpriteAndPointer < 180)) {
       this.sprite.play('left');
-      this.sprite.body.x = this.fatherSprite.body.x - 28;
-      this.sprite.body.y = this.fatherSprite.body.y + 22;
+      this.sprite.body.x = this.fatherSprite.body.x + configs.left.x;
+      this.sprite.body.y = this.fatherSprite.body.y + configs.left.y;
     }
   }
 

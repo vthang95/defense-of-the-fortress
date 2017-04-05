@@ -35,46 +35,59 @@ class LaserGunController extends GunController {
     this.sprite.animations.add('leftCrossDown', [6], 1, true);
   }
 
-  changeAnimation() {
-    if (this.angleBetweenSpriteAndPointer > 67.5 && this.angleBetweenSpriteAndPointer < 112.5) {
-      this.sprite.play('down');
-      this.sprite.body.x = this.fatherSprite.body.x + 8;
-      this.sprite.body.y = this.fatherSprite.body.y + 42;
-    }
-    if (this.angleBetweenSpriteAndPointer > 112.5 && this.angleBetweenSpriteAndPointer < 157.5) {
-      this.sprite.play('leftCrossDown');
-      this.sprite.body.x = this.fatherSprite.body.x - 15;
-      this.sprite.body.y = this.fatherSprite.body.y + 37;
-    }
-    if (this.angleBetweenSpriteAndPointer > 22.5 && this.angleBetweenSpriteAndPointer < 67.5) {
-      this.sprite.play('rightCrossDown');
-      this.sprite.body.x = this.fatherSprite.body.x + 20;
-      this.sprite.body.y = this.fatherSprite.body.y + 38;
-    }
-    if (this.angleBetweenSpriteAndPointer > -22.5 && this.angleBetweenSpriteAndPointer < 22.5) {
-      this.sprite.play('right');
-      this.sprite.body.x = this.fatherSprite.body.x + 25;
-      this.sprite.body.y = this.fatherSprite.body.y + 25;
-    }
-    if (this.angleBetweenSpriteAndPointer > -67.5 && this.angleBetweenSpriteAndPointer < -22.5) {
-      this.sprite.play('rightCrossUp');
-      this.sprite.body.x = this.fatherSprite.body.x + 34;
-      this.sprite.body.y = this.fatherSprite.body.y + 16;
-    }
-    if (this.angleBetweenSpriteAndPointer > -112.5 && this.angleBetweenSpriteAndPointer < -67.5) {
-      this.sprite.play('up');
-      this.sprite.body.x = this.fatherSprite.body.x + 10;
-      this.sprite.body.y = this.fatherSprite.body.y + 25;
-    }
-    if (this.angleBetweenSpriteAndPointer > -157.5 && this.angleBetweenSpriteAndPointer < -112.5) {
-      this.sprite.play('leftCrossUp');
-      this.sprite.body.x = this.fatherSprite.body.x - 21;
-      this.sprite.body.y = this.fatherSprite.body.y + 15;
-    }
-    if ((this.angleBetweenSpriteAndPointer > -180 && this.angleBetweenSpriteAndPointer < -157.5) || (this.angleBetweenSpriteAndPointer > 157.5 && this.angleBetweenSpriteAndPointer < 180)) {
-      this.sprite.play('left');
-      this.sprite.body.x = this.fatherSprite.body.x - 25;
-      this.sprite.body.y = this.fatherSprite.body.y + 25;
+  configGun() {
+    return {
+        down: {x: 8, y: 42},
+        right: {x: 30, y: 30},
+        up: {x: 10,y: 25},
+        left: {x: -25,y: 25},
+        leftCrossDown: {x: -15,y: 37},
+        rightCrossDown: {x: 20,y: 38},
+        rightCrossUp: {x: 34,y: 16},
+        leftCrossUp: {x: -21,y: 15}
     }
   }
+
+  // changeAnimation() {
+  //   if (this.angleBetweenSpriteAndPointer > 67.5 && this.angleBetweenSpriteAndPointer < 112.5) {
+  //     this.sprite.play('down');
+  //     this.sprite.body.x = this.fatherSprite.body.x + 8;
+  //     this.sprite.body.y = this.fatherSprite.body.y + 42;
+  //   }
+  //   if (this.angleBetweenSpriteAndPointer > 112.5 && this.angleBetweenSpriteAndPointer < 157.5) {
+  //     this.sprite.play('leftCrossDown');
+  //     this.sprite.body.x = this.fatherSprite.body.x - 15;
+  //     this.sprite.body.y = this.fatherSprite.body.y + 37;
+  //   }
+  //   if (this.angleBetweenSpriteAndPointer > 22.5 && this.angleBetweenSpriteAndPointer < 67.5) {
+  //     this.sprite.play('rightCrossDown');
+  //     this.sprite.body.x = this.fatherSprite.body.x + 20;
+  //     this.sprite.body.y = this.fatherSprite.body.y + 38;
+  //   }
+  //   if (this.angleBetweenSpriteAndPointer > -22.5 && this.angleBetweenSpriteAndPointer < 22.5) {
+  //     this.sprite.play('right');
+  //     this.sprite.body.x = this.fatherSprite.body.x + 25;
+  //     this.sprite.body.y = this.fatherSprite.body.y + 25;
+  //   }
+  //   if (this.angleBetweenSpriteAndPointer > -67.5 && this.angleBetweenSpriteAndPointer < -22.5) {
+  //     this.sprite.play('rightCrossUp');
+  //     this.sprite.body.x = this.fatherSprite.body.x + 34;
+  //     this.sprite.body.y = this.fatherSprite.body.y + 16;
+  //   }
+  //   if (this.angleBetweenSpriteAndPointer > -112.5 && this.angleBetweenSpriteAndPointer < -67.5) {
+  //     this.sprite.play('up');
+  //     this.sprite.body.x = this.fatherSprite.body.x + 10;
+  //     this.sprite.body.y = this.fatherSprite.body.y + 25;
+  //   }
+  //   if (this.angleBetweenSpriteAndPointer > -157.5 && this.angleBetweenSpriteAndPointer < -112.5) {
+  //     this.sprite.play('leftCrossUp');
+  //     this.sprite.body.x = this.fatherSprite.body.x - 21;
+  //     this.sprite.body.y = this.fatherSprite.body.y + 15;
+  //   }
+  //   if ((this.angleBetweenSpriteAndPointer > -180 && this.angleBetweenSpriteAndPointer < -157.5) || (this.angleBetweenSpriteAndPointer > 157.5 && this.angleBetweenSpriteAndPointer < 180)) {
+  //     this.sprite.play('left');
+  //     this.sprite.body.x = this.fatherSprite.body.x - 25;
+  //     this.sprite.body.y = this.fatherSprite.body.y + 25;
+  //   }
+  // }
 }

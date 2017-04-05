@@ -108,7 +108,7 @@ class ShopController {
 
   buyCannonGun() {
     let pushGun = function() {
-      Dotf.player.gunIsEquiped.push(new GunController(Dotf.gunGroup, 'flaming_gun_animation', Dotf.player.sprite, {
+      Dotf.player.gunIsEquiped.push(new CannonGunController(Dotf.player.sprite, {
         fireRate: 200
       }));
     };
@@ -122,7 +122,14 @@ class ShopController {
     };
     this.buy(this.flamethrowerGun, 'flamethrower', pushGun);
   }
-  buyLaserGun() {}
+  buyLaserGun() {
+    let pushGun = function() {
+      Dotf.player.gunIsEquiped.push(new LaserGunController(Dotf.player.sprite, {
+        fireRate: 200
+      }));
+    };
+    this.buy(this.flamethrowerGun, 'flamethrower', pushGun);
+  }
   buyMatterGun() {}
   buyMgGun() {}
   buyPistolGun() {}
