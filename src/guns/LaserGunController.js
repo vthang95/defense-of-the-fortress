@@ -4,6 +4,7 @@ class LaserGunController extends GunController {
     this.sprite.setDamage = 10;
     this.laserGunSound = Dotf.game.add.audio('laser_gun_audio');
     this.laserGunSound.volume = 0.01;
+    this.gunName = 'laser_gun';
   }
 
   changeCursor() {

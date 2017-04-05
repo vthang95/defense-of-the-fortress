@@ -133,6 +133,7 @@ const sharedGlobalObject = () => {
   Dotf.coinGroup = Dotf.game.add.physicsGroup();
   Dotf.expGroup = Dotf.game.add.physicsGroup();
   Dotf.immuneItemGroup = Dotf.game.add.physicsGroup();
+  Dotf.shopGroup = Dotf.game.add.physicsGroup();
 
   Dotf.playerBulletGroup.setAll('outOfBoundsKill', true);
   Dotf.playerBulletGroup.setAll('checkWorldBounds', true);
@@ -224,6 +225,7 @@ const sharedUpdateInfoOfStage = () => {
   Dotf.playerInformationBoard.update();
   Dotf.player.update();
   Dotf.base.update();
+  Dotf.shop.update();
 };
 const sharedUpdateSpritesOfStage = () => {
   Dotf.constructions.forEach(construction => construction.update());
@@ -316,6 +318,8 @@ const sharedInitializeObjectOfStage = (characterSpriteName) => {
     changeWeapon: Phaser.Keyboard.Q,
     speed: Dotf.configs.player.speed
   });
+
+  Dotf.shop = new ShopController();
   // Dotf.gunIsEquiped.push(new LaserGunController(Dotf.player.sprite, {cooldown: 0.7}))
 // this.gun = new LaserGunController(this.sprite, {cooldown: 0.7});
 

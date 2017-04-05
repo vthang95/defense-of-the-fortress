@@ -7,6 +7,7 @@ class GunController {
     this.sprite.scale.setTo(2);
     this.sprite.setDamage = 2;
     this.sprite.alpha = true;
+    this.gunName = 'default_gun';
     // TODO check self remove object when it is destroyed
 
     this.bullets = [];
@@ -88,13 +89,19 @@ class GunController {
     }
   }
 
+  isCanFire() {
+    return true;
+  }
+
   tryFire() {
-    if (!this.sprite.alive) return;
-    Dotf.game.camera.shake(0.001, 200);
-    if (Dotf.game.time.now > this.nextTime) {
-      this.nextTime = Dotf.game.time.now + this.fireRate;
-      this.playSound();
-      this.createBullet();
+    if (this.isCanFire) {
+      if (!this.sprite.alive) return;
+      Dotf.game.camera.shake(0.001, 200);
+      if (Dotf.game.time.now > this.nextTime) {
+        this.nextTime = Dotf.game.time.now + this.fireRate;
+        this.playSound();
+        this.createBullet();
+      }
     }
   }
 

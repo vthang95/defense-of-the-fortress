@@ -40,7 +40,15 @@ const LoadingMenu = {
     Dotf.game.load.image('default', './Assets/cursors/mouse_pointer.png');
     //TODO create a spritesheet including all animations of an object.
     // <GUN TYPE>
-    Dotf.game.load.image('gun', './Assets/guns/flamthrower/flamethrower_down.png');
+    Dotf.game.load.image('flamethrower_shop', './Assets/guns/flamthrower/flamethrower_side.png');
+    Dotf.game.load.image('canon_shop', './Assets/guns/cannon/cannon_side.png');
+    Dotf.game.load.image('laser_shop', './Assets/guns/laser/laser_side.png');
+    Dotf.game.load.image('matter_shop', './Assets/guns/matter/matter_side.png');
+    Dotf.game.load.image('mg_shop', './Assets/guns/mg/mg_side.png');
+    Dotf.game.load.image('pistol_shop', './Assets/guns/pistol/p_side.png');
+    Dotf.game.load.image('rocket_shop', './Assets/guns/rocket/rocket_side.png');
+    Dotf.game.load.image('shotgun_shop', './Assets/guns/shotgun/shot_side.png');
+    Dotf.game.load.image('spazer_shop', './Assets/guns/spazer/spazer_side.png');
     // <CONTRUCTIONS>
     Dotf.game.load.image('fountain', './Assets/other/base.png');
     // Dotf.game.load.image('healthBar', './Assets/other/healthBar.png');
@@ -54,7 +62,9 @@ const LoadingMenu = {
     // <BOSS
     Dotf.game.load.image('boss_level_one', './Assets/boss/boss_up_left.gif', 872, 632);
     Dotf.game.load.image('boss_level_two', './Assets/boss/boss.png', 872, 632);
-
+    // shop
+    Dotf.game.load.image('shop_background', './Assets/shop/background.png');
+    Dotf.game.load.image('shop_button', './Assets/shop/shop.png');
     // <ANIMATION>
     Dotf.game.load.spritesheet('character1_animation', './Assets/spritesheet/character1.png', 16, 21);
     Dotf.game.load.spritesheet('flaming_gun_animation', './Assets/guns/flamthrower/flaming_gun.png', 21, 16);
@@ -74,6 +84,7 @@ const LoadingMenu = {
     Dotf.game.load.image('compass','./Assets/other/compass.png');
     Dotf.game.load.image('shield','./Assets/other/Shield.png');
     Dotf.game.load.image('immune_item','./Assets/other/icon2.png');
+    Dotf.game.load.image('game_over', './Assets/gameover.png');
     // Player info
     Dotf.game.load.image('player_board','./Assets/other/player_board.png');
     Dotf.game.load.image('red_health_bar','./Assets/other/red_health_bar.png');
