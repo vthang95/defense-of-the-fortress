@@ -29,6 +29,8 @@ window.onload = function() {
 
   // Dotf.cursor = new CursorController('default', {anchorX: 0, anchorY: 0});
 
+  Dotf.game.state.add('Boot', Boot);
+  Dotf.game.state.add('LoadingMenu', LoadingMenu);
   Dotf.game.state.add('Menu', Menu);
   Dotf.game.state.add('Preload', Preload);
   Dotf.game.state.add("Winning", Winning);
@@ -37,5 +39,5 @@ window.onload = function() {
   Dotf.game.state.add("Stage1", Stage1);
   Dotf.game.state.add("Stage2", Stage2);
 
-  Dotf.game.state.start('Menu');
+  Dotf.game.state.start('Boot');
 };

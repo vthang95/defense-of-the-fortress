@@ -45,6 +45,7 @@ const Preload = {
     Dotf.game.load.image('compass','../Assets/other/compass.png');
     Dotf.game.load.image('shield','../Assets/other/Shield.png');
     Dotf.game.load.image('immune_item','../Assets/other/icon2.png');
+    Dotf.game.load.image('game_over', '../Assets/gameover.png');
     // Player info
     Dotf.game.load.image('player_board','../Assets/other/player_board.png');
     Dotf.game.load.image('red_health_bar','../Assets/other/red_health_bar.png');
