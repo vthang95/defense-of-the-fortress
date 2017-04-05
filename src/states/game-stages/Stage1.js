@@ -60,6 +60,12 @@ const Stage1 = {
       }
     }, 2000);
   },
+  doWhenPaused: function() {
+    clearInterval(this.setIntervalId);
+  },
+  doWhenResume: function() {
+
+  },
   update: function() {
     // Next stage condition
     if (!Dotf.player.sprite.alive || !Dotf.base.sprite.alive) {
@@ -80,6 +86,8 @@ const Stage1 = {
     sharedUpdateInfoOfStage();
     sharedUpdateSpritesOfStage();
     sharedCollideChecking();
+    // sharedOnPaused();
+    sharedOnPaused(this.doWhenPaused, this.doWhenResume);
   },
   render: function() {
 

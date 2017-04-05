@@ -1,7 +1,7 @@
 class CannonGunController extends GunController {
   constructor(playerSprite, configs) {
     super(Dotf.gunGroup, 'cannon_gun_animation', playerSprite, configs);
-    this.sprite.setDamage = 10;
+    this.sprite.setDamage = 1;
     this.laserGunSound = Dotf.game.add.audio('laser_gun_audio');
     this.laserGunSound.volume = 0.01;
     this.gunName = 'laser_gun';

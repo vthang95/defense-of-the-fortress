@@ -163,19 +163,18 @@ class PlayerController {
         realDamage: this.sprite.realDamage,
         maxHealth: this.sprite.maxHealth,
         health: this.sprite.health,
-        mana: this.sprite.mana
+        mana: this.sprite.mana,
+        gunIsEquiped: this.gunIsEquiped
       };
-      this.hideWeapons();
-      this.regenMana();
-      this.regenHp();
-      this.checkRealDamage();
       if (!this.sprite.alive) {
         this.gun.sprite.kill();
         return
       }
-
+      this.hideWeapons();
+      this.regenMana();
+      this.regenHp();
+      this.checkRealDamage();
       // if mana === 0 => speed set to default
-
       this.gunIsEquiped.forEach(gun => {
         gun.setAngleBetweenSpriteAndPointer();
         gun.changeAnimation();

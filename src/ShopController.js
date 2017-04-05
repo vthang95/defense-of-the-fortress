@@ -22,47 +22,47 @@ class ShopController {
 
     this.cannonGun = Dotf.shopGroup.create(Dotf.game.width - 100, 230, 'canon_shop');
     this.setFirstValue(this.cannonGun);
-    this.cannonGun.price = 3000;
+    this.cannonGun.price = 300;
     this.cannonGun.events.onInputDown.add(this.buyCannonGun, this);
 
     this.flamethrowerGun = Dotf.shopGroup.create(Dotf.game.width - 100, 275, 'flamethrower_shop');
     this.setFirstValue(this.flamethrowerGun);
-    this.flamethrowerGun.price = 4000;
+    this.flamethrowerGun.price = 400;
     this.flamethrowerGun.events.onInputDown.add(this.buyFlamethrower, this);
 
     this.laserGun = Dotf.shopGroup.create(Dotf.game.width - 100, 320, 'laser_shop');
     this.setFirstValue(this.laserGun);
-    this.laserGun.price = 5000;
+    this.laserGun.price = 500;
     this.laserGun.events.onInputDown.add(this.buyLaserGun, this);
 
     this.matterGun = Dotf.shopGroup.create(Dotf.game.width - 100, 365, 'matter_shop');
     this.setFirstValue(this.matterGun);
-    this.matterGun.price = 6000;
+    this.matterGun.price = 600;
     this.matterGun.events.onInputDown.add(this.buyMatterGun, this);
 
     this.mgGun = Dotf.shopGroup.create(Dotf.game.width - 100, 400, 'mg_shop');
     this.setFirstValue(this.mgGun);
-    this.mgGun.price = 7000;
+    this.mgGun.price = 700;
     this.mgGun.events.onInputDown.add(this.buyMgGun, this);
 
     this.pistolGun = Dotf.shopGroup.create(Dotf.game.width - 100, 435, 'pistol_shop');
     this.setFirstValue(this.pistolGun);
-    this.pistolGun.price = 8000;
+    this.pistolGun.price = 800;
     this.pistolGun.events.onInputDown.add(this.buyPistolGun, this);
 
     this.rocketGun = Dotf.shopGroup.create(Dotf.game.width - 100, 470, 'rocket_shop');
     this.setFirstValue(this.rocketGun);
-    this.rocketGun.price = 9000;
+    this.rocketGun.price = 900;
     this.rocketGun.events.onInputDown.add(this.buyRocketGun, this);
 
     this.shotGun = Dotf.shopGroup.create(Dotf.game.width - 100, 505, 'shotgun_shop');
     this.setFirstValue(this.shotGun);
-    this.shotGun.price = 10000;
+    this.shotGun.price = 1000;
     this.shotGun.events.onInputDown.add(this.buyShotGun, this);
 
     this.spazerGun = Dotf.shopGroup.create(Dotf.game.width - 100, 540, 'spazer_shop');
     this.setFirstValue(this.spazerGun);
-    this.spazerGun.price = 11000;
+    this.spazerGun.price = 1100;
     this.spazerGun.events.onInputDown.add(this.buySpazerGun, this);
 
     this.gunInfo = Dotf.game.add.text(Dotf.game.width -100, 250, '', {

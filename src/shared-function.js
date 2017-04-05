@@ -103,6 +103,7 @@ const sharedFetchDataFromPreviewStage = () => {
   Dotf.player.sprite.maxHealth = Dotf.playerData.maxHealth;
   Dotf.player.sprite.health = Dotf.playerData.health;
   Dotf.player.sprite.mana = Dotf.playerData.mana;
+  Dotf.player.gunIsEquiped = Dotf.player.gunIsEquiped;
 }
 
 const sharedStopPlayer = () => {
@@ -256,6 +257,11 @@ const sharedGameInfo = (stageId) => {
     fill: '#fff'
   });
   Dotf.stageName.fixedToCamera = true;
+};
+
+const sharedOnPaused = (sharedDoWhenPaused, sharedDoWhenResume) => {
+  Dotf.game.onPause.add(sharedDoWhenPaused, this);
+  Dotf.game.onResume.add(sharedDoWhenResume, this);
 };
 
 const sharedCreateBackgroundForStage = (spriteName) => {

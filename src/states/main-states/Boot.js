@@ -10,6 +10,7 @@ const Boot = {
     Dotf.game.scale.setScreenSize = true;
     // TODO fix responsive
     Dotf.game.time.advancedTiming = true;
+    Dotf.game.stage.disableVisibilityChange = true;
     Dotf.game.state.start('LoadingMenu');
   }
 }
